@@ -22,7 +22,8 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
         "coresphere/console-bundle": "^0.4.0",
-        "mmucklo/krumo": "*"
+        "mmucklo/krumo": "*",
+        "elao/web-profiler-extra-bundle" : "~2.3@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
