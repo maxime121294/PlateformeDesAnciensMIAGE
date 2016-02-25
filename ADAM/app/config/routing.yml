@@ -1,0 +1,7 @@
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+KrumoBundle:
+    resource: "@MjmKrumoBundle/Resources/config/routing/routing.yml"
+    prefix:   /
