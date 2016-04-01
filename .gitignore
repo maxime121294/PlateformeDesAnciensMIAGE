@@ -23,7 +23,8 @@ ADAM/bin/*
 ADAM/vendor/
 
 # Assets and user uploads
-ADAM/web/bundles/
+ADAM/web/bundles/*
+!ADAM/web/bundles/front/
 ADAM/web/uploads/
 
 # Assets managed by Bower
