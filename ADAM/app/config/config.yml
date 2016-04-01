@@ -75,8 +75,3 @@ mjm_krumo:
         show_version: true
         show_call_info: true
         cascade: [5,10]
-
-fos_user:
-    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
-    firewall_name: main
-    user_class: AppBundle\Entity\User
