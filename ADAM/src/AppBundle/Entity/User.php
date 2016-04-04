@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Users
@@ -40,6 +41,7 @@ class User extends BaseUser
      * @var \DateTime
      *
      * @ORM\Column(name="birthday", type="date")
+     * @Assert\Date()
      */
     private $birthday;
 
@@ -54,6 +56,12 @@ class User extends BaseUser
      * @var int
      *
      * @ORM\Column(name="graduateYear", type="integer")
+     * @Assert\Range(
+     *      min = 2000,
+     *      max = 2016,
+     *      minMessage = "Année minimum : {{ limit }}",
+     *      maxMessage = "Année maximum : {{ limit }}"
+     * )
      */
     private $graduateYear;
 
