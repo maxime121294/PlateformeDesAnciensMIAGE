@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class RegistrationType extends AbstractType
 {
@@ -19,6 +20,15 @@ class RegistrationType extends AbstractType
             ->add('firstname', TextType::class, array(
                 "label" => "Prénom",
                 "required" => true,
+            ))
+            ->add('graduate', ChoiceType::class, array(
+                "label" => "Type de diplôme obtenu",
+                "required" => true,
+                "placeholder" => "Selectionner un type de diplôme",
+                "choices"  => array(
+                    "licence" => "Licence",
+                    "master" => "Master"
+                ),
             ))
             ->add('graduate_year', IntegerType::class, array(
                 "label" => "Année d'obtention du diplôme",
