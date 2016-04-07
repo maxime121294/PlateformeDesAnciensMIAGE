@@ -1,5 +1,46 @@
+.logo-ADAM {
+    width: 95px;
+}
+
+nav.navbar {
+    position: fixed;
+    z-index: 2;
+    width: 100%;
+    margin-bottom: 0;
+    border: 0;
+}
+
+nav.navbar > .container-fluid {
+    background-color: white;
+}
+
+nav.navbar > .container-fluid a {
+    cursor: pointer;
+}
+
+nav.navbar > .container-fluid a:not(.btn) {
+    color: #BB0F47;
+}
+
+nav.navbar > .container-fluid a.navbar-brand {
+    cursor: default;
+}
+
+nav.navbar > .container-fluid a:not(.navbar-logo):not(.help-link):hover {
+    background-color: #BB0F47;
+    color: #E8E8E8;
+}
+
+nav.navbar > .container-fluid .active a,
+nav.navbar > .container-fluid .active a:focus,
+nav.navbar > .container-fluid .active a:hover,
+nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-toggle {
+    background-color: #BB0F47;
+    color: #BB0F47;
+}
+
 #login-dp{
-    min-width: 250px;
+    min-width: 275px;
     padding: 14px 14px 0;
     overflow:hidden;
     background-color:rgba(255,255,255,.8);
@@ -47,8 +88,4 @@
         background-color: inherit;
         border-top:0 none;
     }
-}
-
-.logo-ADAM {
-    width: 95px;
 }
