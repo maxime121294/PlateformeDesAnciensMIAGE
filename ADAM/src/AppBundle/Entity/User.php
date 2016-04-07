@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Users
@@ -40,6 +41,7 @@ class User extends BaseUser
      * @var \DateTime
      *
      * @ORM\Column(name="birthday", type="date")
+     * @Assert\Date()
      */
     private $birthday;
 
@@ -54,13 +56,35 @@ class User extends BaseUser
      * @var int
      *
      * @ORM\Column(name="graduateYear", type="integer")
+     * @Assert\Range(
+     *      min = 2000,
+     *      max = 2016,
+     *      minMessage = "Année minimum : {{ limit }}",
+     *      maxMessage = "Année maximum : {{ limit }}"
+     * )
      */
     private $graduateYear;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="createdAt", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updatedAt", type="datetime")
+     */
+    private $updatedAt;
 
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+
+        $this->createdAt = new \Datetime();
+        $this->updatedAt = new \Datetime();
     }
 
     /**
@@ -232,5 +256,51 @@ class User extends BaseUser
     public function getGraduateYear()
     {
         return $this->graduateYear;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Task
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return Task
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }
