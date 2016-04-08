@@ -39,12 +39,17 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     color: #BB0F47;
 }
 
+.checkbox input[type=checkbox] {
+    margin-left: 0px;
+}
+
 #login-dp{
     min-width: 275px;
     padding: 14px 14px 0;
     overflow:hidden;
     background-color:rgba(255,255,255,.8);
 }
+
 #login-dp .help-block{
     font-size:12px    
 }
