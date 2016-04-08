@@ -1,7 +1,5 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block fos_user_content %}
 {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
@@ -42,4 +40,3 @@
         </div>
     </li>
 </ul>
-{% endblock fos_user_content %}
