@@ -28,13 +28,11 @@ security:
             form_login:
                 provider:               fos_userbundle
                 csrf_token_generator:   security.csrf.token_manager
-                # if you are using Symfony < 2.8, use the following config instead:
-                # csrf_provider: form.csrf_provider
-                login_path:             fos_user_security_login
+                login_path:             homepage
                 use_forward:            false
                 check_path:             fos_user_security_check
                 failure_path:           null
-                default_target_path:    /
+                default_target_path:    homepage
                 remember_me:            true
             remember_me:
                 key:        %secret%
@@ -43,7 +41,7 @@ security:
                 domain:     ~
             logout:
                 path:       fos_user_security_logout
-                target:     fos_user_security_login
+                target:     homepage
             anonymous:      true
             switch_user:    true
             # activate different ways to authenticate
