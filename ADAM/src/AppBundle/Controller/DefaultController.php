@@ -91,7 +91,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/register", name="register")
+     * @Route("/register/", name="register")
      */
     public function registerAction(Request $request)
     {
