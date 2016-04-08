@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}ADAM{% endblock %}</title>
         {% block stylesheets %}
         {% endblock %}
         <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/bootstrap.min.css') }}">
@@ -14,8 +14,10 @@
     </head>
     <body>
         {% include ':default:navbar.html.twig' %}
-        {% block body %}{% endblock %}
-        {% block javascripts %}
-        {% endblock %}
+        <div class="block-container">
+            {% block body %}{% endblock %}
+            {% block javascripts %}
+            {% endblock %}
+        </div>
     </body>
 </html>

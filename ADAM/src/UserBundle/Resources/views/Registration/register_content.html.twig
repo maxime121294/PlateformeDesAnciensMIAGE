@@ -1,55 +1,55 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
+<div class="form-register">
 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-	<div>
-	    {{ form_label(form.firstname) }}
-	    {{ form_widget(form.firstname) }}
+	<div class="form-group row">
+	    {{ form_label(form.firstname, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+	    <div class="col-sm-9">{{ form_widget(form.firstname, {'attr': {'class': 'form-control'}}) }}</div>
 	    {{ form_errors(form.firstname) }}
 	</div>
 
-	<div>
-	    {{ form_label(form.lastname) }}
-	    {{ form_widget(form.lastname) }}
+	<div class="form-group row">
+	    {{ form_label(form.lastname, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+	    <div class="col-sm-9">{{ form_widget(form.lastname, {'attr': {'class': 'form-control'}}) }}</div>
 	    {{ form_errors(form.lastname) }}
     </div>
 
-    <div>
-	    {{ form_label(form.birthday) }}
-	    {{ form_widget(form.birthday) }}
+    <div class="form-group row">
+	    {{ form_label(form.birthday, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+	    <div class="col-sm-9">{{ form_widget(form.birthday, {'attr': {'class': 'form-control'}}) }}</div>
 	    {{ form_errors(form.birthday) }}
 	</div>
 
-	<div>
-	    {{ form_label(form.email) }}
-	    {{ form_widget(form.email) }}
+	<div class="form-group row">
+	    {{ form_label(form.email, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+	    <div class="col-sm-9">{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}</div>
 	    {{ form_errors(form.email) }}
 	</div>
 	
-	<div>
-		{{ form_label(form.graduate) }}
-	    {{ form_widget(form.graduate) }}
+	<div class="form-group row">
+		{{ form_label(form.graduate, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+	    <div class="col-sm-9">{{ form_widget(form.graduate, {'attr': {'class': 'form-control'}}) }}</div>
 	    {{ form_errors(form.graduate) }}
 	</div>
 	
-	<div>
-	    {{ form_label(form.graduate_year) }}
-	    {{ form_widget(form.graduate_year) }}
+	<div class="form-group row">
+	    {{ form_label(form.graduate_year, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+	    <div class="col-sm-9">{{ form_widget(form.graduate_year, {'attr': {'class': 'form-control'}}) }}</div>
 	    {{ form_errors(form.graduate_year) }}
 	</div>
 	
-	<div>
-	    {{ form_label(form.plainPassword.first) }}
-	    {{ form_widget(form.plainPassword.first) }}
+	<div class="form-group row">
+	    {{ form_label(form.plainPassword.first, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+	    <div class="col-sm-9">{{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control'}}) }}</div>
 	    {{ form_errors(form.plainPassword.first) }}
 	</div>
 	
-	<div>
-	    {{ form_label(form.plainPassword.second) }}
-	    {{ form_widget(form.plainPassword.second) }}
+	<div class="form-group row">
+	    {{ form_label(form.plainPassword.second, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+	    <div class="col-sm-9"> {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'}}) }}</div>
 	    {{ form_errors(form.plainPassword.second) }}
 	</div>
 
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans }}" />
-    </div>
+    <input type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-register" />
 {{ form_end(form) }}
+</div>
