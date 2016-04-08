@@ -5,13 +5,15 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
         {% endblock %}
-        <link rel="stylesheet" href="{{ asset('bundles/front/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('bundles/front/css/bootstrap-theme.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/bootstrap-theme.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/front/css/style.css') }}">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <script type="text/javascript" src="{{asset('bundles/front/js/jquery-2.2.2.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('bundles/front/js/bootstrap.min.js')}}"></script>
     </head>
     <body>
+        {% include ':default:navbar.html.twig' %}
         {% block body %}{% endblock %}
         {% block javascripts %}
         {% endblock %}
