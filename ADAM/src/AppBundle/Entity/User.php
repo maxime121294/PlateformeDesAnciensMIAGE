@@ -27,6 +27,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="lastname", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $lastname;
 
@@ -34,6 +35,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $firstname;
 
@@ -42,6 +44,7 @@ class User extends BaseUser
      *
      * @ORM\Column(name="birthday", type="date")
      * @Assert\Date()
+     * @Assert\NotBlank()
      */
     private $birthday;
 
@@ -49,6 +52,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="graduate", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $graduate;
 
@@ -62,6 +66,7 @@ class User extends BaseUser
      *      minMessage = "Année minimum : {{ limit }}",
      *      maxMessage = "Année maximum : {{ limit }}"
      * )
+     * @Assert\NotBlank()
      */
     private $graduateYear;
 
