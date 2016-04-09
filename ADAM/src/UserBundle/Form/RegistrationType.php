@@ -35,12 +35,14 @@ class RegistrationType extends AbstractType
                     "master" => "Master"
                 ),
             ))
-            ->add('graduate_year', IntegerType::class, array(
+            ->add('graduate_year', TextType::class, array(
                 "label" => "Année d'obtention du diplôme",
                 "required" => true,
             ))
             ->add('birthday', DateType::class, array(
                 "label" => "Date de naissance",
+                'widget' => 'single_text',
+                'format' => 'dd/MM/yyyy',
                 "required" => true,
             ))
             ->add('email', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\EmailType'), array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
