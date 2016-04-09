@@ -86,3 +86,17 @@ fos_user:
     registration:
         form:
             type: UserBundle\Form\RegistrationType
+
+hwi_oauth:
+    firewall_name: main
+    resource_owners:
+        any_name:
+            type:                facebook
+            client_id:           242442899442279
+            client_secret:       9a05d159ead0cdc35b1b008471d27645
+            scope:         "email"
+            options:
+                display: popup #dialog is optimized for popup window
+                auth_type: rerequest # Re-asking for Declined Permissions
+                
+# Déclaration de service crée par nous, pour gérer de manière générique les connexion OAuth
