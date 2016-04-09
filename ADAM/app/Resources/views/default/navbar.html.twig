@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <a href="#" class="navbar-logo">
+      <a href="{{ path('homepage') }}" class="navbar-logo">
         <img class="logo-ADAM" alt="ADAM" src="{{ asset('bundles/front/images/ADAM_Icon.png') }}">
       </a>
     </div>
@@ -11,7 +11,9 @@
       <ul class="nav navbar-nav">     
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><p class="navbar-text">Vous avez déjà un compte ?</p></li>
+        <li>
+          <a href="{{ path('fos_user_registration_register') }}" class="divider"><b>Inscription</b></span></a>
+        </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Connexion</b> <span class="caret"></span></a>
             {% include ':default:login.html.twig' %}

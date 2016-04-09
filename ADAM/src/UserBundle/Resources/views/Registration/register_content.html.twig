@@ -1,8 +1,85 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
+<div class="form-register">
 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans }}" />
+	<div class="form-group row">
+	    {{ form_label(form.firstname, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+	    <div class="col-sm-9">{{ form_widget(form.firstname, {'attr': {'class': 'form-control'}}) }}</div>
+	    {{ form_errors(form.firstname) }}
+	</div>
+
+	<div class="form-group row">
+	    {{ form_label(form.lastname, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+	    <div class="col-sm-9">{{ form_widget(form.lastname, {'attr': {'class': 'form-control'}}) }}</div>
+	    {{ form_errors(form.lastname) }}
     </div>
+
+    <div class="form-group row">
+	    {{ form_label(form.birthday, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+	    <div class="col-sm-9 input-group date" id="birthday">{{ form_widget(form.birthday, {'attr': {'class': 'form-control'}}) }}<span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
+	    {{ form_errors(form.birthday) }}
+	</div>
+
+	<div class="form-group row">
+	    {{ form_label(form.email, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+	    <div class="col-sm-9">{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}</div>
+	    {{ form_errors(form.email) }}
+	</div>
+	
+	<div class="form-group row">
+		{{ form_label(form.graduate, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+	    <div class="col-sm-9">{{ form_widget(form.graduate, {'attr': {'class': 'form-control'}}) }}</div>
+	    {{ form_errors(form.graduate) }}
+	</div>
+	
+	<div class="form-group row">
+	    {{ form_label(form.graduate_year, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+	    <div class="col-sm-9 input-group date" id="graduateYear">{{ form_widget(form.graduate_year, {'attr': {'class': 'form-control'}}) }}<span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
+	    {{ form_errors(form.graduate_year) }}
+	</div>
+	
+	<div class="form-group row">
+	    {{ form_label(form.plainPassword.first, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+	    <div class="col-sm-9">{{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control'}}) }}</div>
+	    {{ form_errors(form.plainPassword.first) }}
+	</div>
+	
+	<div class="form-group row">
+	    {{ form_label(form.plainPassword.second, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+	    <div class="col-sm-9"> {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'}}) }}</div>
+	    {{ form_errors(form.plainPassword.second) }}
+	</div>
+
+    <input type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-register" />
 {{ form_end(form) }}
+</div>
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/datepicker/bootstrap-datepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/datepicker/bootstrap-datepicker.standalone.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/datepicker/bootstrap-datepicker3.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/datepicker/bootstrap-datepicker3.standalone.min.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript" src="{{asset('bundles/front/js/libs/datepicker/bootstrap-datepicker.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('bundles/front/js/libs/datepicker/bootstrap-datepicker.fr.min.js')}}"></script>
+
+	<script>
+		$(function() {
+			$('#birthday').datepicker({
+			    format: "dd/mm/yyyy",
+			    language: "fr",
+			    autoclose: true
+			});
+
+			$('#graduateYear').datepicker({
+			    format: "yyyy",
+			    startView: 1,
+			    minViewMode: 2,
+			    language: "fr",
+			    autoclose: true
+			});
+		});
+	</script>
+{% endblock %}

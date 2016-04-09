@@ -23,7 +23,7 @@
                     <div class="form-group">
                          <label for="password">{{ 'security.login.password'|trans }}</label>
                          <input type="password" id="password exampleInputPassword2" name="_password" required="required"  class="form-control" placeholder="Mot de passe" required>
-                         <div class="help-block text-right"><a href="" class="help-link">Mot de passe oublié ?</a></div>
+                         <div class="help-block text-right"><a href="{{ path('fos_user_resetting_request') }}" class="help-link">Mot de passe oublié ?</a></div>
                     </div>
                     <div class="form-group">
                          <button type="submit" class="btn btn-primary btn-block">Connexion</button>
@@ -35,7 +35,7 @@
                  </form>
             </div>
             <div class="bottom text-center">
-                Pas encore inscrit ? <a href="#" class="help-link"><b>Rejoignez-nous</b></a>
+                Pas encore inscrit ? <a href="{{ path('fos_user_registration_register') }}" class="help-link"><b>Rejoignez-nous</b></a>
             </div>
         </div>
     </li>
