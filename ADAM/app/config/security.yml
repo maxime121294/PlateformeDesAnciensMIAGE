@@ -53,6 +53,7 @@ security:
                 provider: fos_userbundle
                 oauth_user_provider:
                     service: hwi_oauth.user.provider.fosub_bridge
+                
             # activate different ways to authenticate
 
             # http_basic: ~
