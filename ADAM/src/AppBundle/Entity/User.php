@@ -11,6 +11,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="`user`")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @ORM\AttributeOverrides({
+ *              @ORM\AttributeOverride(name="username", column=@ORM\Column(nullable=true, unique=false)),
+ *              @ORM\AttributeOverride(name="usernameCanonical", column=@ORM\Column(nullable=true, unique=false))
+ * 
+ * }) 
  */
 class User extends BaseUser
 {
@@ -177,11 +182,9 @@ class User extends BaseUser
      * @param string $email
      * @return Users
      */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
+    public function setEmail($email){
+        parent::setEmail($email);
+        parent::setUsername($email);
     }
 
     /**
