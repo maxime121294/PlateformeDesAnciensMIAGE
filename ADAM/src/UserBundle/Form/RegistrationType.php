@@ -35,7 +35,7 @@ class RegistrationType extends AbstractType
                     "master" => "Master"
                 ),
             ))
-            ->add('graduate_year', TextType::class, array(
+            ->add('graduateYear', TextType::class, array(
                 "label" => "Année d'obtention du diplôme",
                 "required" => true,
             ))
