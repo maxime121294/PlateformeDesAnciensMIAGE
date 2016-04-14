@@ -47,9 +47,9 @@ security:
             oauth:
                 resource_owners:
                     facebook:           "/login/check-facebook"
-                login_path:        /login
+                login_path:        homepage
                 use_forward:       false
-                failure_path:      /login
+                failure_path:      null
                 provider: fos_userbundle
                 oauth_user_provider:
                     service: hwi_oauth.user.provider.fosub_bridge
