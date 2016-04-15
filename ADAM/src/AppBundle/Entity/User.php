@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\AttributeOverrides({
  *              @ORM\AttributeOverride(name="username", column=@ORM\Column(nullable=true, unique=false)),
  *              @ORM\AttributeOverride(name="usernameCanonical", column=@ORM\Column(nullable=true, unique=false))
- * 
  * }) 
  */
 class User extends BaseUser
