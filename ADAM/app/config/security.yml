@@ -53,7 +53,7 @@ security:
                 use_forward:       false
                 failure_path:      null
                 oauth_user_provider:
-                    service: hwi_oauth.user.provider.entity
+                    service: my_user_provider
             # activate different ways to authenticate
 
             # http_basic: ~

@@ -30,6 +30,16 @@ class User extends BaseUser
     /**
      * @var string
      *
+     * @ORM\Column(name="facebook_id", type="string", nullable=true)
+     */
+    protected $facebook_id;
+
+    /** @ORM\Column(name="facebook_access_token", type="string", length=255, nullable=true) */
+    protected $facebook_access_token;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="lastname", type="string", length=255)
      * @Assert\NotBlank()
      */
@@ -46,16 +56,15 @@ class User extends BaseUser
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="birthday", type="date")
+     * @ORM\Column(name="birthday", type="date",nullable=true)
      * @Assert\Date()
-     * @Assert\NotBlank()
      */
     private $birthday;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="graduate", type="string", length=255)
+     * @ORM\Column(name="graduate", type="string", length=255, nullable=true)
      * @Assert\NotBlank()
      */
     private $graduate;
@@ -63,14 +72,13 @@ class User extends BaseUser
     /**
      * @var int
      *
-     * @ORM\Column(name="graduateYear", type="integer")
+     * @ORM\Column(name="graduateYear", type="integer",nullable=true)
      * @Assert\Range(
      *      min = 2000,
      *      max = 2016,
      *      minMessage = "Année minimum : {{ limit }}",
      *      maxMessage = "Année maximum : {{ limit }}"
      * )
-     * @Assert\NotBlank()
      */
     private $graduateYear;
 
@@ -106,6 +114,32 @@ class User extends BaseUser
         return $this->id;
     }
     
+    /**
+     * Set facebook_id
+     *
+     * @param string $facebook_id
+     * @return Users
+     */
+    public function setFacebookId($facebook_id)
+    {
+        $this->facebook_id = $facebook_id;
+
+        return $this;
+    }
+
+    /**
+     * Set facebook_access_token
+     *
+     * @param string $facebook_access_token
+     * @return Users
+     */
+    public function setFacebookAccessToken($facebook_access_token)
+    {
+        $this->facebook_access_token = $facebook_access_token;
+
+        return $this;
+    }
+
     /**
      * Set lastname
      *

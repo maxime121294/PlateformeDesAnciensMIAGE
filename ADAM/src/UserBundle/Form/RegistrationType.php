@@ -28,7 +28,7 @@ class RegistrationType extends AbstractType
             ))
             ->add('graduate', ChoiceType::class, array(
                 "label" => "Type de diplôme obtenu",
-                "required" => true,
+                "required" => false,
                 "placeholder" => "Selectionner un type de diplôme",
                 "choices"  => array(
                     "licence" => "Licence",
@@ -37,13 +37,13 @@ class RegistrationType extends AbstractType
             ))
             ->add('graduateYear', TextType::class, array(
                 "label" => "Année d'obtention du diplôme",
-                "required" => true,
+                "required" => false,
             ))
             ->add('birthday', DateType::class, array(
                 "label" => "Date de naissance",
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy',
-                "required" => true,
+                "required" => false,
             ))
             ->add('email', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\EmailType'), array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
             ->add('plainPassword', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\RepeatedType'), array(

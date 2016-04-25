@@ -89,13 +89,20 @@ fos_user:
 
 # OAuthBundle Configuration
 hwi_oauth:
+    connect:
+        account_connector: my_user_provider
     firewall_names: [main]
+    fosub:
+        username_iterations: 30
+        properties:
+            facebook:    facebook_id
     resource_owners:
         facebook:
             type:                facebook
             client_id:           %oauth.facebook.id%
             client_secret:       %oauth.facebook.secret%
-            scope:         "email"
+            scope:               "email public_profile"
+            infos_url:            "https://graph.facebook.com/me?fields=id,name,first_name,last_name,email,picture.type(square)"
             options:
                 csrf: true
                 display: popup #dialog is optimized for popup window
