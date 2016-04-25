@@ -70,20 +70,20 @@
         }
     }
 
-    var allUnits = ["Days", "Hours", "Minutes", "Seconds"];
+    var allUnits = ["Jours", "Heures", "Minutes", "Secondes"];
     var nextUnits = {
-        Seconds: "Minutes",
-        Minutes: "Hours",
-        Hours: "Days",
-        Days: "Years"
+        Secondes: "Minutes",
+        Minutes: "Heures",
+        Heures: "Jours",
+        Jours: "Annees"
     };
     var secondsIn = {
-        Seconds: 1,
+        Secondes: 1,
         Minutes: 60,
-        Hours: 3600,
-        Days: 86400,
-        Months: 2678400,
-        Years: 31536000
+        Heures: 3600,
+        Jours: 86400,
+        Mois: 2678400,
+        Annees: 31536000
     };
 
     /**
@@ -207,7 +207,7 @@
                 else oldUnits = Math.ceil(oldUnits);
             }
             
-            if (unit !== "Days") {
+            if (unit !== "Jours") {
                 curUnits = curUnits % maxUnits;
                 oldUnits = oldUnits % maxUnits;
             }
@@ -283,10 +283,10 @@
             prev_time: null,
             drawn_units: [],
             text_elements: {
-                Days: null,
-                Hours: null,
+                Jours: null,
+                Heures: null,
                 Minutes: null,
-                Seconds: null
+                Secondes: null
             },
             attributes: {
                 canvas: null,
@@ -298,10 +298,10 @@
             },
             state: {
                 fading: {
-                    Days: false,
-                    Hours: false,
+                    Jours: false,
+                    Heures: false,
                     Minutes: false,
-                    Seconds: false
+                    Secondes: false
                 }
             }
         };
@@ -318,7 +318,7 @@
     TC_Instance.prototype.addTime = function(seconds_to_add) {
         if(this.data.attributes.ref_date instanceof Date) {
             var d = this.data.attributes.ref_date;
-            d.setSeconds(d.getSeconds() + seconds_to_add);
+            d.setSecondes(d.getSecondes() + seconds_to_add);
         }
         else if(!isNaN(this.data.attributes.ref_date)) {
             this.data.attributes.ref_date += (seconds_to_add * 1000);
@@ -472,7 +472,7 @@
         var floor = this.config.animation !== "smooth";
 
         var visible_times = parse_times(diff, old_diff, this.data.total_duration, this.data.drawn_units, floor);
-        var all_times = parse_times(diff, old_diff, secondsIn["Years"], allUnits, floor);
+        var all_times = parse_times(diff, old_diff, secondsIn["Annees"], allUnits, floor);
 
         var i = 0;
         var j = 0;
@@ -762,7 +762,7 @@
         this.data.total_duration = this.config.total_duration;
         if (typeof this.data.total_duration === "string") {
             if (typeof secondsIn[this.data.total_duration] !== "undefined") {
-                // If set to Years, Months, Days, Hours or Minutes, fetch the secondsIn value for that
+                // If set to Annees, Mois, Jours, Heures or Minutes, fetch the secondsIn value for that
                 this.data.total_duration = secondsIn[this.data.total_duration];
             }
             else if (this.data.total_duration === "Auto") {
@@ -777,8 +777,8 @@
             }
             else {
                 // If it's a string, but neither of the above, user screwed up.
-                this.data.total_duration = secondsIn["Years"];
-                console.error("Valid values for TimeCircles config.total_duration are either numeric, or (string) Years, Months, Days, Hours, Minutes, Auto");
+                this.data.total_duration = secondsIn["Annees"];
+                console.error("Valid values for TimeCircles config.total_duration are either numeric, or (string) Annees, Mois, Jours, Heures, Minutes, Auto");
             }
         }
     };
@@ -813,14 +813,14 @@
         use_top_frame: false,
         start_angle: 0,
         time: {
-            Days: {
+            Jours: {
                 show: true,
-                text: "Days",
+                text: "Jours",
                 color: "#FC6"
             },
-            Hours: {
+            Heures: {
                 show: true,
-                text: "Hours",
+                text: "Heures",
                 color: "#9CF"
             },
             Minutes: {
@@ -828,9 +828,9 @@
                 text: "Minutes",
                 color: "#BFB"
             },
-            Seconds: {
+            Secondes: {
                 show: true,
-                text: "Seconds",
+                text: "Secondes",
                 color: "#F99"
             }
         }
