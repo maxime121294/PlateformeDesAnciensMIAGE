@@ -1,5 +1,42 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	
+	<div class="homepage-logo col-sm-offset-3 col-sm-6">
+		<img class="logo-ADAM" alt="ADAM" src="{{ asset('bundles/front/images/ADAM_Icon.png') }}">
+	</div>
+
+	<div class="row">
+	   	<div class="col-sm-offset-3 col-sm-6">
+			<div class="timing">
+				<div id="count-down" data-date="2016-01-15 00:00:00">
+					
+				</div>
+			</div>
+			<!-- /.timing -->
+	   </div>
+	</div>
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('bundles/front/css/libs/TimeCircles.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript" src="{{asset('bundles/front/js/libs/TimeCircles.js')}}"></script>
+	<script type="text/javascript">
+	    $("#count-down").TimeCircles(
+	       {   
+	           circle_bg_color: "#F3F3F3",
+	           use_background: true,
+	           bg_width: 1.0,
+	           fg_width: 0.02,
+	           time: {
+	                Days: { color: "#BB0F47" },
+	                Hours: { color: "#BB0F47" },
+	                Minutes: { color: "#BB0F47" },
+	                Seconds: { color: "#BB0F47" }
+	            }
+	       }
+	    );
+	</script>
 {% endblock %}

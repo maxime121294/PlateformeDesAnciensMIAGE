@@ -154,3 +154,10 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 .form-register .required:after {
     content: "*";
 }
+
+/*
+ * Homepage css
+ */
+.homepage-logo .logo-ADAM {
+    height: 300px;
+}
