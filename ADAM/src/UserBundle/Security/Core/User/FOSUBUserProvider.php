@@ -54,7 +54,7 @@ class FOSUBUserProvider extends BaseClass
             $user->setFirstName($firstname);
             $user->setLastname($lastname);
             $user->setEmail($email);
-            $user->setPassword($username);
+            $user->setPlainPassword($username);
             $user->setEnabled(true);
             $this->userManager->updateUser($user);
             return $user;
