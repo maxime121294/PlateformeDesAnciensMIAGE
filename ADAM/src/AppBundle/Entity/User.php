@@ -65,7 +65,6 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="graduate", type="string", length=255, nullable=true)
-     * @Assert\NotBlank()
      */
     private $graduate;
 
@@ -343,5 +342,25 @@ class User extends BaseUser
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Get facebook_id
+     *
+     * @return string 
+     */
+    public function getFacebookId()
+    {
+        return $this->facebook_id;
+    }
+
+    /**
+     * Get facebook_access_token
+     *
+     * @return string 
+     */
+    public function getFacebookAccessToken()
+    {
+        return $this->facebook_access_token;
     }
 }
