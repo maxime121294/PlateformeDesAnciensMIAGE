@@ -7,11 +7,12 @@
  * Container block en dessous de la navbar
  */
 .block-container {
-    margin: 54px auto 0;
+    padding-top: 54px;
     background-color: #444444;
     height: 100%;
     width: 100%;
-    position: absolute;
+    position: fixed;
+    overflow: auto;
 }
 
 /*
@@ -158,6 +159,23 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 /*
  * Homepage css
  */
+.homepage-background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #444444;
+    background-image: url(../images/saints_peres.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.25;
+}
+
 .homepage-logo .logo-ADAM {
     height: 300px;
+}
+
+.homepage-logo,
+.homepage-time {
+    padding-top: 5%;
+    text-align: center;
 }

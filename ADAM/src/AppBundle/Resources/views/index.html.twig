@@ -1,20 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<div class="homepage-logo col-sm-offset-3 col-sm-6">
-		<img class="logo-ADAM" alt="ADAM" src="{{ asset('bundles/front/images/ADAM_Icon.png') }}">
+	<div class="homepage-background">
+		{# <img class="descartes-background" src="{{ asset('bundles/front/images/saints_peres.jpeg') }}"> #}
+	</div>
+	<div class="homepage-logo col-sm-12">
+		<div class="col-sm-offset-3  col-sm-6">
+			<img class="logo-ADAM" alt="ADAM" src="{{ asset('bundles/front/images/ADAM_Icon.png') }}">
+		</div>
 	</div>
 
-	<div class="row">
+	<div class="homepage-time col-sm-12">
 	   	<div class="col-sm-offset-3 col-sm-6">
 			<div class="timing">
-				<div id="count-down" data-date="2016-01-15 00:00:00">
-					
-				</div>
+				<div id="count-down" data-date="2016-06-31 00:00:00"></div>
 			</div>
-			<!-- /.timing -->
 	   </div>
 	</div>
+	
 {% endblock %}
 
 {% block stylesheets %}
