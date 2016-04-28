@@ -11,7 +11,7 @@
                 Se connecter via
                 <div class="social-buttons">
                     <a href="#" onclick="fb_login();" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
-                    <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
+                    <a href="{{ path('hwi_oauth_service_redirect', {'service':'google'}) }}" class="btn btn-google"><i class="fa fa-google"></i> Google</a>
                 </div>
                 ou
                  <form action="{{ path("fos_user_security_check") }}" method="post" class="form" role="form" accept-charset="UTF-8" id="login-nav">

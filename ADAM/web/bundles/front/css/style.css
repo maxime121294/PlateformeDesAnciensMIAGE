@@ -109,6 +109,14 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     color: #fff;
     background-color:#59b5fa;
 }
+.btn-google{
+    color: #fff;
+    background-color:#517FA4;
+}
+.btn-google:hover{
+    color: #fff;
+    background-color:#517FA4;
+}
 @media(max-width:768px){
     #login-dp{
         background-color: inherit;

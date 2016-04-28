@@ -33,16 +33,26 @@ class FOSUBUserProvider extends BaseClass
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $username = $response->getUsername();
-        $lastname = $response->getLastName();
-        $firstname = $response->getFirstName();
-        $email = $response->getEmail();
+        $data = $response->getResponse();
+        $serviceName = $response->getResourceOwner()->getName();
+        if ($serviceName === 'google'){
+            $username = $data['id'];
+            $firstname = $data['given_name'];
+            $lastname = $data['family_name'];
+            $email = $data['email'];
+        }
+
+        if ($serviceName === 'facebook'){
+            $username = $response->getUsername();
+            $lastname = $response->getLastName();
+            $firstname = $response->getFirstName();
+            $email = $response->getEmail();
+        }
+
         $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
         //when the user is registrating
         if (null === $user) {
-            $service = $response->getResourceOwner()->getName();
-            var_dump($service);
-            $setter = 'set'.ucfirst($service);
+            $setter = 'set'.ucfirst($serviceName);
             $setter_id = $setter.'Id';
             $setter_token = $setter.'AccessToken';
             // create new user here
@@ -61,7 +71,6 @@ class FOSUBUserProvider extends BaseClass
         }
         //if user exists - go with the HWIOAuth way
         $user = parent::loadUserByOAuthUserResponse($response);
-        $serviceName = $response->getResourceOwner()->getName();
         $setter = 'set' . ucfirst($serviceName) . 'AccessToken';
         //update access token
         $user->$setter($response->getAccessToken());
