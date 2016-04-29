@@ -150,3 +150,7 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 .form-register #graduateYear span{
     height: 34px;
 }
+
+.form-register .required:after {
+    content: "*";
+}
