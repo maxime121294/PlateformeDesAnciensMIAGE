@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Mjm\KrumoBundle\MjmKrumoBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new UserBundle\UserBundle(),
+            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

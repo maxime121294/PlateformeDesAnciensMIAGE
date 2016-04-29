@@ -89,7 +89,7 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     margin:12px 0    
 }
 #login-dp .social-buttons a{
-    width: 49%;
+    width: 32%;
 }
 #login-dp .form-group {
     margin-bottom: 10px;
@@ -109,6 +109,22 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 .btn-tw:hover{
     color: #fff;
     background-color:#59b5fa;
+}
+.btn-google{
+    color: #fff;
+    background-color:#db3236;
+}
+.btn-google:hover{
+    color: #fff;
+    background-color:#db3236;
+}
+.btn-linkedin{
+    color: #fff;
+    background-color:#004471;
+}
+.btn-linkedin:hover{
+    color: #fff;
+    background-color:#004471;
 }
 @media(max-width:768px){
     #login-dp{
