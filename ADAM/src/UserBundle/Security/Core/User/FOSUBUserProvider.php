@@ -35,6 +35,7 @@ class FOSUBUserProvider extends BaseClass
     {
         $data = $response->getResponse();
         $serviceName = $response->getResourceOwner()->getName();
+        
         if ($serviceName === 'google'){
             $username = $data['id'];
             $firstname = $data['given_name'];
@@ -52,26 +53,40 @@ class FOSUBUserProvider extends BaseClass
         $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
         //when the user is registrating
         if (null === $user) {
+            $user = $this->userManager->findUserByEmail($email);
+
             $setter = 'set'.ucfirst($serviceName);
-            $setter_id = $setter.'Id';
-            $setter_token = $setter.'AccessToken';
+            $setterId = $setter.'Id';
+            $setterToken = $setter.'AccessToken';
             // create new user here
-            $user = $this->userManager->createUser();
-            $user->$setter_id($username);
-            $user->$setter_token($response->getAccessToken());
-            //I have set all requested data with the user's username
-            //modify here with relevant data
-            $user->setFirstName($firstname);
-            $user->setLastname($lastname);
-            $user->setEmail($email);
-            $user->setPlainPassword($username);
-            $user->setEnabled(true);
-            $this->userManager->updateUser($user);
-            return $user;
+            if (null === $user) {
+                $user = $this->userManager->createUser();
+                $user->$setter_id($username);
+                $user->$setter_token($response->getAccessToken());
+                //I have set all requested data with the user's username
+                //modify here with relevant data
+                $user->setFirstName($firstname);
+                $user->setLastname($lastname);
+                $user->setEmail($email);
+                $user->setPlainPassword($username);
+                $user->setEnabled(true);
+                $this->userManager->updateUser($user);
+
+                return $user;
+            }
+            else {
+                $user->$setterId($username);
+                $user->$setterToken($response->getAccessToken());
+
+                $this->userManager->updateUser($user);
+
+                return $user;
+            }
         }
         //if user exists - go with the HWIOAuth way
         $user = parent::loadUserByOAuthUserResponse($response);
         $setter = 'set' . ucfirst($serviceName) . 'AccessToken';
+        
         //update access token
         $user->$setter($response->getAccessToken());
         return $user;
