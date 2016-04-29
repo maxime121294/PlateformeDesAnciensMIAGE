@@ -47,31 +47,28 @@ class User extends BaseUser
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="birthday", type="date")
+     * @ORM\Column(name="birthday", type="date", nullable=true)
      * @Assert\Date()
-     * @Assert\NotBlank()
      */
     private $birthday;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="graduate", type="string", length=255)
-     * @Assert\NotBlank()
+     * @ORM\Column(name="graduate", type="string", length=255, nullable=true)
      */
     private $graduate;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="graduateYear", type="integer")
+     * @ORM\Column(name="graduateYear", type="integer", nullable=true)
      * @Assert\Range(
      *      min = 2000,
      *      max = 2016,
      *      minMessage = "Année minimum : {{ limit }}",
      *      maxMessage = "Année maximum : {{ limit }}"
      * )
-     * @Assert\NotBlank()
      */
     private $graduateYear;
 
