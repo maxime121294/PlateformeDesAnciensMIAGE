@@ -14,7 +14,7 @@
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                     {% if app.user is defined %}
                         <li>
-                            <b>Bonjour {{ app.user.firstname }} !</b>
+                            <b>Bonjour {{ app.user.firstname|capitalize }} !</b>
                         </li>
                     {% endif %}
                     {% if is_granted('ROLE_ADMIN') %}

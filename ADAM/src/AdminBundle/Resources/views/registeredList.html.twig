@@ -12,6 +12,9 @@
             <th>Année d'obtention du diplôme</th>
             <th>Actif</th>
             <th>Role</th>
+            {% if is_granted("ROLE_SUPER_ADMIN") %}
+                <th>Actions</th>
+            {% endif %}
         </tr>
         {% for user in users %}
             <tr>
@@ -41,6 +44,21 @@
                         Utilisateur
                     {% endif %}
                 </td>
+                {% if is_granted("ROLE_SUPER_ADMIN") %}
+                    <td>
+                        {% if "ROLE_SUPER_ADMIN" not in user.roles %}
+                            {% if "ROLE_ADMIN" not in user.roles %}
+                                <a href="{{ path('role_toggle', {'action': 'promote', 'id': user.id}) }}">
+                                    <img width="30" height="30" alt="Promouvoir l'utilisateur" title="Promouvoir l'utilisateur" src="{{ asset('bundles/front/images/promote_user.svg') }}">
+                                </a>
+                            {% else %}
+                                <a href="{{ path('role_toggle', {'action': 'demote', 'id': user.id}) }}">
+                                    <img width="30" height="30" alt="Destituer l'utilisateur" title="Destituer l'utilisateur" src="{{ asset('bundles/front/images/demote_user.svg') }}">
+                                </a>
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                {% endif %}
             </tr>
         {% endfor %}
     </table>
