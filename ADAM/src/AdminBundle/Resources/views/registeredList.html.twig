@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>     
+            <th>Email</th>
+            <th>Date d'inscription</th>
+            <th>Date de naissance</th>
+            <th>Diplôme</th>
+            <th>Année d'obtention du diplôme</th>
+            <th>Actif</th>
+            <th>Role</th>
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.lastname }}</td>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.createdAt|localizeddate('long', 'none', app.request.locale ) }}</td>
+                <td>
+                    {% if user.birthday %}
+                        {{ user.birthday|localizeddate('long', 'none', app.request.locale ) }}</td>
+                    {% endif %}
+                <td>{{ user.graduate }}</td>
+                <td>{{ user.graduateYear }}</td>
+                <td>
+                    {% if user.enabled %}
+                        Oui
+                    {% else %}
+                        Non
+                    {% endif %}
+                </td>
+                <td>
+                    {% if "ROLE_SUPER_ADMIN" in user.roles %}
+                        Super Administrateur
+                    {% elseif "ROLE_ADMIN" in user.roles %}
+                        Administateur
+                    {% else %}
+                        Utilisateur
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
