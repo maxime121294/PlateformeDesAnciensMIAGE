@@ -49,7 +49,6 @@ class User extends BaseUser
      *
      * @ORM\Column(name="birthday", type="date", nullable=true)
      * @Assert\Date()
-     * @Assert\NotBlank()
      */
     private $birthday;
 
@@ -57,7 +56,6 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="graduate", type="string", length=255, nullable=true)
-     * @Assert\NotBlank()
      */
     private $graduate;
 
@@ -71,7 +69,6 @@ class User extends BaseUser
      *      minMessage = "Année minimum : {{ limit }}",
      *      maxMessage = "Année maximum : {{ limit }}"
      * )
-     * @Assert\NotBlank()
      */
     private $graduateYear;
 
