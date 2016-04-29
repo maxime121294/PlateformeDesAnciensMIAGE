@@ -66,7 +66,7 @@ class User extends BaseUser
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="birthday", type="date",nullable=true)
+     * @ORM\Column(name="birthday", type="date", nullable=true)
      * @Assert\Date()
      */
     private $birthday;
@@ -81,7 +81,7 @@ class User extends BaseUser
     /**
      * @var int
      *
-     * @ORM\Column(name="graduateYear", type="integer",nullable=true)
+     * @ORM\Column(name="graduateYear", type="integer", nullable=true)
      * @Assert\Range(
      *      min = 2000,
      *      max = 2016,
