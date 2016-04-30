@@ -15,7 +15,9 @@ security:
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
         fos_userbundle:
-            id: fos_user.user_provider.username_email
+            id: fos_user.user_provider.username_email    
+        hwi:                               
+            id: hwi_oauth.user.provider
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -33,10 +35,11 @@ security:
                 check_path:             fos_user_security_check
                 failure_path:           null
                 default_target_path:    homepage
+                require_previous_session: false
                 remember_me:            true
             remember_me:
                 key:        %secret%
-                lifetime:   300000000
+                lifetime:   31536000  # 365 days in seconds
                 path:       /
                 domain:     ~
             logout:
@@ -44,6 +47,15 @@ security:
                 target:     homepage
             anonymous:      true
             switch_user:    true
+            oauth:
+                resource_owners:
+                    facebook:           "/login/check-facebook"
+                    google:             "/login/check-google"
+                login_path:        homepage
+                use_forward:       false
+                failure_path:      null
+                oauth_user_provider:
+                    service: my_user_provider
             # activate different ways to authenticate
 
             # http_basic: ~
@@ -53,7 +65,7 @@ security:
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
 
     access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }

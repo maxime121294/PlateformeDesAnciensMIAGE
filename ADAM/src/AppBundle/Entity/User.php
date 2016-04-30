@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\AttributeOverrides({
  *              @ORM\AttributeOverride(name="username", column=@ORM\Column(nullable=true, unique=false)),
  *              @ORM\AttributeOverride(name="usernameCanonical", column=@ORM\Column(nullable=true, unique=false))
- * 
  * }) 
  */
 class User extends BaseUser
@@ -27,6 +26,26 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="facebook_id", type="string", nullable=true)
+     */
+    protected $facebook_id;
+
+    /** @ORM\Column(name="facebook_access_token", type="string", length=255, nullable=true) */
+    protected $facebook_access_token;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="google_id", type="string", nullable=true)
+     */
+    protected $google_id;
+
+    /** @ORM\Column(name="google_access_token", type="string", length=255, nullable=true) */
+    protected $google_access_token;
 
     /**
      * @var string
@@ -102,6 +121,58 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+    
+    /**
+     * Set facebook_id
+     *
+     * @param string $facebook_id
+     * @return Users
+     */
+    public function setFacebookId($facebook_id)
+    {
+        $this->facebook_id = $facebook_id;
+
+        return $this;
+    }
+
+    /**
+     * Set facebook_access_token
+     *
+     * @param string $facebook_access_token
+     * @return Users
+     */
+    public function setFacebookAccessToken($facebook_access_token)
+    {
+        $this->facebook_access_token = $facebook_access_token;
+
+        return $this;
+    }
+
+    /**
+     * Set google_id
+     *
+     * @param string $google_id
+     * @return Users
+     */
+    public function setGoogleId($google_id)
+    {
+        $this->google_id = $google_id;
+
+        return $this;
+    }
+
+    /**
+     * Set google_access_token
+     *
+     * @param string $google_access_token
+     * @return Users
+     */
+    public function setGoogleAccessToken($google_access_token)
+    {
+        $this->google_access_token = $google_access_token;
+
+        return $this;
     }
 
     /**
@@ -307,5 +378,45 @@ class User extends BaseUser
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Get facebook_id
+     *
+     * @return string 
+     */
+    public function getFacebookId()
+    {
+        return $this->facebook_id;
+    }
+
+    /**
+     * Get facebook_access_token
+     *
+     * @return string 
+     */
+    public function getFacebookAccessToken()
+    {
+        return $this->facebook_access_token;
+    }
+
+    /**
+     * Get google_id
+     *
+     * @return string 
+     */
+    public function getGoogleId()
+    {
+        return $this->google_id;
+    }
+
+    /**
+     * Get google_access_token
+     *
+     * @return string 
+     */
+    public function getGoogleAccessToken()
+    {
+        return $this->google_access_token;
     }
 }

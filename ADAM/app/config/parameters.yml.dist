@@ -17,3 +17,9 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    # A secret key for login
+    oauth.facebook.id: ~
+    oauth.facebook.secret: ~
+    oauth.google.id: ~
+    oauth.google.secret: ~
