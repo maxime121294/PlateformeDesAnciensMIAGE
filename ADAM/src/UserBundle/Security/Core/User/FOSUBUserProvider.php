@@ -37,10 +37,14 @@ class FOSUBUserProvider extends BaseClass
         $serviceName = $response->getResourceOwner()->getName();
         
         if ($serviceName === 'google'){
+            $birthday = null;
             $username = $data['id'];
-            $firstname = $data['given_name'];
-            $lastname = $data['family_name'];
-            $email = $data['email'];
+            $firstname = $data['name']['givenName'];
+            $lastname = $data['name']['familyName'];
+            $email = $data['emails'][0]['value'];
+            if (isset($data['birthday'])) {
+                $birthday = $data['birthday'];
+            }
         }
 
         if ($serviceName === 'facebook'){
@@ -61,14 +65,17 @@ class FOSUBUserProvider extends BaseClass
             // create new user here
             if (null === $user) {
                 $user = $this->userManager->createUser();
-                $user->$setter_id($username);
-                $user->$setter_token($response->getAccessToken());
+                $user->$setterId($username);
+                $user->$setterToken($response->getAccessToken());
                 //I have set all requested data with the user's username
                 //modify here with relevant data
                 $user->setFirstName($firstname);
                 $user->setLastname($lastname);
                 $user->setEmail($email);
                 $user->setPlainPassword($username);
+                if (!is_null($birthday)) {
+                    $user->setBirthday(new \DateTime($birthday));
+                }
                 $user->setEnabled(true);
                 $this->userManager->updateUser($user);
 
