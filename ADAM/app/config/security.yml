@@ -35,10 +35,11 @@ security:
                 check_path:             fos_user_security_check
                 failure_path:           null
                 default_target_path:    homepage
+                require_previous_session: false
                 remember_me:            true
             remember_me:
                 key:        %secret%
-                lifetime:   300000000
+                lifetime:   31536000  # 365 days in seconds
                 path:       /
                 domain:     ~
             logout:
