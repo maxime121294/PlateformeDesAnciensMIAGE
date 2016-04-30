@@ -1,4 +1,7 @@
 services:
-#    user.example:
-#        class: UserBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+    user.security:
+        class: UserBundle\Controller\SecurityController
+        arguments: [@service_container]
+    user.registration:
+        class: UserBundle\Controller\RegistrationController
+        arguments: [@service_container]
