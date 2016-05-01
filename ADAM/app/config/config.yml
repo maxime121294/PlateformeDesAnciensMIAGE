@@ -87,6 +87,14 @@ fos_user:
         form:
             type: UserBundle\Form\RegistrationType
 
+services:
+    hwi_oauth.user.provider.entity:
+        class: HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
 # OAuthBundle Configuration
 hwi_oauth:
     connect:
@@ -117,8 +125,3 @@ hwi_oauth:
             scope:               "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.profile"
             options:
                 infos_url:       "https://www.googleapis.com/plus/v1/people/me"
-
-
-services:
-    hwi_oauth.user.provider.entity:
-        class: HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider

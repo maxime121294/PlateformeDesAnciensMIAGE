@@ -37,6 +37,7 @@ class FOSUBUserProvider extends BaseClass
         $serviceName = $response->getResourceOwner()->getName();
         
         if ($serviceName === 'google'){
+            $birthday = null;
             $username = $data['id'];
             $firstname = $data['name']['givenName'];
             $lastname = $data['name']['familyName'];
