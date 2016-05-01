@@ -97,7 +97,11 @@ hwi_oauth:
         properties:
             facebook:    facebook_id
             google:      google_id
+            linkedin:    linkedin_id
     resource_owners:
+        # On déclare la ressource en question et son type
+        # Le client ID et client secret sont fournis à la création de l'application sur la ressource en question (Linkedin, Facebook, Google...)
+        # Le scope cible les informations qu'on veut de l'utilisateur (profil complet, adresses mail, contact, etc....)
     # facebook Access
         facebook:
             type:                facebook
@@ -117,7 +121,13 @@ hwi_oauth:
             scope:               "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.profile"
             options:
                 infos_url:       "https://www.googleapis.com/plus/v1/people/me"
-
+     # Linkedin Access
+        linkedin:
+            type:                linkedin
+            client_id:           %oauth.linkedin.id%
+            client_secret:       %oauth.linkedin.secret%
+            scope:               r_basicprofile
+            infos_url:           "https://api.linkedin.com/v1/people/~:(id,formatted-name,recommendations-received)"
 
 services:
     hwi_oauth.user.provider.entity:

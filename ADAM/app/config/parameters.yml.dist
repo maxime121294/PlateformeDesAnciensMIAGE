@@ -23,3 +23,5 @@ parameters:
     oauth.facebook.secret: ~
     oauth.google.id: ~
     oauth.google.secret: ~
+    oauth.linkedin.id: ~
+    oauth.linkedin.secret: ~

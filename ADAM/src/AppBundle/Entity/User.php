@@ -50,6 +50,16 @@ class User extends BaseUser
     /**
      * @var string
      *
+     * @ORM\Column(name="linkedin_id", type="string", nullable=true)
+     */
+    protected $linkedin_id;
+
+    /** @ORM\Column(name="linkedin_access_token", type="string", length=255, nullable=true) */
+    protected $linkedin_access_token;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="lastname", type="string", length=255)
      * @Assert\NotBlank()
      */
@@ -171,6 +181,32 @@ class User extends BaseUser
     public function setGoogleAccessToken($google_access_token)
     {
         $this->google_access_token = $google_access_token;
+
+        return $this;
+    }
+
+    /**
+     * Set linkedin_id
+     *
+     * @param string $linkedin_id
+     * @return Users
+     */
+    public function setLinkedinId($linkedin_id)
+    {
+        $this->linkedin_id = $linkedin_id;
+
+        return $this;
+    }
+
+    /**
+     * Set linkedin_access_token
+     *
+     * @param string $linkedin_access_token
+     * @return Users
+     */
+    public function setLinkedinAccessToken($linkedin_access_token)
+    {
+        $this->linkedin_access_token = $linkedin_access_token;
 
         return $this;
     }
@@ -418,5 +454,25 @@ class User extends BaseUser
     public function getGoogleAccessToken()
     {
         return $this->google_access_token;
+    }
+
+    /**
+     * Get linkedin_id
+     *
+     * @return string 
+     */
+    public function getLinkedinId()
+    {
+        return $this->linkedin_id;
+    }
+
+    /**
+     * Get linkedin_access_token
+     *
+     * @return string 
+     */
+    public function getLinkedinAccessToken()
+    {
+        return $this->linkedin_access_token;
     }
 }

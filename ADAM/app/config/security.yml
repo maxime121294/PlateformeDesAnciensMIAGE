@@ -51,6 +51,7 @@ security:
                 resource_owners:
                     facebook:           "/login/check-facebook"
                     google:             "/login/check-google"
+                    linkedin:           "/login/check-linkedin"       
                 login_path:        homepage
                 use_forward:       false
                 failure_path:      null
