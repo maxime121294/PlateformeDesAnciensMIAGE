@@ -42,6 +42,7 @@ class FOSUBUserProvider extends BaseClass
             $firstname = $data['name']['givenName'];
             $lastname = $data['name']['familyName'];
             $email = $data['emails'][0]['value'];
+            $birthday = null;
             if (isset($data['birthday'])) {
                 $birthday = $data['birthday'];
             }
@@ -52,6 +53,17 @@ class FOSUBUserProvider extends BaseClass
             $lastname = $response->getLastName();
             $firstname = $response->getFirstName();
             $email = $response->getEmail();
+        }
+
+        if ($serviceName === 'linkedin'){
+            $username = $data['id'];
+            $firstname = $data['firstName'];
+            $lastname = $data['lastName'];
+            $email = $data['emailAddress'];
+            $birthday = null;
+            if (isset($data['birthday'])) {
+                $birthday = $data['birthday'];
+            }
         }
 
         $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));

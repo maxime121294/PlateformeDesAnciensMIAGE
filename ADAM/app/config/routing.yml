@@ -37,3 +37,6 @@ facebook_login:
 
 google_login:
     path: /login/check-google
+
+linkedin_login:
+    path: /login/check-linkedin
