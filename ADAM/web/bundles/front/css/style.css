@@ -36,7 +36,11 @@ nav.navbar > .container-fluid .logo-ADAM {
     width: 95px;
 }
 
-nav.navbar > .container-fluid a {
+nav.navbar > .container-fluid a:not(.btn) {
+    height: 54px;
+}
+
+nav.navbar > .container-fluid a:not(.user-name) {
     cursor: pointer;
 }
 
@@ -48,7 +52,7 @@ nav.navbar > .container-fluid a.navbar-brand {
     cursor: default;
 }
 
-nav.navbar > .container-fluid a:not(.navbar-logo):not(.help-link):hover {
+nav.navbar > .container-fluid a:not(.navbar-logo):not(.help-link):not(.user-name):hover {
     background-color: var(--descartes-rouge-color);
     color: #E8E8E8;
 }
@@ -194,4 +198,28 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 .homepage-time {
     padding-top: 5%;
     text-align: center;
+}
+
+/*
+ * Registerd list
+ */
+.registered-list-container {
+    margin: 25px auto 15px auto;
+    width: 90%;
+    border: 3px solid grey;
+    padding: 10px;
+    vertical-align: middle;
+    background-color: var(--descartes-grey-color);
+    color: var(--descartes-rouge-color);
+}
+
+.registered-list-container .table-hover tbody tr td, 
+.registered-list-container .table-hover tbody tr th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.registered-list-container .table-hover tbody tr:hover td, 
+.registered-list-container .table-hover tbody tr:hover th {
+    background-color: white;
 }

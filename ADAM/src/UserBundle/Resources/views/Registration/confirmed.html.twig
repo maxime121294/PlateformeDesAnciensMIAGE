@@ -1,10 +1,7 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends 'base.html.twig' %}
 
-{% trans_default_domain 'FOSUserBundle' %}
-
-{% block fos_user_content %}
-    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
-    {% if targetUrl %}
-    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
-    {% endif %}
-{% endblock fos_user_content %}
+{% block body %}
+    <p>
+    	Ton inscription a bien été prise en compte, {{ app.user.firstname|capitalize }}. Bienvenu sur ADAM, l'Association de Descartes des Anciens Miagistes !
+    </p>
+{% endblock body %}
