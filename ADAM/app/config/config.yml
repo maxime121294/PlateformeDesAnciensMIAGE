@@ -126,8 +126,8 @@ hwi_oauth:
             type:                linkedin
             client_id:           %oauth.linkedin.id%
             client_secret:       %oauth.linkedin.secret%
-            scope:               r_basicprofile
-            infos_url:           "https://api.linkedin.com/v1/people/~:(id,formatted-name,recommendations-received)"
+            scope:               "r_basicprofile,r_emailaddress"
+            infos_url:           "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address,picture-url)?format=json"
 
 services:
     hwi_oauth.user.provider.entity:

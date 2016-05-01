@@ -12,6 +12,8 @@ class FOSUBUserProvider extends BaseClass
     {
         $property = $this->getProperty($response);
         $username = $response->getUsername();
+        var_dump($username);
+        die;
         //on connect - get the access token and the user ID
         $service = $response->getResourceOwner()->getName();
         $setter = 'set'.ucfirst($service);
@@ -41,6 +43,7 @@ class FOSUBUserProvider extends BaseClass
             $firstname = $data['name']['givenName'];
             $lastname = $data['name']['familyName'];
             $email = $data['emails'][0]['value'];
+            $birthday = null;
             if (isset($data['birthday'])) {
                 $birthday = $data['birthday'];
             }
@@ -51,6 +54,17 @@ class FOSUBUserProvider extends BaseClass
             $lastname = $response->getLastName();
             $firstname = $response->getFirstName();
             $email = $response->getEmail();
+        }
+
+        if ($serviceName === 'linkedin'){
+            $username = $data['id'];
+            $firstname = $data['firstName'];
+            $lastname = $data['lastName'];
+            $email = $data['emailAddress'];
+            $birthday = null;
+            if (isset($data['birthday'])) {
+                $birthday = $data['birthday'];
+            }
         }
 
         $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
@@ -72,7 +86,7 @@ class FOSUBUserProvider extends BaseClass
                 $user->setLastname($lastname);
                 $user->setEmail($email);
                 $user->setPlainPassword($username);
-                if (!is_null($birthday)) {
+                if (isset($birthday) & !is_null($birthday)) {
                     $user->setBirthday(new \DateTime($birthday));
                 }
                 $user->setEnabled(true);
