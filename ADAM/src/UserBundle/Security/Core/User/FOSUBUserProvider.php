@@ -84,7 +84,7 @@ class FOSUBUserProvider extends BaseClass
                 $user->setLastname($lastname);
                 $user->setEmail($email);
                 $user->setPlainPassword($username);
-                if (isset($birthday) & !is_null($birthday)) {
+                if (!is_null($birthday)) {
                     $user->setBirthday(new \DateTime($birthday));
                 }
                 $user->setEnabled(true);
