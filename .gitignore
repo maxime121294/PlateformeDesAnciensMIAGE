@@ -39,4 +39,6 @@ ADAM/build/
 
 # Composer PHAR
 ADAM/composer.phar
+
+# Composer LOCK
 ADAM/composer.lock
