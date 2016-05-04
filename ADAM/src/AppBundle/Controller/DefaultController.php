@@ -34,4 +34,12 @@ class DefaultController extends Controller
             'csrf_token' => $loginVariables['csrf_token'],
         ));
     }
+
+    /**
+     * @Route("/security/", name="security")
+     */
+    public function securityAction(Request $request)
+    {
+        return $this->render('AppBundle:Security:confidentialite.html.twig');
+    }
 }
