@@ -40,6 +40,7 @@ class DefaultController extends Controller
      */
     public function securityAction(Request $request)
     {
-        return $this->render('AppBundle:Security:confidentialite.html.twig');
+        $loginVariables = $this->get('user.security')->loginFormInstance($request);
+        return $this->render('AppBundle:Security:confidentialite.html.twig', $loginVariables);
     }
 }

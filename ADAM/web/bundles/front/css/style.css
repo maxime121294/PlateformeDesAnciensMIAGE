@@ -240,3 +240,19 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 .footer-distributed i, .letterMiage{
     color: var(--descartes-rouge-color);
 }
+
+/*
+*  Politique de confidentialite
+*/
+.confidentialite {
+    padding-left: 10%;
+    padding-right: 10%;
+    text-align: justify;
+    background-color: var(--descartes-grey-color);
+}
+.confidentialite h2{
+    color:var(--descartes-rouge-color);
+}
+.confidentialite h3{
+    color:var(--descartes-brown-color);
+}
