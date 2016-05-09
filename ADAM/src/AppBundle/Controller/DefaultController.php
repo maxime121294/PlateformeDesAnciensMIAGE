@@ -47,4 +47,13 @@ class DefaultController extends Controller
             ));
         }
     }
+
+    /**
+     * @Route("/security/", name="security")
+     */
+    public function securityAction(Request $request)
+    {
+        $loginVariables = $this->get('user.security')->loginFormInstance($request);
+        return $this->render('AppBundle:Security:confidentialite.html.twig', $loginVariables);
+    }
 }
