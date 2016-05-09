@@ -2,15 +2,16 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: "@UserBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: fr
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -66,6 +67,7 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
+# KrumoBundle Configuration
 mjm_krumo:
     skin:
         selected: schabalon.com
@@ -75,3 +77,62 @@ mjm_krumo:
         show_version: true
         show_call_info: true
         cascade: [5,10]
+
+# FOSUserBundle Configuration
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+    registration:
+        form:
+            type: UserBundle\Form\RegistrationType
+
+services:
+    hwi_oauth.user.provider.entity:
+        class: HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
+# OAuthBundle Configuration
+hwi_oauth:
+    connect:
+        account_connector: my_user_provider
+    firewall_names: [main]
+    fosub:
+        username_iterations: 30
+        properties:
+            facebook:    facebook_id
+            google:      google_id
+            linkedin:    linkedin_id
+    resource_owners:
+        # On déclare la ressource en question et son type
+        # Le client ID et client secret sont fournis à la création de l'application sur la ressource en question (Linkedin, Facebook, Google...)
+        # Le scope cible les informations qu'on veut de l'utilisateur (profil complet, adresses mail, contact, etc....)
+    # facebook Access
+        facebook:
+            type:                facebook
+            client_id:           %oauth.facebook.id%
+            client_secret:       %oauth.facebook.secret%
+            scope:               "email,public_profile,user_birthday"
+            infos_url:           "https://graph.facebook.com/me?fields=id,name,birthday,first_name,age_range,last_name,email,picture.type(square)"
+            options:
+                csrf: true
+                display: popup #dialog is optimized for popup window
+                auth_type: rerequest # Re-asking for Declined Permissions
+    # google Access
+        google:
+            type:                google
+            client_id:           %oauth.google.id%
+            client_secret:       %oauth.google.secret%
+            scope:               "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.profile"
+            options:
+                infos_url:       "https://www.googleapis.com/plus/v1/people/me"
+     # Linkedin Access
+        linkedin:
+            type:                linkedin
+            client_id:           %oauth.linkedin.id%
+            client_secret:       %oauth.linkedin.secret%
+            scope:               "r_basicprofile,r_emailaddress"
+            infos_url:           "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address,picture-url)?format=json"

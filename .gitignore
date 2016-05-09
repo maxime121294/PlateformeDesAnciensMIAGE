@@ -23,8 +23,9 @@
 /vendor/
 
 # Assets and user uploads
-/web/bundles/
-/web/uploads/
+ADAM/web/bundles/*
+!ADAM/web/bundles/front/
+ADAM/web/uploads/
 
 # Assets managed by Bower
 /web/assets/vendor/
@@ -37,4 +38,7 @@
 /build/
 
 # Composer PHAR
-/composer.phar
+ADAM/composer.phar
+
+# Composer LOCK
+ADAM/composer.lock

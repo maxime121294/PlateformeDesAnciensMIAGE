@@ -1,0 +1,56 @@
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a href="{{ path('homepage') }}" class="navbar-logo">
+                <img class="logo-ADAM" alt="ADAM" src="{{ asset('bundles/front/images/ADAM_Icon.png') }}">
+            </a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">     
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    {% if app.user is defined %}
+                        <li>
+                            <a class="user-name">
+                                <i class="fa fa-user"></i>
+                                <b>{{ app.user.firstname|capitalize }}</b>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li>
+                            <a href="{{ path('registered_list') }}" class="divider">
+                                <i class="fa fa-users"></i>
+                                <b>Liste des inscrits</b>
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li>
+                        <a href="{{ path('fos_user_security_logout') }}" class="divider">
+                            <i class="fa fa-sign-out"></i>
+                            <b>Deconnexion</b>
+                        </a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{{ path('fos_user_registration_register') }}" class="divider">
+                            <i class="fa fa-pencil"></i>
+                            <b>Inscription</b>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-sign-in"></i>
+                            <b>Connexion</b> 
+                            <span class="caret"></span>
+                        </a>
+                        {% include ':default:login.html.twig' %}
+                    </li>
+                {% endif %}
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>

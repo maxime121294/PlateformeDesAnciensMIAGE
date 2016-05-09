@@ -1,0 +1,258 @@
+:root {
+  --descartes-rouge-color: #BB0F47;
+  --descartes-grey-color: #F3F3F3;
+  --descartes-brown-color: #554348;
+}
+
+/*
+ * Container block en dessous de la navbar
+ */
+.block-container {
+    padding-top: 54px;
+    background-color: #444444;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    overflow: auto;
+}
+
+/*
+ * Navbar
+ */
+nav.navbar {
+    position: fixed;
+    z-index: 2;
+    width: 100%;
+    margin-bottom: 0;
+    border: 0;
+    top: 0;
+    height: 54px;
+}
+
+nav.navbar > .container-fluid {
+    background-color: white;
+}
+
+nav.navbar > .container-fluid .logo-ADAM {
+    width: 95px;
+}
+
+nav.navbar > .container-fluid a:not(.btn) {
+    height: 54px;
+}
+
+nav.navbar > .container-fluid a:not(.user-name) {
+    cursor: pointer;
+}
+
+nav.navbar > .container-fluid a:not(.btn) {
+    color: var(--descartes-rouge-color);
+}
+
+nav.navbar > .container-fluid a.navbar-brand {
+    cursor: default;
+}
+
+nav.navbar > .container-fluid a:not(.navbar-logo):not(.help-link):not(.user-name):hover {
+    background-color: var(--descartes-rouge-color);
+    color: #E8E8E8;
+}
+
+nav.navbar > .container-fluid .active a,
+nav.navbar > .container-fluid .active a:focus,
+nav.navbar > .container-fluid .active a:hover,
+nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-toggle {
+    background-color: var(--descartes-rouge-color);
+    color: var(--descartes-rouge-color);
+}
+
+/*
+ * Login form
+ */
+.checkbox input[type=checkbox] {
+    margin-left: 0px;
+}
+
+#login-dp{
+    min-width: 275px;
+    padding: 14px 14px 0;
+    overflow: hidden;
+    background-color: white;
+}
+
+#login-dp .help-block{
+    font-size:12px    
+}
+
+#login-dp .bottom{
+    background-color:rgba(255,255,255,.8);
+    border-top:1px solid #ddd;
+    clear:both;
+    padding:14px;
+}
+#login-dp .social-buttons{
+    margin:12px 0    
+}
+#login-dp .social-buttons a{
+    width: 32%;
+}
+#login-dp .form-group {
+    margin-bottom: 10px;
+}
+.btn-fb{
+    color: #fff;
+    background-color:#3b5998;
+}
+.btn-fb:hover{
+    color: #fff;
+    background-color:#496ebc 
+}
+.btn-tw{
+    color: #fff;
+    background-color:#55acee;
+}
+.btn-tw:hover{
+    color: #fff;
+    background-color:#59b5fa;
+}
+.btn-google{
+    color: #fff;
+    background-color:#db3236;
+}
+.btn-google:hover{
+    color: #fff;
+    background-color:#db3236;
+}
+.btn-linkedin{
+    color: #fff;
+    background-color:#004471;
+}
+.btn-linkedin:hover{
+    color: #fff;
+    background-color:#004471;
+}
+@media(max-width:768px){
+    #login-dp{
+        background-color: inherit;
+        color: #fff;
+    }
+    #login-dp .bottom{
+        background-color: inherit;
+        border-top:0 none;
+    }
+}
+
+/*
+ * Register form
+ */
+.form-register {
+    margin: 25px auto 15px auto;
+    width: 75%;
+    border: 3px solid grey;
+    padding: 10px;
+    vertical-align: middle;
+    background-color: var(--descartes-grey-color);
+    color: var(--descartes-rouge-color);
+}
+
+.form-register .btn-register {
+    color : white;
+    background-color: var(--descartes-rouge-color);
+    margin: auto;
+    display: block;
+}
+
+.form-register #birthday input,
+.form-register #graduateYear input{
+    z-index: 0;
+    width: 92%;
+}
+
+.form-register #birthday span,
+.form-register #graduateYear span{
+    height: 34px;
+}
+
+.form-register .required:after {
+    content: "*";
+}
+
+/*
+ * Homepage css
+ */
+.homepage-background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #444444;
+    background-image: url(../images/saints_peres.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.25;
+}
+
+.homepage-logo .logo-ADAM {
+    height: 300px;
+}
+
+.homepage-logo,
+.homepage-time {
+    padding-top: 5%;
+    text-align: center;
+}
+
+/*
+ * Registerd list
+ */
+.registered-list-container {
+    margin: 25px auto 15px auto;
+    width: 90%;
+    border: 3px solid grey;
+    padding: 10px;
+    vertical-align: middle;
+    background-color: var(--descartes-grey-color);
+    color: var(--descartes-rouge-color);
+}
+
+.registered-list-container .table-hover tbody tr td, 
+.registered-list-container .table-hover tbody tr th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.registered-list-container .table-hover tbody tr:hover td, 
+.registered-list-container .table-hover tbody tr:hover th {
+    background-color: white;
+}
+
+/*
+*  Footer
+*/
+.footer-distributed{
+    position: fixed;
+    bottom: 0;
+    background-color: var(--descartes-grey-color);
+    width: 100%;
+}
+.footer-distributed h3{
+    color: var(--descartes-brown-color);
+}
+.footer-distributed i, .letterMiage{
+    color: var(--descartes-rouge-color);
+}
+
+/*
+*  Politique de confidentialite
+*/
+.confidentialite {
+    padding-left: 10%;
+    padding-right: 10%;
+    text-align: justify;
+    background-color: var(--descartes-grey-color);
+}
+.confidentialite h2{
+    color:var(--descartes-rouge-color);
+}
+.confidentialite h3{
+    color:var(--descartes-brown-color);
+}

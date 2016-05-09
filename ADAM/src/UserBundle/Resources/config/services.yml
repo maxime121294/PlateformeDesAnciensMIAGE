@@ -1,0 +1,7 @@
+services:
+    user.security:
+        class: UserBundle\Controller\SecurityController
+        arguments: [@service_container]
+    user.registration:
+        class: UserBundle\Controller\RegistrationController
+        arguments: [@service_container]

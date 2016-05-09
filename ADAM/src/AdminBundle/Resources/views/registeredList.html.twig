@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="registered-list-container">
+        <table class="table table-striped table-bordered table-hover" id="registreList">
+            <thead>
+                <th>Nom</th>
+                <th>Prénom</th>     
+                <th>Email</th>
+                <th>Date d'inscription</th>
+                <th>Date de naissance</th>
+                <th>Diplôme</th>
+                <th>Année d'obtention du diplôme</th>
+                <th>Actif</th>
+                <th>Role</th>
+                {% if is_granted("ROLE_SUPER_ADMIN") %}
+                    <th>Actions</th>
+                {% endif %}
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.lastname }}</td>
+                    <td>{{ user.firstname }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.createdAt|localizeddate('long', 'none', app.request.locale ) }}</td>
+                    <td>
+                        {% if user.birthday %}
+                            {{ user.birthday|localizeddate('long', 'none', app.request.locale ) }}</td>
+                        {% endif %}
+                    <td>{{ user.graduate }}</td>
+                    <td>{{ user.graduateYear }}</td>
+                    <td>
+                        {% if user.enabled %}
+                            Oui
+                        {% else %}
+                            Non
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if "ROLE_SUPER_ADMIN" in user.roles %}
+                            Super Administrateur
+                        {% elseif "ROLE_ADMIN" in user.roles %}
+                            Administateur
+                        {% else %}
+                            Utilisateur
+                        {% endif %}
+                    </td>
+                    {% if is_granted("ROLE_SUPER_ADMIN") %}
+                        <td>
+                            {% if "ROLE_SUPER_ADMIN" not in user.roles %}
+                                {% if "ROLE_ADMIN" not in user.roles %}
+                                    <a href="{{ path('role_toggle', {'action': 'promote', 'id': user.id}) }}">
+                                        <img width="30" height="30" alt="Promouvoir l'utilisateur" title="Promouvoir l'utilisateur" src="{{ asset('bundles/front/images/promote_user.svg') }}">
+                                    </a>
+                                {% else %}
+                                    <a href="{{ path('role_toggle', {'action': 'demote', 'id': user.id}) }}">
+                                        <img width="30" height="30" alt="Destituer l'utilisateur" title="Destituer l'utilisateur" src="{{ asset('bundles/front/images/demote_user.svg') }}">
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block javascripts %}
+<script>
+    $(document).ready(function() {
+        $('#registreList').dataTable({
+            "oLanguage": { 
+                "sProcessing":      "Traitement en cours...",
+                "sLengthMenu":      "Afficher _MENU_ éléments",
+                "sZeroRecords":     "Aucun élément à afficher",
+                "sInfo":            "Affichage de l'élement _START_ à _END_ sur _TOTAL_ éléments",
+                "sInfoEmpty":       "Affichage de l'élement 0 à 0 sur 0 éléments",
+                "sInfoFiltered":    "(filtré de _MAX_ éléments au total)",
+                "sInfoPostFix":     "",
+                "sSearch":          "Rechercher:",
+                "sUrl":             "",
+                "oPaginate": {
+                     "sFirst":      "Premier",
+                     "sPrevious":   "Précédent",
+                     "sNext":       "Suivant",
+                     "sLast":       "Dernier"
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

@@ -2,12 +2,26 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}ADAM{% endblock %}</title>
+        {% block stylesheets %}
+        {% endblock %}
+        <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/bootstrap-theme.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/front/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/datatables.min.css') }}">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <script type="text/javascript" src="{{asset('bundles/front/js/libs/jquery-2.2.2.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('bundles/front/js/libs/bootstrap.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('bundles/front/js/libs/datatables.min.js')}}"></script>
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% include ':default:navbar.html.twig' %}
+        <div class="block-container">
+            {% block body %}{% endblock %}
+            {% block javascripts %}
+            {% endblock %}
+        </div>
+        {% include ':default:footer.html.twig' %}
     </body>
 </html>

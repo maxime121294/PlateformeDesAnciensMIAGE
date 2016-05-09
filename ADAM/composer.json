@@ -18,7 +18,9 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
         "mmucklo/krumo-bundle": "*",
-        "twbs/bootstrap": "^3.3"
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "twig/extensions": "^1.3",
+        "hwi/oauth-bundle": "^0.4.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",
