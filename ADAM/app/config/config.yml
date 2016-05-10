@@ -136,3 +136,35 @@ hwi_oauth:
             client_secret:       %oauth.linkedin.secret%
             scope:               "r_basicprofile,r_emailaddress"
             infos_url:           "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address,picture-url)?format=json"
+
+# CKEditorBundle Configuration 
+ivory_ck_editor:
+    default_config:              my_custom_config    # Utiliser par defaut la configuration my_custom_config
+    configs:
+        my_custom_config:
+            language:            %locale%
+            toolbar:             standard            # Charger la toolbar tollbar_1 (voir plus bas)
+            skin:                'bootstrapck, AppBundle\Resources\public\ckEditor\skins\'
+            extraPlugins:        "youtube, widget, glyphicons, about, dialog, link"
+    plugins:
+        youtube:
+            path:               'AppBundle\Resources\public\ckEditor\plugins\youtube\'
+            filename:           "plugin.js"
+        widget:
+            path:               'AppBundle\Resources\public\ckEditor\plugins\widget\'
+            filename:           "plugin.js"
+        glyphicons:
+            path:               'AppBundle\Resources\public\ckEditor\plugins\glyphicons\'
+            filename:           "plugin.js"
+        about:
+            path:               'AppBundle\Resources\public\ckEditor\plugins\about\'
+            filename:           "plugin.js"
+        clipboard:
+            path:               'AppBundle\Resources\public\ckEditor\plugins\clipboard\'
+            filename:           "plugin.js"
+        dialog:
+            path:               'AppBundle\Resources\public\ckEditor\plugins\dialog\'
+            filename:           "plugin.js"
+        link:
+            path:               'AppBundle\Resources\public\ckEditor\plugins\link\'
+            filename:           "plugin.js"
