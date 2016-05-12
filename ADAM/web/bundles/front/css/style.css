@@ -14,7 +14,6 @@
     width: 100%;
     position: fixed;
     overflow: scroll;
-    margin-bottom: 130px;
 }
 
 /*
@@ -229,12 +228,13 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 /*
 *  Footer
 */
-.footer-distributed{
+.footer-distributed {
     position: absolute;
     bottom: -20%;
     background-color: var(--descartes-grey-color);
     width: 100%;
-    height: 136px;
+    margin-top: 0;
+    border-top: 0;
 }
 .footer-distributed h3{
     color: var(--descartes-brown-color);
