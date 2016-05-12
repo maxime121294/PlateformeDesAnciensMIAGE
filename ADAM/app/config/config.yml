@@ -139,32 +139,41 @@ hwi_oauth:
 
 # CKEditorBundle Configuration 
 ivory_ck_editor:
-    default_config:              my_custom_config    # Utiliser par defaut la configuration my_custom_config
     configs:
         my_custom_config:
             language:            %locale%
-            toolbar:             standard            # Charger la toolbar tollbar_1 (voir plus bas)
-            skin:                'bootstrapck, AppBundle\Resources\public\ckEditor\skins\'
-            extraPlugins:        "youtube, widget, glyphicons, about, dialog, link"
+            toolbar:             [ [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt'],['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl']  , "/", [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'], ['Link', 'Unlink', 'Anchor'],[ 'oembed', 'wordcount', 'FLash', 'Table', 'HorizontalRule', 'SpecialChar', 'Smiley', 'PageBreak', 'Iframe'], "/" , ['Styles', 'Format', 'Font', 'FontSize', 'TextColor', 'BGColor'],['Maximize', 'ShowBlocks'],['About'],[ "Image" , "Youtube" , "Glyphicons"] ]
+            skin:                "bootstrapck,skins/bootstrapck/"
+            contentsCss:         "bundles/front/css/libs/bootstrap.min.css"
+            allowedContent:      true
+            extraPlugins:        "youtube,widget,glyphicons,lineutils,about,clipboard,dialog,link,autogrow"
+            youtube_width :      "640"
+            youtube_height :     "480"
     plugins:
         youtube:
-            path:               'AppBundle\Resources\public\ckEditor\plugins\youtube\'
+            path:               "bundles/ivoryckeditor/plugins/youtube/"
             filename:           "plugin.js"
         widget:
-            path:               'AppBundle\Resources\public\ckEditor\plugins\widget\'
+            path:               "bundles/ivoryckeditor/plugins/widget/"
             filename:           "plugin.js"
         glyphicons:
-            path:               'AppBundle\Resources\public\ckEditor\plugins\glyphicons\'
+            path:               "bundles/ivoryckeditor/plugins/glyphicons/"
+            filename:           "plugin.js"
+        lineutils:
+            path:               "bundles/ivoryckeditor/plugins/lineutils/"
             filename:           "plugin.js"
         about:
-            path:               'AppBundle\Resources\public\ckEditor\plugins\about\'
+            path:               "bundles/ivoryckeditor/plugins/about/"
             filename:           "plugin.js"
         clipboard:
-            path:               'AppBundle\Resources\public\ckEditor\plugins\clipboard\'
+            path:               "bundles/ivoryckeditor/plugins/clipboard/"
             filename:           "plugin.js"
         dialog:
-            path:               'AppBundle\Resources\public\ckEditor\plugins\dialog\'
+            path:               "bundles/ivoryckeditor/plugins/dialog/"
             filename:           "plugin.js"
         link:
-            path:               'AppBundle\Resources\public\ckEditor\plugins\link\'
+            path:               "bundles/ivoryckeditor/plugins/link/"
+            filename:           "plugin.js"
+        autogrow:
+            path:               "bundles/ivoryckeditor/plugins/autogrow/"
             filename:           "plugin.js"
