@@ -13,7 +13,8 @@
     height: 100%;
     width: 100%;
     position: fixed;
-    overflow: auto;
+    overflow: scroll;
+    margin-bottom: 130px;
 }
 
 /*
@@ -81,17 +82,17 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 }
 
 #login-dp .help-block{
-    font-size:12px    
+    font-size: 12px;
 }
 
 #login-dp .bottom{
-    background-color:rgba(255,255,255,.8);
-    border-top:1px solid #ddd;
-    clear:both;
-    padding:14px;
+    background-color: rgba(255,255,255,.8);
+    border-top: 1px solid #ddd;
+    clear: both;
+    padding: 14px;
 }
 #login-dp .social-buttons{
-    margin:12px 0    
+    margin: 12px 0;
 }
 #login-dp .social-buttons a{
     width: 32%;
@@ -105,7 +106,7 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 }
 .btn-fb:hover{
     color: #fff;
-    background-color:#496ebc 
+    background-color:#496ebc;
 }
 .btn-tw{
     color: #fff;
@@ -214,13 +215,13 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     color: var(--descartes-rouge-color);
 }
 
-.registered-list-container .table-hover tbody tr td, 
+.registered-list-container .table-hover tbody tr td,
 .registered-list-container .table-hover tbody tr th {
     text-align: center;
     vertical-align: middle;
 }
 
-.registered-list-container .table-hover tbody tr:hover td, 
+.registered-list-container .table-hover tbody tr:hover td,
 .registered-list-container .table-hover tbody tr:hover th {
     background-color: white;
 }
@@ -229,10 +230,11 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 *  Footer
 */
 .footer-distributed{
-    position: fixed;
-    bottom: 0;
+    position: absolute;
+    bottom: -20%;
     background-color: var(--descartes-grey-color);
     width: 100%;
+    height: 136px;
 }
 .footer-distributed h3{
     color: var(--descartes-brown-color);
