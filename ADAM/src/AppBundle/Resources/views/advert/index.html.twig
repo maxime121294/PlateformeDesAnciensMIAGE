@@ -1,31 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Advert list</h1>
-
-    <table>
-        <tbody>
-        {% for advert in adverts %}
-            <tr>
-                <td><a href="{{ path('annonce_show', { 'id': advert.id }) }}">{{ advert.id }}</a></td>
-                <td>{% if advert.createdAt %}{{ advert.createdAt|date('Y-m-d') }}{% endif %}</td>
-                <td>{% if advert.updatedAt %}{{ advert.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ advert.title }}</td>
-                <td>{{ advert.content|raw  }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('annonce_show', { 'id': advert.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('annonce_edit', { 'id': advert.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <h1>Listes des annonces</h1>
+    {% for advert in adverts %}
+    <div class="advertList">
+        <div class="row">
+            <div class="col-xs-12 col-md-8">
+               <h2>{{ advert.title }}  </h2>
+            </div>
+            <div class="col-xs-6 col-md-4">
+               {{ advert.category }}  
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-18 col-sm-12">
+                {{ advert.content|raw  }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-8"></div>
+            <div class="col-xs-6 col-md-4">
+                <p>Posté par {{ advert.author }}</p>
+                <p>Posté le  {% if advert.createdAt %}{{ advert.createdAt|date('Y-m-d') }}{% endif %}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 
     <ul>
         <li>

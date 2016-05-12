@@ -275,3 +275,15 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 .form-advert h1 {
     color: var(--descartes-brown-color);
 }
+
+/*
+ * Advert List
+ */
+.advertList {
+    margin: 25px auto 15px auto;
+    width: 75%;
+    padding: 10px;
+    vertical-align: middle;
+    border: 3px solid grey;
+    background-color: var(--descartes-grey-color);
+}
