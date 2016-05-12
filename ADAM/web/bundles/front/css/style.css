@@ -4,16 +4,28 @@
   --descartes-brown-color: #554348;
 }
 
+html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto;
+    /* Negative indent footer by its height */
+    margin: 0 auto -150px;
+    /* Pad bottom by footer height */
+    padding: 0 0 150px;
+    background-color: #444444;
+}
+
 /*
  * Container block en dessous de la navbar
  */
 .block-container {
-    padding-top: 54px;
-    background-color: #444444;
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    overflow: scroll;
+    padding: 54px 0 0 0;
 }
 
 /*
@@ -236,11 +248,8 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 *  Footer
 */
 .footer-distributed {
-    position: absolute;
+    height: 150px;
     background-color: var(--descartes-grey-color);
-    width: 100%;
-    margin-top: 0;
-    border-top: 0;
 }
 .footer-distributed h3{
     color: var(--descartes-brown-color);
