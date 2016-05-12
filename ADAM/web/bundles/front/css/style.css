@@ -2,6 +2,8 @@
   --descartes-rouge-color: #BB0F47;
   --descartes-grey-color: #F3F3F3;
   --descartes-brown-color: #554348;
+  --descartes-blue-color: #93B7BE;
+  --descartes-green-color: #8C9A9E;
 }
 
 /*
@@ -265,4 +267,11 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     width: 75%;
     padding: 10px;
     vertical-align: middle;
+}
+.form-advert .btn {
+    background-color: var(--descartes-blue-color);
+    color: var(--descartes-grey-color);
+}
+.form-advert h1 {
+    color: var(--descartes-brown-color);
 }

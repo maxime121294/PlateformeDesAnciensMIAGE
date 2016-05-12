@@ -1,6 +1,8 @@
 <?php
 namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Advert
  *
@@ -19,7 +21,7 @@ class Advert
     private $id;
     /**
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $author;
     /**
@@ -36,7 +38,7 @@ class Advert
     private $updatedAt;
     /**
      * @ORM\ManyToOne(targetEntity="Category")
-     * @ORM\JoinColumn(name="id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $category;
     /**
@@ -48,9 +50,23 @@ class Advert
     /**
      * @var text
      *
-     * @ORM\Column(name="content", type="text", length=255)
+     * @ORM\Column(name="content", type="text")
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 3500,
+     *      minMessage = "Your first name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $content;
+
+    public function __construct()
+    {
+
+        $this->createdAt = new \Datetime();
+        $this->updatedAt = new \Datetime();
+    }
+    
     /**
      * Get id
      *
@@ -163,10 +179,10 @@ class Advert
     /**
      * Set category
      *
-     * @param \AppBundle\Entity\Categorie $category
+     * @param \AppBundle\Entity\Category $category
      * @return Advert
      */
-    public function setCategory(\AppBundle\Entity\Categorie $category = null)
+    public function setCategory(\AppBundle\Entity\Category $category = null)
     {
         $this->category = $category;
         return $this;
@@ -174,7 +190,7 @@ class Advert
     /**
      * Get category
      *
-     * @return \AppBundle\Entity\Categorie 
+     * @return \AppBundle\Entity\Category
      */
     public function getCategory()
     {

@@ -1,6 +1,9 @@
 <?php
 namespace AppBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Category
  *
@@ -23,6 +26,15 @@ class Category
      * @ORM\Column(name="wording", type="string", length=255, unique=true)
      */
     private $wording;
+    /**
+     * @ORM\OneToMany(targetEntity="Advert", mappedBy="category")
+     */
+    private $adverts;
+
+    public function __construct()
+    {
+        $this->adverts = new \Doctrine\Common\Collections\ArrayCollection();
+    }
     /**
      * Get id
      *
@@ -51,5 +63,52 @@ class Category
     public function getWording()
     {
         return $this->wording;
+    }
+
+    public function __toString() {
+        return $this->wording;
+    }
+
+    /**
+     * Add adverts
+     *
+     * @param \AppBundle\Entity\Advert $adverts
+     * @return Category
+     */
+    public function addAdvert(\AppBundle\Entity\Advert $adverts)
+    {
+        $this->adverts[] = $adverts;
+
+        return $this;
+    }
+
+    /**
+     * Remove adverts
+     *
+     * @param \AppBundle\Entity\Advert $adverts
+     */
+    public function removeAdvert(\AppBundle\Entity\Advert $adverts)
+    {
+        $this->adverts->removeElement($adverts);
+    }
+
+    /**
+     * Get adverts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAdverts()
+    {
+        return $this->adverts;
+    }
+
+    /**
+    * Set adverts
+    *
+    * @param \Doctrine\Common\Collections\Collection $adverts
+    */
+    public function setCategoryAdvert(\Doctrine\Common\Collections\Collection $adverts)
+    {
+        $this->adverts = $adverts;
     }
 }

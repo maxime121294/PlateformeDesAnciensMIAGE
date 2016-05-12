@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Advert list</h1>
+
+    <table>
+        <tbody>
+        {% for advert in adverts %}
+            <tr>
+                <td><a href="{{ path('annonce_show', { 'id': advert.id }) }}">{{ advert.id }}</a></td>
+                <td>{% if advert.createdAt %}{{ advert.createdAt|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if advert.updatedAt %}{{ advert.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ advert.title }}</td>
+                <td>{{ advert.content|raw  }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('annonce_show', { 'id': advert.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('annonce_edit', { 'id': advert.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('annonce_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}
