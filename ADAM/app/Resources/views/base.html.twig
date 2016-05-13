@@ -16,12 +16,18 @@
         <script type="text/javascript" src="{{asset('bundles/front/js/libs/datatables.min.js')}}"></script>
     </head>
     <body>
-        {% include ':default:navbar.html.twig' %}
-        <div class="block-container">
-            {% block body %}{% endblock %}
-            {% block javascripts %}
-            {% endblock %}
+        <div id="wrap">
+            {% include ':default:navbar.html.twig' %}
+            <div class="block-container container-fluid">
+                {% block body %}
+                {% endblock %}
+            </div>
             {% include ':default:footer.html.twig' %}
         </div>
+        
+
+        {% block javascripts %}
+        {% endblock %}
+        {# Bloc JavaScript en fin de page pour plus de rapidité dans le chargement #}
     </body>
 </html>
