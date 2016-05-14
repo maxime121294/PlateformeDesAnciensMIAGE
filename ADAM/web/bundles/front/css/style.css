@@ -4,17 +4,24 @@
   --descartes-brown-color: #554348;
 }
 
+html,
+body {
+    height: 100%;
+}
+
+#wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto auto;
+    padding: 0 0 auto;
+    background-color: #444444;
+}
+
 /*
  * Container block en dessous de la navbar
  */
 .block-container {
-    padding-top: 54px;
-    background-color: #444444;
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    overflow: scroll;
-    margin-bottom: 130px;
+    padding: 54px 0 0 0;
 }
 
 /*
@@ -27,7 +34,7 @@ nav.navbar {
     margin-bottom: 0;
     border: 0;
     top: 0;
-    height: 54px;
+    height: 54px;   
 }
 
 nav.navbar > .container-fluid {
@@ -190,18 +197,25 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     background-size: cover;
     background-repeat: no-repeat;
     opacity: 0.25;
+    padding: auto;
 }
 
 .homepage-logo .logo-ADAM {
     height: 300px;
 }
 
+.homepage-logo {
+    padding-top: 5%;
+}
+
 .homepage-logo,
 .homepage-time {
-    padding-top: 5%;
     text-align: center;
 }
 
+.homepage-time {
+    padding-bottom: 5%;
+}
 /*
  * Registerd list
  */
@@ -229,15 +243,13 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 /*
 *  Footer
 */
-.footer-distributed{
-    position: absolute;
-    bottom: -20%;
-    background-color: var(--descartes-grey-color);
-    width: 100%;
-    height: 136px;
+.footer-distributed {
+    background-color: #202020;
+    position: relative;
 }
-.footer-distributed h3{
-    color: var(--descartes-brown-color);
+.footer-distributed h3,
+.footer-distributed p{
+    color: #8C8D90;
 }
 .footer-distributed i, .letterMiage{
     color: var(--descartes-rouge-color);
