@@ -44,7 +44,7 @@ class Advert
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="evenementDate", type="datetime", length=255)
+     * @ORM\Column(name="evenementDate", type="datetime", length=255, nullable=true)
      */
     private $evenementDate;
     /**

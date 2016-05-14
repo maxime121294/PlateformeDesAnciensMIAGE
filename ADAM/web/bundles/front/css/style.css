@@ -292,15 +292,13 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 .form-advert h1 {
     color: var(--descartes-brown-color);
 }
-.form-advert #evenementDate input {
+.form-advert #evenDate span {
+    height: 20px;
+}
+.form-advert #evenDate input {
     z-index: 0;
     width: 92%;
 }
-
-.form-advert #evenementDate span {
-    height: 34px;
-}
-
 /*
  * Advert List
  */
@@ -321,4 +319,14 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
   font-size: 12px;
   line-height: 1.428571429;
   border-radius: 15px;
+}
+
+/*
+ * edit Advert
+ */
+.editAdvert {
+    width: 85%;
+    margin: 25px auto 15px auto;
+    padding: 10px;
+    vertical-align: middle;
 }

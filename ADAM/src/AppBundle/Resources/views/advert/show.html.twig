@@ -1,44 +1,58 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <section class="pageAdvertList">
     <h1>Advert</h1>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ advert.id }}</td>
-            </tr>
-            <tr>
-                <th>Createdat</th>
-                <td>{% if advert.createdAt %}{{ advert.createdAt|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Updatedat</th>
-                <td>{% if advert.updatedAt %}{{ advert.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ advert.title }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ advert.content|raw }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('annonce_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('annonce_edit', { 'id': advert.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+      <div class="container">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-9">
+                    <div id="postlist">
+                        <div class="panel">
+                                <div class="panel-heading">
+                                    <div class="text-center">
+                                        <div class="row">
+                                            <div class="col-sm-9">
+                                                <h3 class="pull-left">{{ advert.title }}</h3>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <h4 class="pull-right">
+                                                <small>{{ advert.author.firstname }} {{ advert.author.lastname }}</small><br>
+                                                <small><em>{% if advert.createdAt %}{{ advert.createdAt|localizeddate('full', 'none') }}{% endif %} </em></small>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="panel-body">
+                                {{ advert.content|raw  }}
+                            </div>
+                            
+                            <div class="panel-footer">
+                                <div class="text-center">
+                                    <div class="row">
+                                        <div class="col-sm-9">
+                                            <span class="label label-default pull-left">{{ advert.category }}</span>
+                                        </div>
+                                        {% if advert.author == app.user %}
+                                            <div class="col-sm-3">
+                                                <h5 class="pull-right">
+                                                    <a type="button" href="{{ path('annonce_edit', { 'id': advert.id }) }}" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                    {{ form_start(delete_form) }}
+                                                        <input type="submit" class="btn btn-danger btn-circle" value="X">
+                                                    {{ form_end(delete_form) }}
+                                                </h5>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('annonce_index') }}" class="btn btn-default" type="button"> Retour aux annonces</a>
+        </div>
+</section>
 {% endblock %}

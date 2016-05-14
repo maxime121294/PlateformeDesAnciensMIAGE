@@ -1,21 +1,80 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<div class="editAdvert">
     <h1>Advert edit</h1>
 
     {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+         <div class="form-group row">
+                {{ form_label(edit_form.title, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+                <div class="col-sm-9">
+                    {{ form_widget(edit_form.title, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(edit_form.title) }}
+                </div>
+                
+            </div>
+            <div class="form-group row">
+                {{ form_label(edit_form.category, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+                <div class="col-sm-9">
+                    {{ form_widget(edit_form.category, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(edit_form.category) }}
+                </div>  
+            </div>
+             <div class="form-group row" style="display:none;" id="edit_form-evenementDate">
+                {{ form_label(edit_form.evenementDate, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+                <div class="col-sm-9">
+                    {{ form_widget(edit_form.evenementDate, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(edit_form.evenementDate) }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-12 input-group date" id="contentsAdvert">
+                    <div class="col-sm-12">
+                        {{ form_widget(edit_form.content, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    {{ form_errors(edit_form.content) }}
+                </div>
+            </div>
+        <center><input type="submit" value="Modifier l'annonce" class="btn btn-lg" /></center>
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('annonce_index') }}">Back to the list</a>
-        </li>
-        <li>
+    <a href="{{ path('annonce_index') }}" type="button" class="btn btn-warning">Retour</a>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Supprimer</button>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Supprimer le post</h4>
+          </div>
+          <div class="modal-body">
+            <p> Etes vous sure de vouloir supprimer ce post ?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete" class="btn btn-link">
+                <button type="submit" class="btn btn-danger">Supprimer</button>
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+       $(document).ready( function() {
+            $('#advert_category').change(function() {
+                var evenementDate = document.getElementById('edit_form-evenementDate');
+                if ($(this).val() == '1'){
+                    evenementDate.style.display = '';
+                }
+                else{
+                    evenementDate.style.display = 'none';
+                }
+            });
+        });
+    </script>
 {% endblock %}

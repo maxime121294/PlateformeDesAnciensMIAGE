@@ -22,8 +22,13 @@
             </div>
              <div class="form-group row" style="display:none;" id="form-evenementDate">
                 {{ form_label(form.evenementDate, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
-                <div class="col-sm-9">
-                    {{ form_widget(form.evenementDate, {'attr': {'class': 'form-control'}}) }}
+                <div class="col-sm-9 input-group date" id="evenDate">
+                    <div class="col-sm-12">
+                        {{ form_widget(form.evenementDate, {'attr': {'class': 'form-control'}}) }}
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
                     {{ form_errors(form.evenementDate) }}
                 </div>
             </div>
@@ -40,9 +45,16 @@
     <a href="{{ path('annonce_index') }}" class="btn btn-danger" role="button">Retour</a>
 {% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/bootstrap-datetimepicker.min.css') }}">
+{% endblock %}
+
 {% block javascripts %}
-    <script type="text/javascript">
-       $(document).ready( function() {
+    <script type="text/javascript" src="{{asset('bundles/front/js/libs/Moment.js')}}"></script>
+    <script type="text/javascript" src="{{asset('bundles/front/js/libs/bootstrap-datetimepicker.js')}}"></script>
+
+    <script>
+    $(document).ready( function() {
             $('#advert_category').change(function() {
                 var evenementDate = document.getElementById('form-evenementDate');
                 if ($(this).val() == '1'){
@@ -52,6 +64,8 @@
                     evenementDate.style.display = 'none';
                 }
             });
+
+            $('#evenDate').datetimepicker();
         });
     </script>
 {% endblock %}

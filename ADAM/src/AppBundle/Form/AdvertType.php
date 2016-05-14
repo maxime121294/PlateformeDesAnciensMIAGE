@@ -33,6 +33,7 @@ class AdvertType extends AbstractType
             ))
             ->add('evenementDate', DateTimeType::class, array(
                 'label' => 'Date et Heure de l\'evenement',
+                'widget' => 'single_text',
                 'placeholder' => 'Select a value',
             ))
             ->add('content', CKEditorType::class, array(
