@@ -26,7 +26,7 @@ class AdvertController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $adverts = $em->getRepository('AppBundle:Advert')->findAll();
+        $adverts = $em->getRepository('AppBundle:Advert')->findBy(array(), array('updatedAt' => 'desc'));
 
         return $this->render('AppBundle:advert:index.html.twig', array(
             'adverts' => $adverts,

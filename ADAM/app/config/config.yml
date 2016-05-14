@@ -141,39 +141,53 @@ hwi_oauth:
 ivory_ck_editor:
     configs:
         my_custom_config:
-            language:            %locale%
-            toolbar:             [ [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt'],['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl']  , "/", [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'], ['Link', 'Unlink', 'Anchor'],[ 'oembed', 'wordcount', 'FLash', 'Table', 'HorizontalRule', 'SpecialChar', 'Smiley', 'PageBreak', 'Iframe'], "/" , ['Styles', 'Format', 'Font', 'FontSize', 'TextColor', 'BGColor'],['Maximize', 'ShowBlocks'],['About'],[ "Image" , "Youtube" , "Glyphicons"] ]
-            skin:                "bootstrapck,skins/bootstrapck/"
-            contentsCss:         "bundles/front/css/libs/bootstrap.min.css"
-            allowedContent:      true
-            extraPlugins:        "youtube,widget,glyphicons,lineutils,about,clipboard,dialog,link,autogrow"
-            youtube_width :      "640"
-            youtube_height :     "480"
+            language:               %locale%
+            toolbar:                [ [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt'],['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl']  , "/", [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'], ['Link', 'Unlink', 'Anchor'],[ 'oembed', 'wordcount', 'FLash', 'Table', 'HorizontalRule', 'SpecialChar', 'Smiley', 'PageBreak', 'Iframe'], "/" , ['Styles', 'Format', 'Font', 'FontSize', 'TextColor', 'BGColor'],['Maximize', 'ShowBlocks'],['About'],[ "Image" , "Youtube" , "Glyphicons"] ]
+            skin:                   "bootstrapck,skins/bootstrapck/"
+            contentsCss:            "bundles/front/css/libs/bootstrap.min.css"
+            allowedContent:         true
+            extraPlugins:           "youtube,widget,glyphicons,lineutils,about,clipboard,dialog,link,autogrow,wordcount,notification"
+            youtube_width :         "640"
+            youtube_height :        "480"
+            wordcount:
+                showParagraphs:     true
+                showWordCount:      false
+                showCharCount:      true
+                countSpacesAsChars: true
+                countHTML:          false
+                maxWordCount:       -1
+                maxCharCount:       5000
     plugins:
         youtube:
-            path:               "bundles/ivoryckeditor/plugins/youtube/"
-            filename:           "plugin.js"
+            path:                   "bundles/ivoryckeditor/plugins/youtube/"
+            filename:               "plugin.js"
         widget:
-            path:               "bundles/ivoryckeditor/plugins/widget/"
-            filename:           "plugin.js"
+            path:                   "bundles/ivoryckeditor/plugins/widget/"
+            filename:               "plugin.js"
         glyphicons:
-            path:               "bundles/ivoryckeditor/plugins/glyphicons/"
-            filename:           "plugin.js"
+            path:                   "bundles/ivoryckeditor/plugins/glyphicons/"
+            filename:               "plugin.js"
         lineutils:
-            path:               "bundles/ivoryckeditor/plugins/lineutils/"
-            filename:           "plugin.js"
+            path:                   "bundles/ivoryckeditor/plugins/lineutils/"
+            filename:               "plugin.js"
         about:
-            path:               "bundles/ivoryckeditor/plugins/about/"
-            filename:           "plugin.js"
+            path:                   "bundles/ivoryckeditor/plugins/about/"
+            filename:               "plugin.js"
         clipboard:
-            path:               "bundles/ivoryckeditor/plugins/clipboard/"
-            filename:           "plugin.js"
+            path:                   "bundles/ivoryckeditor/plugins/clipboard/"
+            filename:               "plugin.js"
         dialog:
-            path:               "bundles/ivoryckeditor/plugins/dialog/"
-            filename:           "plugin.js"
+            path:                   "bundles/ivoryckeditor/plugins/dialog/"
+            filename:               "plugin.js"
         link:
-            path:               "bundles/ivoryckeditor/plugins/link/"
-            filename:           "plugin.js"
+            path:                   "bundles/ivoryckeditor/plugins/link/"
+            filename:               "plugin.js"
         autogrow:
-            path:               "bundles/ivoryckeditor/plugins/autogrow/"
-            filename:           "plugin.js"
+            path:                   "bundles/ivoryckeditor/plugins/autogrow/"
+            filename:               "plugin.js"
+        wordcount:
+            path:                   "bundles/ivoryckeditor/plugins/wordcount/"
+            filename:               "plugin.js"
+        notification:
+            path:                   "bundles/ivoryckeditor/plugins/notification/"
+            filename:               "plugin.js"

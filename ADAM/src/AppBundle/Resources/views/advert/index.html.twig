@@ -1,35 +1,69 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<section class="pageAdvertList">
     <h1>Listes des annonces</h1>
-    {% for advert in adverts %}
-    <div class="advertList">
-        <div class="row">
-            <div class="col-xs-12 col-md-8">
-               <h2>{{ advert.title }}  </h2>
-            </div>
-            <div class="col-xs-6 col-md-4">
-               {{ advert.category }}  
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-18 col-sm-12">
-                {{ advert.content|raw  }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-8"></div>
-            <div class="col-xs-6 col-md-4">
-                <p>Posté par {{ advert.author }}</p>
-                <p>Posté le  {% if advert.createdAt %}{{ advert.createdAt|date('Y-m-d') }}{% endif %}</p>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
 
-    <ul>
-        <li>
-            <a href="{{ path('annonce_new') }}">Create a new entry</a>
-        </li>
-    </ul>
+    <div align="right">
+        <a href="{{ path('annonce_new') }}" class="btn btn-default" role="button">Créer une annonce</a>
+    </div>
+    <br>
+    {% for advert in adverts %}
+         <div class="container">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-9">
+                    <div id="postlist">
+                        <div class="panel">
+                                <div class="panel-heading">
+                                    <div class="text-center">
+                                        <div class="row">
+                                            <div class="col-sm-9">
+                                                <h3 class="pull-left">{{ advert.title }}</h3>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <h4 class="pull-right">
+                                                <small>{{ advert.author.firstname }} {{ advert.author.lastname }}</small><br>
+                                                <small><em>{% if advert.createdAt %}{{ advert.createdAt|localizeddate('full', 'none') }}{% endif %} </em></small>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="panel-body">
+                                {{ advert.content|raw  }}
+                            </div>
+                            
+                            <div class="panel-footer">
+                                <div class="text-center">
+                                    <div class="row">
+                                        <div class="col-sm-9">
+                                            <span class="label label-default pull-left">{{ advert.category }}</span>
+                                        </div>
+                                        {% if advert.author == app.user %}
+                                            <div class="col-sm-3">
+                                                <h5 class="pull-right">
+                                                    <button type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-pencil"></i></button>
+                                                    <button type="button" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-remove"></i></button>
+                                                </h5>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %} 
+</section>
 {% endblock %}
+
+ {% block javascripts %}
+    <script type="text/javascript">
+
+    </script>
+ {% endblock %}
+
+

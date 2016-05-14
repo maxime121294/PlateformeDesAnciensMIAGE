@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
@@ -28,6 +29,11 @@ class AdvertType extends AbstractType
             ->add('category', EntityType::class, array(
                 'class' => 'AppBundle:Category',
                 'label' => 'Catégorie',
+                "required" => true,
+            ))
+            ->add('evenementDate', DateTimeType::class, array(
+                'label' => 'Date et Heure de l\'evenement',
+                'placeholder' => 'Select a value',
             ))
             ->add('content', CKEditorType::class, array(
                 'label' => 'Corps',

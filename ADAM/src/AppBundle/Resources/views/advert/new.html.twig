@@ -5,7 +5,7 @@
     <h1>Poster une annonce</h1>
 
     {{ form_start(form) }}
-        <div class="form-group row">
+            <div class="form-group row">
                 {{ form_label(form.title, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
                 <div class="col-sm-9">
                     {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
@@ -20,6 +20,13 @@
                     {{ form_errors(form.category) }}
                 </div>  
             </div>
+             <div class="form-group row" style="display:none;" id="form-evenementDate">
+                {{ form_label(form.evenementDate, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+                <div class="col-sm-9">
+                    {{ form_widget(form.evenementDate, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.evenementDate) }}
+                </div>
+            </div>
             <div class="form-group row">
                 <div class="col-sm-12 input-group date" id="contentsAdvert">
                     <div class="col-sm-12">
@@ -30,10 +37,21 @@
             </div>
         <center><input type="submit" value="Poster l'annonce" class="btn btn-lg" /></center>
     {{ form_end(form) }}
-</div>
-    <ul>
-        <li>
-            <a href="{{ path('annonce_index') }}">Back to the list</a>
-        </li>
-    </ul>
+    <a href="{{ path('annonce_index') }}" class="btn btn-danger" role="button">Retour</a>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+       $(document).ready( function() {
+            $('#advert_category').change(function() {
+                var evenementDate = document.getElementById('form-evenementDate');
+                if ($(this).val() == '1'){
+                    evenementDate.style.display = '';
+                }
+                else{
+                    evenementDate.style.display = 'none';
+                }
+            });
+        });
+    </script>
 {% endblock %}

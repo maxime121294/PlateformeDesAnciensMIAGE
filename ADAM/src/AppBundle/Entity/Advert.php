@@ -37,10 +37,16 @@ class Advert
      */
     private $updatedAt;
     /**
-     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="adverts")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $category;
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="evenementDate", type="datetime", length=255)
+     */
+    private $evenementDate;
     /**
      * @var string
      *
@@ -195,5 +201,28 @@ class Advert
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set evenementDate
+     *
+     * @param \DateTime $evenementDate
+     * @return Advert
+     */
+    public function setEvenementDate($evenementDate)
+    {
+        $this->evenementDate = $evenementDate;
+
+        return $this;
+    }
+
+    /**
+     * Get evenementDate
+     *
+     * @return \DateTime 
+     */
+    public function getEvenementDate()
+    {
+        return $this->evenementDate;
     }
 }

@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Category
  *
- * @ORM\Table(name="Category")
+ * @ORM\Table(name="category")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
  */
 class Category
@@ -27,10 +27,15 @@ class Category
      */
     private $wording;
     /**
-     * @ORM\OneToMany(targetEntity="Advert", mappedBy="category")
-     */
+    * @var ArrayCollection
+    *
+    * @ORM\OneToMany(targetEntity="Advert", mappedBy="category")
+    */
     private $adverts;
-
+    
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->adverts = new \Doctrine\Common\Collections\ArrayCollection();
@@ -68,7 +73,6 @@ class Category
     public function __toString() {
         return $this->wording;
     }
-
     /**
      * Add adverts
      *
@@ -100,15 +104,5 @@ class Category
     public function getAdverts()
     {
         return $this->adverts;
-    }
-
-    /**
-    * Set adverts
-    *
-    * @param \Doctrine\Common\Collections\Collection $adverts
-    */
-    public function setCategoryAdvert(\Doctrine\Common\Collections\Collection $adverts)
-    {
-        $this->adverts = $adverts;
     }
 }

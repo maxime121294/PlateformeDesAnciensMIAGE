@@ -6,16 +6,28 @@
   --descartes-green-color: #8C9A9E;
 }
 
+html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto;
+    /* Negative indent footer by its height */
+    margin: 0 auto -150px;
+    /* Pad bottom by footer height */
+    padding: 0 0 150px;
+    background-color: #444444;
+}
+
 /*
  * Container block en dessous de la navbar
  */
 .block-container {
-    padding-top: 54px;
-    background-color: #444444;
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    overflow: auto;
+    padding: 54px 0 0 0;
 }
 
 /*
@@ -83,17 +95,17 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 }
 
 #login-dp .help-block{
-    font-size:12px    
+    font-size: 12px;
 }
 
 #login-dp .bottom{
-    background-color:rgba(255,255,255,.8);
-    border-top:1px solid #ddd;
-    clear:both;
-    padding:14px;
+    background-color: rgba(255,255,255,.8);
+    border-top: 1px solid #ddd;
+    clear: both;
+    padding: 14px;
 }
 #login-dp .social-buttons{
-    margin:12px 0    
+    margin: 12px 0;
 }
 #login-dp .social-buttons a{
     width: 32%;
@@ -107,7 +119,7 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 }
 .btn-fb:hover{
     color: #fff;
-    background-color:#496ebc 
+    background-color:#496ebc;
 }
 .btn-tw{
     color: #fff;
@@ -182,7 +194,11 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 /*
  * Homepage css
  */
-.homepage-background {
+.homepage {
+    height: 100%;
+}
+
+.homepage .homepage-background {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -193,13 +209,16 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     opacity: 0.25;
 }
 
-.homepage-logo .logo-ADAM {
+.homepage .homepage-logo .logo-ADAM {
     height: 300px;
 }
 
-.homepage-logo,
-.homepage-time {
+.homepage .homepage-logo {
     padding-top: 5%;
+}
+
+.homepage .homepage-logo,
+.homepage .homepage-time {
     text-align: center;
 }
 
@@ -216,13 +235,13 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     color: var(--descartes-rouge-color);
 }
 
-.registered-list-container .table-hover tbody tr td, 
+.registered-list-container .table-hover tbody tr td,
 .registered-list-container .table-hover tbody tr th {
     text-align: center;
     vertical-align: middle;
 }
 
-.registered-list-container .table-hover tbody tr:hover td, 
+.registered-list-container .table-hover tbody tr:hover td,
 .registered-list-container .table-hover tbody tr:hover th {
     background-color: white;
 }
@@ -230,11 +249,9 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 /*
 *  Footer
 */
-.footer-distributed{
-    position: fixed;
-    bottom: 0;
+.footer-distributed {
+    height: 150px;
     background-color: var(--descartes-grey-color);
-    width: 100%;
 }
 .footer-distributed h3{
     color: var(--descartes-brown-color);
@@ -268,22 +285,40 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     padding: 10px;
     vertical-align: middle;
 }
-.form-advert .btn {
+.form-advert .btn.btn-lg {
     background-color: var(--descartes-blue-color);
     color: var(--descartes-grey-color);
 }
 .form-advert h1 {
     color: var(--descartes-brown-color);
 }
+.form-advert #evenementDate input {
+    z-index: 0;
+    width: 92%;
+}
+
+.form-advert #evenementDate span {
+    height: 34px;
+}
 
 /*
  * Advert List
  */
-.advertList {
+.pageAdvertList{
+    width: 85%;
     margin: 25px auto 15px auto;
-    width: 75%;
     padding: 10px;
     vertical-align: middle;
-    border: 3px solid grey;
-    background-color: var(--descartes-grey-color);
+}
+.pageAdvertList a.btn.btn-default{
+    background-color: #BB0F47;
+}
+.pageAdvertList .btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
 }
