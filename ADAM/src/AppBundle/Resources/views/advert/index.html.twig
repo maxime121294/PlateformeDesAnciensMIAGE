@@ -40,7 +40,7 @@
                                         <div class="col-sm-9">
                                             <span class="label label-default pull-left">{{ advert.category }}</span>
                                         </div>
-                                        {% if advert.author == app.user %}
+                                        {% if advert.author == app.user or is_granted("ROLE_ADMIN")%}
                                             <div class="col-sm-3">
                                                 <h5 class="pull-right">
                                                     <a type="button" href="{{ path('annonce_edit', { 'id': advert.id }) }}" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-pencil"></i></a>
