@@ -7,17 +7,13 @@
 html,
 body {
     height: 100%;
-    /* The html and body elements cannot have any padding or margin. */
 }
 
-/* Wrapper for page content to push down footer */
 #wrap {
     min-height: 100%;
     height: auto;
-    /* Negative indent footer by its height */
-    margin: 0 auto -150px;
-    /* Pad bottom by footer height */
-    padding: 0 0 150px;
+    margin: 0 auto auto;
+    padding: 0 0 auto;
     background-color: #444444;
 }
 
@@ -38,7 +34,7 @@ nav.navbar {
     margin-bottom: 0;
     border: 0;
     top: 0;
-    height: 54px;
+    height: 54px;   
 }
 
 nav.navbar > .container-fluid {
@@ -192,11 +188,7 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 /*
  * Homepage css
  */
-.homepage {
-    height: 100%;
-}
-
-.homepage .homepage-background {
+.homepage-background {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -205,21 +197,25 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     background-size: cover;
     background-repeat: no-repeat;
     opacity: 0.25;
+    padding: auto;
 }
 
-.homepage .homepage-logo .logo-ADAM {
+.homepage-logo .logo-ADAM {
     height: 300px;
 }
 
-.homepage .homepage-logo {
+.homepage-logo {
     padding-top: 5%;
 }
 
-.homepage .homepage-logo,
-.homepage .homepage-time {
+.homepage-logo,
+.homepage-time {
     text-align: center;
 }
 
+.homepage-time {
+    padding-bottom: 5%;
+}
 /*
  * Registerd list
  */
@@ -248,11 +244,12 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 *  Footer
 */
 .footer-distributed {
-    height: 150px;
-    background-color: var(--descartes-grey-color);
+    background-color: #202020;
+    position: relative;
 }
-.footer-distributed h3{
-    color: var(--descartes-brown-color);
+.footer-distributed h3,
+.footer-distributed p{
+    color: #8C8D90;
 }
 .footer-distributed i, .letterMiage{
     color: var(--descartes-rouge-color);
