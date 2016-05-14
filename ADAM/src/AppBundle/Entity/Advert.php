@@ -17,17 +17,20 @@ class Advert
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Assert\NotBlank()
      */
     private $id;
     /**
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
+     * @Assert\NotBlank()
      */
     private $author;
     /**
      * @var date
      *
      * @ORM\Column(name="createdAt", type="date", length=255)
+     * @Assert\NotBlank()
      */
     private $createdAt;
     /**
@@ -39,6 +42,7 @@ class Advert
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="adverts")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * @Assert\NotBlank()
      */
     private $category;
     /**
@@ -51,17 +55,19 @@ class Advert
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $title;
     /**
      * @var text
      *
      * @ORM\Column(name="content", type="text")
+     * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 1,
      *      max = 3500,
-     *      minMessage = "Your first name must be at least {{ limit }} characters long",
-     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     *      minMessage = "Le contenu de l'annonce doit être au minimum de {{ limit }} caractère",
+     *      maxMessage = "YLe contenu de l'annonce doit être au maximum de {{ limit }} caractères"
      * )
      */
     private $content;

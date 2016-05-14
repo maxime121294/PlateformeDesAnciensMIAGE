@@ -42,3 +42,8 @@ ADAM/composer.phar
 
 # Composer LOCK
 ADAM/composer.lock
+
+#DS_Store
+ADAM/web/bundles/front/.DS_Store 
+ADAM/web/bundles/front/js/.DS_Store
+

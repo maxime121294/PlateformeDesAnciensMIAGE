@@ -20,7 +20,7 @@
                     {{ form_errors(form.category) }}
                 </div>  
             </div>
-             <div class="form-group row" style="display:none;" id="form-evenementDate">
+             <div class="form-group row hidden" id="form-evenementDate">
                 {{ form_label(form.evenementDate, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
                 <div class="col-sm-9 input-group date" id="evenDate">
                     <div class="col-sm-12">
@@ -58,10 +58,10 @@
             $('#advert_category').change(function() {
                 var evenementDate = document.getElementById('form-evenementDate');
                 if ($(this).val() == '1'){
-                    evenementDate.style.display = '';
+                    evenementDate.attributes["class"].value = "form-group row show";
                 }
                 else{
-                    evenementDate.style.display = 'none';
+                    evenementDate.attributes["class"].value = "form-group row hidden";
                 }
             });
 
