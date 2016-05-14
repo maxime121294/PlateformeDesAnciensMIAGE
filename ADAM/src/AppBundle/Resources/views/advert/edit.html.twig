@@ -20,7 +20,7 @@
                     {{ form_errors(edit_form.category) }}
                 </div>  
             </div>
-             <div class="form-group row" style="display:none;" id="edit_form-evenementDate">
+             <div class="form-group row hidden" id="edit_form-evenementDate">
                 {{ form_label(edit_form.evenementDate, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
                 <div class="col-sm-9">
                     {{ form_widget(edit_form.evenementDate, {'attr': {'class': 'form-control'}}) }}
@@ -69,10 +69,10 @@
             $('#advert_category').change(function() {
                 var evenementDate = document.getElementById('edit_form-evenementDate');
                 if ($(this).val() == '1'){
-                    evenementDate.style.display = '';
+                    evenementDate.attributes["class"].value = "form-group row show";
                 }
                 else{
-                    evenementDate.style.display = 'none';
+                    evenementDate.attributes["class"].value = "form-group row hidden";
                 }
             });
         });

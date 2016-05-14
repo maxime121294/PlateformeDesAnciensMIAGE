@@ -17,13 +17,11 @@ class Advert
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Assert\NotBlank()
      */
     private $id;
     /**
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
-     * @Assert\NotBlank()
      */
     private $author;
     /**
