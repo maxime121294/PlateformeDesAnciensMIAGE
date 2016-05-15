@@ -50,7 +50,7 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script type="text/javascript" src="{{asset('bundles/front/js/libs/Moment.js')}}"></script>
+    <script type="text/javascript" src="{{asset('bundles/front/js/libs/moment-with-locales.js')}}"></script>
     <script type="text/javascript" src="{{asset('bundles/front/js/libs/bootstrap-datetimepicker.js')}}"></script>
 
     <script>
@@ -64,7 +64,9 @@
                 }
             });
 
-            $('#evenDate').datetimepicker();
+            $('#evenDate').datetimepicker({
+                locale: 'fr'
+            });
         });
     </script>
 {% endblock %}
