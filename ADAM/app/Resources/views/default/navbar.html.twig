@@ -13,6 +13,11 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                     {% if app.user is defined %}
+                         <li>
+                            <a href="{{ path('annonce_index') }}" class="divider">
+                                <b>Listes des annonces</b>
+                            </a>
+                        </li>
                         <li>
                             <a class="user-name">
                                 <i class="fa fa-user"></i>
