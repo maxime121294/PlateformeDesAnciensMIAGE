@@ -65,7 +65,7 @@ class Advert
      *      min = 1,
      *      max = 3500,
      *      minMessage = "Le contenu de l'annonce doit être au minimum de {{ limit }} caractère",
-     *      maxMessage = "YLe contenu de l'annonce doit être au maximum de {{ limit }} caractères"
+     *      maxMessage = "Le contenu de l'annonce doit être au maximum de {{ limit }} caractères"
      * )
      */
     private $content;

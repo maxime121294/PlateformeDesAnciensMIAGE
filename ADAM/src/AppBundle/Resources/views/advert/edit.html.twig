@@ -69,10 +69,10 @@
             $('#advert_category').change(function() {
                 var evenementDate = document.getElementById('edit_form-evenementDate');
                 if ($(this).val() == '1'){
-                    evenementDate.attributes["class"].value = "form-group row show";
+                    evenementDate.removeClass("hidden");
                 }
                 else{
-                    evenementDate.attributes["class"].value = "form-group row hidden";
+                    evenementDate.addClass("hidden");
                 }
             });
         });
