@@ -56,7 +56,7 @@
     <script>
     $(document).ready( function() {
             $('#advert_category').change(function() {
-                if ($(this).val() == '1'){
+                if ($('#advert_category option:selected').text() === 'Événements'){
                     $('#form-evenementDate').removeClass("hidden");
                 }
                 else{
