@@ -11,12 +11,12 @@ class LoadDegreeData implements FixtureInterface
     public function load(ObjectManager $manager)
     {
         $licence = new Degree();
-        $licence->setwording('Licence');
+        $licence->setWording('Licence');
 
         $manager->persist($licence);
 
         $master = new Degree();
-        $master->setwording('Master');
+        $master->setWording('Master');
 
         $manager->persist($master);
 

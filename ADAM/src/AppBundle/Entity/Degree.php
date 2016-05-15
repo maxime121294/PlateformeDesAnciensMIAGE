@@ -61,4 +61,8 @@ class Degree
     {
         return $this->wording;
     }
+
+    public function __toString() {
+        return $this->wording;
+    }
 }
