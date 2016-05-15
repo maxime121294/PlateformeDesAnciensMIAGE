@@ -67,12 +67,11 @@
     <script type="text/javascript">
        $(document).ready( function() {
             $('#advert_category').change(function() {
-                var evenementDate = document.getElementById('edit_form-evenementDate');
                 if ($(this).val() == '1'){
-                    evenementDate.removeClass("hidden");
+                    $('#form-evenementDate').removeClass("hidden");
                 }
                 else{
-                    evenementDate.addClass("hidden");
+                    $('#form-evenementDate').addClass("hidden");
                 }
             });
         });
