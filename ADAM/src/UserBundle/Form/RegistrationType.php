@@ -30,6 +30,7 @@ class RegistrationType extends AbstractType
                 "label" => "Type de diplôme obtenu",
                 "required" => false,
                 "placeholder" => "Selectionner un type de diplôme",
+				"choices_as_values" => true,
                 "choices"  => array(
                     "licence" => "Licence",
                     "master" => "Master"
