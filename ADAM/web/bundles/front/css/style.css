@@ -24,6 +24,7 @@ body {
  */
 .block-container {
     padding: 54px 0 0 0;
+    height: 100%;
 }
 
 /*
@@ -190,6 +191,16 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 /*
  * Homepage css
  */
+.section {
+    float: left;
+    width: 100%;
+}
+
+.second-section {
+    position: relative;
+    background-color: var(--descartes-grey-color);
+}
+
 .homepage-background {
     position: fixed;
     width: 100%;
@@ -218,6 +229,69 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 .homepage-time {
     padding-bottom: 5%;
 }
+
+.section-title{
+    margin-bottom: 35px;
+    margin-top: 80px;
+    text-align: center;
+}
+.section-title h2{
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    margin: 0 0 10px;
+    padding: 0 0 15px;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+}
+.section-title h2:before {
+    border: 2px solid var(--descartes-rouge-color);
+    bottom: 0;
+    content: "";
+    left: 0;
+    margin: 0 auto;
+    position: absolute;
+    right: 0;
+    width: 100px;
+}
+.section-title p{
+    color: var(--descartes-rouge-color);
+    font-size: 16px;
+    font-style: italic;
+    text-align: center;
+}
+
+.welcome_section{
+    overflow: hidden;
+}
+
+.welcome_part{
+    margin: 50px auto 80px;
+}
+.welcome_icon{
+    background: none repeat scroll 0 0 transparent;
+    border: 2px solid var(--descartes-rouge-color);
+    border-radius: 100%;
+    color: var(--descartes-rouge-color);
+    margin: 0 auto;
+    padding: 35px;
+    text-align: center;
+    width: 140px;
+}
+.welcome_part h2{
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    text-align: center;
+}
+.welcome_part p{
+    color: var(--descartes-brown-color);
+    font-size: 14px;
+    text-align: center;
+}
+
 /*
  * Registerd list
  */
@@ -326,4 +400,12 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     margin: 25px auto 15px auto;
     padding: 10px;
     vertical-align: middle;
+}
+}
+.editAdvert #edit_form-evenDate span {
+    height: 20px;
+}
+.editAdvert #edit_form-evenDate input {
+    z-index: 0;
+    width: 92%;
 }
