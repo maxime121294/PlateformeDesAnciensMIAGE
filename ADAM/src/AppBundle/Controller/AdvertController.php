@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\Advert;
 use AppBundle\Form\AdvertType;
 
@@ -22,14 +23,18 @@ class AdvertController extends Controller
      * @Route("/", name="annonce_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        $loginVariables = $this->get('user.security')->loginFormInstance($request);
         $em = $this->getDoctrine()->getManager();
 
         $adverts = $em->getRepository('AppBundle:Advert')->findBy(array(), array('updatedAt' => 'desc'));
-
+   
         return $this->render('AppBundle:advert:index.html.twig', array(
             'adverts' => $adverts,
+            'last_username' => $loginVariables['last_username'],
+            'error' => $loginVariables['error'],
+            'csrf_token' => $loginVariables['csrf_token'],
         ));
     }
 
@@ -38,6 +43,7 @@ class AdvertController extends Controller
      *
      * @Route("/new", name="annonce_new")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
      */
     public function newAction(Request $request)
     {
@@ -82,6 +88,7 @@ class AdvertController extends Controller
      *
      * @Route("/{id}/edit", name="annonce_edit")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
      */
     public function editAction(Request $request, Advert $advert)
     {
@@ -109,6 +116,7 @@ class AdvertController extends Controller
      *
      * @Route("/{id}", name="annonce_delete")
      * @Method("DELETE")
+     * @Security("has_role('ROLE_USER')")
      */
     public function deleteAction(Request $request, Advert $advert)
     {

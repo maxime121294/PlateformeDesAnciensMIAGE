@@ -4,11 +4,14 @@
 <section class="pageAdvertList">
     <h1>Listes des annonces</h1>
 
-    <div align="right">
-        <a href="{{ path('annonce_new') }}" class="btn btn-default" role="button">Créer une annonce</a>
-    </div>
-    <br>
+
     {% for advert in adverts %}
+         {% if advert.author == app.user or is_granted("ROLE_ADMIN") %}
+            <div align="right">
+                <a href="{{ path('annonce_new') }}" class="btn btn-default" role="button">Créer une annonce</a>
+            </div>
+        {% endif %}
+        <br>
          <div class="container">
             <div class="row">
                 <div class="col-md-1"></div>
