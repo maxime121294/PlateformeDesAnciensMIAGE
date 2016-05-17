@@ -8,14 +8,14 @@
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">     
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                 <li>
+            <ul class="nav navbar-nav navbar-left"> 
+                <li>
                     <a href="{{ path('annonce_index') }}" class="divider">
                         <b>Listes des annonces</b>
                     </a>
-                </li>
+                </li>    
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                     {% if app.user is defined %}
                         <li>

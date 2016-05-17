@@ -5,8 +5,20 @@
     <h1>Listes des annonces</h1>
 
 
+    {% if is_granted('IS_AUTHENTICATED_ANONYMOUSLY')  %}
+        {% block javascripts %}
+            <script type="text/javascript">
+                $('#myModal').modal({
+                    backdrop: "static",
+                    keyboard: false
+                }); 
+            </script>
+        {% endblock %}
+        {% include 'AppBundle:advert:popinIndex.html.twig' %}
+    {% endif %}
+
     {% for advert in adverts %}
-         {% if advert.author == app.user or is_granted("ROLE_ADMIN") %}
+         {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  %}
             <div align="right">
                 <a href="{{ path('annonce_new') }}" class="btn btn-default" role="button">Créer une annonce</a>
             </div>
@@ -18,25 +30,24 @@
                 <div class="col-md-9">
                     <div id="postlist">
                         <div class="panel">
-                                <div class="panel-heading">
-                                    <div class="text-center">
-                                        <div class="row">
-                                            <div class="col-sm-9">
-                                                <h3 class="pull-left">{{ advert.title }}</h3>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <h4 class="pull-right">
-                                                <small>{{ advert.author.firstname }} {{ advert.author.lastname }}</small><br>
-                                                <small><em>{% if advert.createdAt %}{{ advert.createdAt|localizeddate('full', 'none') }}{% endif %} </em></small>
-                                                </h4>
-                                            </div>
+                            <div class="panel-heading">
+                                <div class="text-center">
+                                    <div class="row">
+                                        <div class="col-sm-9">
+                                            <h3 class="pull-left">{{ advert.title }}</h3>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <h4 class="pull-right">
+                                            <small>{{ advert.author.firstname }} {{ advert.author.lastname }}</small><br>
+                                            <small><em>{% if advert.createdAt %}{{ advert.createdAt|localizeddate('full', 'none') }}{% endif %} </em></small>
+                                            </h4>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             <div class="panel-body">
                                 {{ advert.content|raw  }}
                             </div>
-                            
                             <div class="panel-footer">
                                 <div class="text-center">
                                     <div class="row">
