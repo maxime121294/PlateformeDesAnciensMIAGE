@@ -4,7 +4,6 @@
 <section class="pageAdvertList">
     <h1>Listes des annonces</h1>
 
-<!---
     {% if is_granted('IS_AUTHENTICATED_ANONYMOUSLY')  %}
         {% block javascripts %}
             <script type="text/javascript">
@@ -16,7 +15,7 @@
         {% endblock %}
         {% include 'AppBundle:advert:popinIndex.html.twig' %}
     {% endif %}
--->
+
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  %}
         <div align="right">
             <a href="{{ path('annonce_new') }}" class="btn btn-default" role="button">Créer une annonce</a>
