@@ -4,7 +4,7 @@
 <section class="pageAdvertList">
     <h1>Listes des annonces</h1>
 
-    {% if is_granted('IS_AUTHENTICATED_ANONYMOUSLY')  %}
+    {% if not app.user  %}
         {% block javascripts %}
             <script type="text/javascript">
                 $('#myModal').modal({
