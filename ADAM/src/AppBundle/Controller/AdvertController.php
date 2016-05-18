@@ -29,8 +29,14 @@ class AdvertController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $adverts = $em->getRepository('AppBundle:Advert')->findBy(array(), array('updatedAt' => 'desc'));
-   
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $adverts, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5 /*limit per page*/
+        );
         return $this->render('AppBundle:advert:index.html.twig', array(
+            'pagination' => $pagination,
             'adverts' => $adverts,
             'last_username' => $loginVariables['last_username'],
             'error' => $loginVariables['error'],
