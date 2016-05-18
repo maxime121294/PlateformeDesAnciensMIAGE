@@ -1,13 +1,43 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
 <div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false" aria-hidden="true" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog">
+    <div id="login-overlay" class="modal-dialog">
         <div class="modal-content">
+        	<div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel">Vous devez être connecté pour voir les annonces </h4>
+          	</div>
               <div class="modal-body">
-                 <p> Si vous voulez voir la suite, connectez-vous ! </p>
+                 <div class="row">
+                  <div class="col-xs-6">
+                      <div class="well">
+                          <form id="loginForm" method="POST" action="{{ path("fos_user_security_check") }}" novalidate="novalidate">
+                              <div class="form-group">
+                                  <label for="username" class="control-label">{{ 'profile.show.email'|trans }}</label>
+                                  <input type="text" class="form-control" id="username" name="username" value="" required="" title="Please enter you username" placeholder="example@gmail.com">
+                                  <span class="help-block"></span>
+                              </div>
+                              <div class="form-group">
+                                  <label for="password" class="control-label">{{ 'security.login.password'|trans }}</label>
+                                  <input type="password" class="form-control" id="password" name="password" value="" required="" title="Please enter your password">
+                                  <span class="help-block"></span>
+                              </div>
+                              <div id="loginErrorMsg" class="alert alert-error hide">Wrong username og password</div>
+                              <div class="help-block text-right"><a href="{{ path('fos_user_resetting_request') }}" class="help-link">Mot de passe oublié ?</a></div>
+                              <button type="submit" class="btn btn-success btn-block">Connexion</button>
+                          </form>
+                      </div>
+                  </div>
+                  <div class="col-xs-6">
+                      <p class="lead">L'inscription est <span class="text-success">GRATUITE</span></p>
+                      <ul class="list-unstyled" style="line-height: 2">
+                          <li><span class="fa fa-check text-success"></span> Retrouvez vos anciens de votre promo</li>
+                          <li><span class="fa fa-check text-success"></span> Trouvez des annonces d'emploi</li>
+                          <li><span class="fa fa-check text-success"></span> Participez à des événements MIAGE</li>
+                      </ul>
+                      <p><a href="{{ path('fos_user_registration_register') }}" class="btn btn-info btn-block">Inscrivez- vous !</a></p>
+                  </div>
               </div>
-              <div class="modal-footer">
-              	<a href="{{ path('fos_user_registration_register') }}" type="button" class="btn btn-success">Se connecter</a>
-                <a href="{{ path('fos_user_registration_register') }}" type="button" class="btn btn-info">S'inscrire</a>
-            </div>
+             </div>
         </div>
     </div>
 </div>

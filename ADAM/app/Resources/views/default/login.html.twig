@@ -17,7 +17,7 @@
                  <form action="{{ path("fos_user_security_check") }}" method="post" class="form" role="form" accept-charset="UTF-8" id="login-nav">
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
                     <div class="form-group">
-                         <label for="username">{{ 'security.login.username'|trans }}</label>
+                         <label for="username">{{ 'profile.show.email'|trans }}</label>
                          <input type="email" id="username exampleInputEmail2" name="_username" value="{{ last_username }}" required="required" class="form-control" placeholder="Adresse email" required>
                     </div>
                     <div class="form-group">
