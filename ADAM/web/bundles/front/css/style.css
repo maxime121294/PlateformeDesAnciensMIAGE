@@ -35,7 +35,7 @@ nav.navbar {
     margin-bottom: 0;
     border: 0;
     top: 0;
-    height: 54px;   
+    height: 54px;
 }
 
 nav.navbar > .container-fluid {
@@ -343,4 +343,29 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 }
 .confidentialite h3{
     color:var(--descartes-brown-color);
+}
+
+/*
+* Mot de passe oublié
+*/
+.password-form {
+    margin: 10% auto;
+    width: 50%;
+    border: 3px solid grey;
+    padding: 10px;
+    vertical-align: middle;
+    background-color: var(--descartes-grey-color);
+    color: var(--descartes-rouge-color);
+}
+
+.password-form .btn-submit {
+    color : white;
+    background-color: var(--descartes-rouge-color);
+    margin: auto;
+    display: block;
+}
+
+.password-form .password-title {
+    text-align: center;
+    margin-bottom: 35px;
 }
