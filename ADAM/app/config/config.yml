@@ -144,10 +144,7 @@ hwi_oauth:
             scope:               "r_basicprofile,r_emailaddress"
             infos_url:           "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address,picture-url)?format=json"
 swiftmailer:
-    disable_delivery: false
-    transport:  smtp
-    encryption: ssl
-    auth_mode:  login
+    transport:  gmail
     host:       smtp.gmail.com
     username:  '%mailer_user%'
     password:  '%mailer_password%'
