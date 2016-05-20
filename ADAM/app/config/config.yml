@@ -83,9 +83,16 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: AppBundle\Entity\User
+    from_email:
+        address:        noreply@adam.parisdescartes.fr
+        sender_name:    ADAM
+    service:
+        mailer: fos_user.mailer.twig_swift
     registration:
         form:
             type: UserBundle\Form\RegistrationType
+        confirmation:
+            enabled: true
 
 services:
     hwi_oauth.user.provider.entity:
@@ -136,3 +143,11 @@ hwi_oauth:
             client_secret:       %oauth.linkedin.secret%
             scope:               "r_basicprofile,r_emailaddress"
             infos_url:           "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address,picture-url)?format=json"
+swiftmailer:
+    disable_delivery: false
+    transport:  smtp
+    encryption: ssl
+    auth_mode:  login
+    host:       smtp.gmail.com
+    username:  '%mailer_user%'
+    password:  '%mailer_password%'

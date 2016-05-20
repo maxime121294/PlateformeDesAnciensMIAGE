@@ -1,12 +1,20 @@
-{% trans_default_domain 'FOSUserBundle' %}
 {% block subject %}
-{% autoescape false %}
-{{ 'resetting.email.subject'|trans({'%username%': user.username}) }}
-{% endautoescape %}
+    {% autoescape false %}
+        Réinitialisation de mot de passe
+    {% endautoescape %}
 {% endblock %}
+
 {% block body_text %}
 {% autoescape false %}
-{{ 'resetting.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
+Bonjour {{ user.firstname }},
+
+Nous avons récemment reçu une demande de changement de mot de passe, ou un rappel de mot de passe pour votre compte : {{ user.email }}.
+
+Afin de réinitialiser votre mot de passe, merci de cliquer sur ce lien : {{ confirmationUrl }}.
+
+N’hésitez pas à le changer aussi souvent que nécessaire depuis votre page de profil !
 {% endautoescape %}
 {% endblock %}
-{% block body_html %}{% endblock %}
+
+{% block body_html %}
+{% endblock %}
