@@ -434,10 +434,6 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 .password-form .password-title {
     text-align: center;
     margin-bottom: 35px;
-<<<<<<< HEAD
-}
-=======
-}
 
 /*
 * Confirmation d'inscription page
@@ -464,4 +460,3 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     background-color: var(--descartes-grey-color);
     color: var(--descartes-rouge-color);
 }
->>>>>>> 50e85081a985ec1581ffe0af865efd54a208f65f

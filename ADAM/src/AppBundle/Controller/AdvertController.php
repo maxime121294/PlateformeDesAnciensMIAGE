@@ -198,4 +198,23 @@ class AdvertController extends Controller
         // return a json encoded response for plugin to process successfully
         return new JsonResponse($output);
     }
+
+    /**
+     * 
+     * @Route("/browse", name="browse")
+     * @Method({"GET", "POST"})
+     */
+    public function browseAction() 
+    {
+        $funcNum = getUrlParam('CKEditorFuncNum');
+        $fileUrl = '/path/to/file.txt';
+        return new response ("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction( $funcNum, '$fileUrl'); window.close();</script>");
+    }
+
+    private function getUrlParam( String $paramName ) {
+        $reParam = new RegExp( '(?:[\?&]|&)' + $paramName + '=([^&]+)', 'i' );
+        $match = window.location.search.match( $reParam );
+
+        return ( $match && $match.length > 1 ) ? $match[1] : null;
+    }
 }

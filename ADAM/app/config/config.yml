@@ -158,7 +158,7 @@ ivory_ck_editor:
                 maxWordCount:       -1
                 maxCharCount:       3500
             filebrowserImageUploadUrl: "upload"
-            filebrowserImageBrowserUrl: "upload"
+            filebrowserImageBrowserUrl: "browse"
     filebrowsers:
         - ImageUpload
         - ImageBrowser
