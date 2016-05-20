@@ -1,9 +1,12 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends 'base.html.twig' %}
 
-{% trans_default_domain 'FOSUserBundle' %}
+{% block body %}
+<div class="confirm-email">
+    <p>
+    Un e-mail a été envoyé à l'adresse {{email}}. </br>
+    Il contient un lien sur lequel il vous faudra cliquer afin de réinitialiser votre mot de passe.
+    </p>
+</div>
+{% endblock body %}
 
-{% block fos_user_content %}
-<p>
-{{ 'resetting.check_email'|trans({'%email%': email}) }}
-</p>
-{% endblock %}
+
