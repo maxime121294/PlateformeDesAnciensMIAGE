@@ -168,25 +168,29 @@ class AdvertController extends Controller
             echo json_encode(['error'=>'No files found for upload.']);
             return; 
         }
-
-        // get the files posted
         $image = $_FILES['upload'];
-
-        $success = null;
         $name = $image['name'];
-        $url = "bundles/front/images/uploads/" . $name ;
-
-        $userName = $user->getId();
-        $newName = $userName . 
+        $success = null;
+        
+        $random = mt_rand ( 00000 , 99999 );
+        $newname = $random . '_' . $name;
+        $url = "bundles/front/images/uploads/" . $newname ;
 
         if (move_uploaded_file($image['tmp_name'], $url))   {
             $funcNum = $_GET['CKEditorFuncNum'];
             $CKEditor = $_GET['CKEditor'] ;
-            $langCode = $_GET['langCode'] ;
-            $url = "../../bundles/front/images/uploads/" . $name;
-            return new response ("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$name');</script>");
-        } elseif {
-             $output = ['error'=>'Error while uploading images. Contact the system administrator'];
+            $url = "../../bundles/front/images/uploads/" . $newname;
+            $message = "Le fichier a bien été intégré !";
+            return new response ("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$message');</script>");
+        } else {
+            $success = false;
+        }
+
+        // check and process based on successful status 
+        if ($success === true) {
+           
+        } elseif ($success === false) {
+            $output = ['error'=>'Error while uploading images. Contact the system administrator'];
         } else {
             $output = ['error'=>'No files were processed.'];
         }
