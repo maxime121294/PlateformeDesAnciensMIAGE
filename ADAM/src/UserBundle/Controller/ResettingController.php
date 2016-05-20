@@ -79,7 +79,7 @@ class ResettingController extends Controller
     public function checkEmailAction(Request $request)
     {
         $email = $request->query->get('email');
-
+        $loginVariables = $this->get('user.security')->loginFormInstance($request);
         if (empty($email)) {
             // the user does not come from the sendEmail action
             return new RedirectResponse($this->generateUrl('fos_user_resetting_request'));
@@ -87,6 +87,9 @@ class ResettingController extends Controller
 
         return $this->render('FOSUserBundle:Resetting:checkEmail.html.twig', array(
             'email' => $email,
+            'last_username' => $loginVariables['last_username'],
+            'error' => $loginVariables['error'],
+            'csrf_token' => $loginVariables['csrf_token']
         ));
     }
 

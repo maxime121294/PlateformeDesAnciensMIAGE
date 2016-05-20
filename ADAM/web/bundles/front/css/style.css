@@ -382,3 +382,16 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     background-color: var(--descartes-grey-color);
     color: var(--descartes-rouge-color);
 }
+
+/*
+* Confirmation d'envoi d'email pour reinitialiser le mot de passe
+*/
+.confirm-email {
+    margin: 10% auto;
+    width: 50%;
+    border: 3px solid grey;
+    padding: 10px;
+    vertical-align: middle;
+    background-color: var(--descartes-grey-color);
+    color: var(--descartes-rouge-color);
+}
