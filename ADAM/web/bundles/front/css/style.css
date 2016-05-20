@@ -23,6 +23,7 @@ body {
 .block-container {
     padding: 54px 0 0 0;
     height: 100%;
+    overflow-x: hidden;
 }
 
 /*
@@ -333,16 +334,38 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 *  Politique de confidentialite
 */
 .confidentialite {
-    padding-left: 10%;
-    padding-right: 10%;
-    text-align: justify;
+    margin: 25px auto 15px auto;
+    width: 90%;
+    border: 3px solid grey;
+    padding: 10px 5% 0 5%;
+    vertical-align: middle;
     background-color: var(--descartes-grey-color);
+    text-align: justify;
+
 }
-.confidentialite h2{
+.confidentialite h2 {
     color:var(--descartes-rouge-color);
+    padding-bottom: 50px;
 }
-.confidentialite h3{
+.confidentialite h3 {
+    text-align: center;
     color:var(--descartes-brown-color);
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.confidentialite h6 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.confidentialite .section-border {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    border-bottom: 1px solid #d6d6d6;
 }
 
 /*
