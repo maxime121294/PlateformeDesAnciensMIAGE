@@ -3,6 +3,8 @@
 namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -57,7 +59,7 @@ class AdvertController extends Controller
         $user = $this->getUser();
         $form = $this->createForm('AppBundle\Form\AdvertType', $advert);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $advert->setAuthor($user);
             $em = $this->getDoctrine()->getManager();
@@ -103,11 +105,12 @@ class AdvertController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $advert->setUpdatedAt(new \DateTime());
             $em = $this->getDoctrine()->getManager();
             $em->persist($advert);
             $em->flush();
 
-            return $this->redirectToRoute('annonce_edit', array('id' => $advert->getId()));
+            return $this->redirectToRoute('annonce_show', array('id' => $advert->getId()));
         }
 
         return $this->render('AppBundle:advert:edit.html.twig', array(
@@ -152,5 +155,43 @@ class AdvertController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * 
+     * @Route("/upload", name="upload")
+     * @Method({"GET", "POST"})
+     */
+    public function uploadAction() 
+    {
+        if (empty($_FILES['upload'])) {
+            echo json_encode(['error'=>'No files found for upload.']);
+            return; 
+        }
+
+        // get the files posted
+        $image = $_FILES['upload'];
+
+        $success = null;
+        $name = $image['name'];
+        $url = "bundles/front/images/uploads/" . $name ;
+
+        $userName = $user->getId();
+        $newName = $userName . 
+
+        if (move_uploaded_file($image['tmp_name'], $url))   {
+            $funcNum = $_GET['CKEditorFuncNum'];
+            $CKEditor = $_GET['CKEditor'] ;
+            $langCode = $_GET['langCode'] ;
+            $url = "../../bundles/front/images/uploads/" . $name;
+            return new response ("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$name');</script>");
+        } elseif {
+             $output = ['error'=>'Error while uploading images. Contact the system administrator'];
+        } else {
+            $output = ['error'=>'No files were processed.'];
+        }
+
+        // return a json encoded response for plugin to process successfully
+        return new JsonResponse($output);
     }
 }

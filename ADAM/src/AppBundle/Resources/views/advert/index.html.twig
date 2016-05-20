@@ -18,7 +18,9 @@
 
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  %}
         <div align="right">
-            <a href="{{ path('annonce_new') }}" class="btn btn-default" role="button">Créer une annonce</a>
+            <a href="{{ path('annonce_new') }}" class="btn btn-default" role="button">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Créer une annonce
+            </a>
         </div>
     {% endif %}
 
@@ -40,7 +42,7 @@
                                         <div class="col-sm-3">
                                             <h4 class="pull-right">
                                             <small>{{ advert.author.firstname }} {{ advert.author.lastname }}</small><br>
-                                            <small><em>{% if advert.createdAt %}{{ advert.createdAt|localizeddate('full', 'none') }}{% endif %} </em></small>
+                                            <small>Modifié le <em> {% if advert.updatedAt %}{{ advert.updatedAt|localizeddate('full', 'none') }}{% endif %} </em></small>
                                             </h4>
                                         </div>
                                     </div>

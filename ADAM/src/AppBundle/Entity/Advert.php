@@ -59,14 +59,8 @@ class Advert
     /**
      * @var text
      *
-     * @ORM\Column(name="content", type="text")
+     * @ORM\Column(name="content", type="text", length=16777215)
      * @Assert\NotBlank()
-     * @Assert\Length(
-     *      min = 1,
-     *      max = 3500,
-     *      minMessage = "Le contenu de l'annonce doit être au minimum de {{ limit }} caractère",
-     *      maxMessage = "Le contenu de l'annonce doit être au maximum de {{ limit }} caractères"
-     * )
      */
     private $content;
 

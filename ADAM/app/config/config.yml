@@ -157,6 +157,11 @@ ivory_ck_editor:
                 countHTML:          false
                 maxWordCount:       -1
                 maxCharCount:       3500
+            filebrowserImageUploadUrl: "upload"
+            filebrowserImageBrowserUrl: "upload"
+    filebrowsers:
+        - ImageUpload
+        - ImageBrowser
     plugins:
         youtube:
             path:                   "bundles/ivoryckeditor/plugins/youtube/"

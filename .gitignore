@@ -46,3 +46,8 @@ ADAM/composer.lock
 #DS_Store
 *.DS_Store
 
+# ckEditor plugins
+!ADAM/web/bundles/ivoryckeditor/plugins
+
+# ckEditor skins
+!ADAM/web/bundles/ivoryckeditor/skins
