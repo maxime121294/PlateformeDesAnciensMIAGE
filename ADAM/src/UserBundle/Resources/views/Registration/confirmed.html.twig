@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <p>
-    	Ton inscription a bien été prise en compte, {{ app.user.firstname|capitalize }}. Bienvenu sur ADAM, l'Association de Descartes des Anciens Miagistes !
-    </p>
+    <div class="register-confirmation">
+        <h3>{{ app.user.firstname|capitalize }},</h3>
+        <p>
+        	Votre inscription a bien été prise en compte. </br>
+            Vous allez recevoir un e-mail contenant un lien d'activation.
+        </p>
+    </div>
 {% endblock body %}
