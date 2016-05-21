@@ -165,38 +165,49 @@ class AdvertController extends Controller
     public function uploadAction() 
     {
         if (empty($_FILES['upload'])) {
-            echo json_encode(['error'=>'No files found for upload.']);
-            return; 
+            return new JsonResponse(['error'=>'No files found for upload.']);
         }
-        $image = $_FILES['upload'];
-        $name = $image['name'];
-        $success = null;
+        $extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
+        $extension_upload = strtolower(  substr(  strrchr($_FILES['upload']['name'], '.')  ,1)  );
+
+        if ( in_array($extension_upload,$extensions_valides) ) {
+            $image = $_FILES['upload'];
+            $name = $image['name'];
+            $success = null;
+            
+            $dateupload = new \DateTime();
+            $dateupload = $dateupload->format('Y-m-d');
+            $user = $this->getUser()->getId();
+
+            $newname = $dateupload . '_' . $user . '_' . $name;
+            $url = "bundles/front/images/uploads/" . $newname ;
+
+            if (move_uploaded_file($image['tmp_name'], $url))   {
+                $funcNum = $_GET['CKEditorFuncNum'];
+                $CKEditor = $_GET['CKEditor'] ;
+                $url = "../../bundles/front/images/uploads/" . $newname;
+                $message = "Le fichier a bien été intégré !";
+                return new response ("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$message');</script>");
+            } else {
+                $success = false;
+            }
+
+            // check and process based on successful status 
+            if ($success === true) {
+               // here for save data
+            } elseif ($success === false) {
+                $output = ['error'=>'Error while uploading images. Contact the system administrator'];
+            } else {
+                $output = ['error'=>'No files were processed.'];
+            }
+
+            // return a json encoded response for plugin to process successfully
+            return new JsonResponse($output);
+        }
+        else{
+            return new JsonResponse(['error'=>'Seuls les formats .jpg, .jpeg, .gif, .png sont accepté.']);
+        }
         
-        $random = mt_rand ( 00000 , 99999 );
-        $newname = $random . '_' . $name;
-        $url = "bundles/front/images/uploads/" . $newname ;
-
-        if (move_uploaded_file($image['tmp_name'], $url))   {
-            $funcNum = $_GET['CKEditorFuncNum'];
-            $CKEditor = $_GET['CKEditor'] ;
-            $url = "../../bundles/front/images/uploads/" . $newname;
-            $message = "Le fichier a bien été intégré !";
-            return new response ("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$message');</script>");
-        } else {
-            $success = false;
-        }
-
-        // check and process based on successful status 
-        if ($success === true) {
-           
-        } elseif ($success === false) {
-            $output = ['error'=>'Error while uploading images. Contact the system administrator'];
-        } else {
-            $output = ['error'=>'No files were processed.'];
-        }
-
-        // return a json encoded response for plugin to process successfully
-        return new JsonResponse($output);
     }
 
     /**
