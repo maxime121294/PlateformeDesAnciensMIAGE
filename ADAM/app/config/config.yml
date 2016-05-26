@@ -142,7 +142,7 @@ ivory_ck_editor:
     configs:
         my_custom_config:
             language:               %locale%
-            toolbar:                [ [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt'],['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl']  , "/", [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'], ['Link', 'Unlink', 'Anchor'],[ 'oembed', 'wordcount', 'FLash', 'Table', 'HorizontalRule', 'SpecialChar', 'Smiley', 'PageBreak', 'Iframe'], "/" , ['Styles', 'Format', 'Font', 'FontSize', 'TextColor', 'BGColor'],['Maximize', 'ShowBlocks'],['About'],[ "Image" , "Youtube" , "Glyphicons"] ]
+            toolbar:                [ [ 'Undo', 'Redo' ],['NumberedList', 'BulletedList', '-', 'Outdent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl'] ,[ 'Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'], ['Link', 'Unlink'],[ 'oembed', 'wordcount', 'Table', 'HorizontalRule', 'SpecialChar', 'Smiley'], "/" , ['Styles', 'Format', 'Font', 'FontSize', 'TextColor', 'BGColor'],['Maximize'],[ "Image" , "Youtube"] ]
             skin:                   "bootstrapck,skins/bootstrapck/"
             contentsCss:            "bundles/front/css/libs/bootstrap.min.css"
             allowedContent:         true
