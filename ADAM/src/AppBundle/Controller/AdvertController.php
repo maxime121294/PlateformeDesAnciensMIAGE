@@ -172,7 +172,7 @@ class AdvertController extends Controller
 
         if ( in_array($extension_upload,$extensions_valides) ) {
             $image = $_FILES['upload'];
-            $name = $image['name'];
+            $name = $this->slugify($image['name'], $extension_upload);
             $success = null;
             
             $dateupload = new \DateTime();
@@ -180,7 +180,7 @@ class AdvertController extends Controller
             $user = $this->getUser()->getId();
 
             $newname = $dateupload . '_' . $user . '_' . $name;
-            $url = "bundles/front/images/uploads/" . $newname ;
+            $url = "bundles/front/images/uploads/" . $newname;
 
             if (move_uploaded_file($image['tmp_name'], $url))   {
                 $funcNum = $_GET['CKEditorFuncNum'];
@@ -205,7 +205,7 @@ class AdvertController extends Controller
             return new JsonResponse($output);
         }
         else{
-            return new JsonResponse(['error'=>'Seuls les formats .jpg, .jpeg, .gif, .png sont accepté.']);
+            return new JsonResponse(['error'=>'Seuls les formats .jpg, .jpeg, .gif, .png sont acceptés.']);
         }
         
     }
@@ -217,7 +217,7 @@ class AdvertController extends Controller
      */
     public function browseAction() 
     {
-        $funcNum = getUrlParam('CKEditorFuncNum');
+        $funcNum = $this->getUrlParam('CKEditorFuncNum');
         $fileUrl = '/path/to/file.txt';
         return new response ("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction( $funcNum, '$fileUrl'); window.close();</script>");
     }
@@ -227,5 +227,13 @@ class AdvertController extends Controller
         $match = window.location.search.match( $reParam );
 
         return ( $match && $match.length > 1 ) ? $match[1] : null;
+    }
+
+
+    public function slugify( String $text , String $extension) {
+        $text = basename($text,'.' . $extension);
+        $slug = $this->get('cocur_slugify')->slugify($text);
+
+        return $slug .'.'. $extension;
     }
 }
