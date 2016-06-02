@@ -23,13 +23,14 @@ class AdvertType extends AbstractType
     {
          $builder 
             ->add('title', TextType::class, array(
-                "label" => "Titre",
-                "required" => true,
+                'label' => 'Titre',
+                'required' => true,
             ))
             ->add('category', EntityType::class, array(
+                'placeholder' => 'Sélectionner une catégorie',
                 'class' => 'AppBundle:Category',
                 'label' => 'Catégorie',
-                "required" => true,
+                'required' => true,
             ))
             ->add('evenementDate', DateTimeType::class, array(
                 'label' => 'Date et Heure de l\'evenement',

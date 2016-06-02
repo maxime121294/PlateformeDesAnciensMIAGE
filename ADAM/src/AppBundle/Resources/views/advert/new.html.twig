@@ -4,7 +4,7 @@
 <div class="form-advert">
     <h1>Poster une annonce</h1>
 
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'id': 'form_advert_new'}}) }}
             <div class="form-group row">
                 {{ form_label(form.title, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
                 <div class="col-sm-9">
@@ -55,18 +55,32 @@
 
     <script>
     $(document).ready( function() {
-            $('#advert_category').change(function() {
-                if ($('#advert_category option:selected').text() === 'Événements'){
-                    $('#form-evenementDate').removeClass("hidden");
-                }
-                else{
-                    $('#form-evenementDate').addClass("hidden");
-                }
-            });
-
-            $('#evenDate').datetimepicker({
-                locale: 'fr'
-            });
+        EvenCategory();
+        var form = document.getElementById('form_advert_new'); // form has to have ID: <form id="formID">
+            form.noValidate = true;
+            form.addEventListener('submit', function(event) { // listen for form submitting
+                    if (!event.target.checkValidity()) {
+                        event.preventDefault(); // dismiss the default functionality
+                        alert('Merci de remplir tout les champs du formulaire'); // error message
+                    }
+            }, false);
+        $('#advert_category').change(function() {
+            EvenCategory();
         });
+
+        $('#evenDate').datetimepicker({
+            locale: 'fr',
+             minDate:moment()
+        });
+    });
+
+    function EvenCategory() {
+        if ($('#advert_category option:selected').text() === 'Événements'){
+            $('#form-evenementDate').removeClass("hidden");
+        }
+        else{
+            $('#form-evenementDate').addClass("hidden");
+        }
+    }
     </script>
 {% endblock %}

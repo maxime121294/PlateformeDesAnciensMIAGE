@@ -185,7 +185,7 @@ class AdvertController extends Controller
             if (move_uploaded_file($image['tmp_name'], $url))   {
                 $funcNum = $_GET['CKEditorFuncNum'];
                 $CKEditor = $_GET['CKEditor'] ;
-                $url = "../../bundles/front/images/uploads/" . $newname;
+                $url = "http://localhost:8888/PlateformeDesAnciensMIAGE/ADAM/web/bundles/front/images/uploads/" . $newname;
                 $message = "Le fichier a bien été intégré !";
                 return new response ("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$message');</script>");
             } else {
@@ -210,27 +210,7 @@ class AdvertController extends Controller
         
     }
 
-    /**
-     * 
-     * @Route("/browse", name="browse")
-     * @Method({"GET", "POST"})
-     */
-    public function browseAction() 
-    {
-        $funcNum = $this->getUrlParam('CKEditorFuncNum');
-        $fileUrl = '/path/to/file.txt';
-        return new response ("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction( $funcNum, '$fileUrl'); window.close();</script>");
-    }
-
-    private function getUrlParam( String $paramName ) {
-        $reParam = new RegExp( '(?:[\?&]|&)' + $paramName + '=([^&]+)', 'i' );
-        $match = window.location.search.match( $reParam );
-
-        return ( $match && $match.length > 1 ) ? $match[1] : null;
-    }
-
-
-    public function slugify( String $text , String $extension) {
+    private function slugify( String $text , String $extension) {
         $text = basename($text,'.' . $extension);
         $slug = $this->get('cocur_slugify')->slugify($text);
 
