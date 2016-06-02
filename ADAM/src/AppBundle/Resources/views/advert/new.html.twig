@@ -56,14 +56,6 @@
     <script>
     $(document).ready( function() {
         EvenCategory();
-        var form = document.getElementById('form_advert_new'); // form has to have ID: <form id="formID">
-            form.noValidate = true;
-            form.addEventListener('submit', function(event) { // listen for form submitting
-                    if (!event.target.checkValidity()) {
-                        event.preventDefault(); // dismiss the default functionality
-                        alert('Merci de remplir tout les champs du formulaire'); // error message
-                    }
-            }, false);
         $('#advert_category').change(function() {
             EvenCategory();
         });

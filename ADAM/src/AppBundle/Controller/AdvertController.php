@@ -162,7 +162,7 @@ class AdvertController extends Controller
      * @Route("/upload", name="upload")
      * @Method({"GET", "POST"})
      */
-    public function uploadAction() 
+    public function uploadAction()
     {
         if (empty($_FILES['upload'])) {
             return new JsonResponse(['error'=>'No files found for upload.']);
@@ -185,7 +185,7 @@ class AdvertController extends Controller
             if (move_uploaded_file($image['tmp_name'], $url))   {
                 $funcNum = $_GET['CKEditorFuncNum'];
                 $CKEditor = $_GET['CKEditor'] ;
-                $url = "http://localhost:8888/PlateformeDesAnciensMIAGE/ADAM/web/bundles/front/images/uploads/" . $newname;
+                $url = $this->get('templating.helper.assets')->getUrl('bundles/front/images/uploads/') . $newname ;
                 $message = "Le fichier a bien été intégré !";
                 return new response ("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$message');</script>");
             } else {

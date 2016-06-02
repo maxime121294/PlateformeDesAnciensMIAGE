@@ -14,12 +14,12 @@
                           <form id="loginForm" method="POST" action="{{ path("fos_user_security_check") }}" novalidate="novalidate">
                               <div class="form-group">
                                   <label for="username" class="control-label">{{ 'profile.show.email'|trans }}</label>
-                                  <input type="text" class="form-control" id="username" name="username" value="" required="" title="Please enter you username" placeholder="example@gmail.com">
+                                  <input type="text" class="form-control" id="username" name="username" value="" required="" title="Votre adresse mail" placeholder="example@gmail.com">
                                   <span class="help-block"></span>
                               </div>
                               <div class="form-group">
                                   <label for="password" class="control-label">{{ 'security.login.password'|trans }}</label>
-                                  <input type="password" class="form-control" id="password" name="password" value="" required="" title="Please enter your password">
+                                  <input type="password" class="form-control" id="password" name="password" value="" required="" title="Votre mot de passe">
                                   <span class="help-block"></span>
                               </div>
                               <div id="loginErrorMsg" class="alert alert-error hide">L'adresse mail ou le mot de passe sont invalides</div>
@@ -35,7 +35,7 @@
                           <li><span class="fa fa-check text-success"></span> Trouvez des annonces d'emploi</li>
                           <li><span class="fa fa-check text-success"></span> Participez à des événements MIAGE</li>
                       </ul>
-                      <p><a href="{{ path('fos_user_registration_register') }}" class="btn btn-info btn-block">Inscrivez- vous !</a></p>
+                      <p><a href="{{ path('fos_user_registration_register') }}" class="btn btn-info btn-block">Inscrivez-vous !</a></p>
                   </div>
               </div>
              </div>
