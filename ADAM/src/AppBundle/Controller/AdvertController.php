@@ -59,7 +59,7 @@ class AdvertController extends Controller
         $user = $this->getUser();
         $form = $this->createForm('AppBundle\Form\AdvertType', $advert);
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
             $advert->setAuthor($user);
             $em = $this->getDoctrine()->getManager();

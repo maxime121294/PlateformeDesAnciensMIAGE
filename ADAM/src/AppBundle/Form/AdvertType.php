@@ -36,6 +36,7 @@ class AdvertType extends AbstractType
                 'label' => 'Date et Heure de l\'evenement',
                 'widget' => 'single_text',
                 'required' => false,
+                'format' => 'dd/MM/yyyy HH:mm',
                 'placeholder' => 'Choississez la date et l\'heure de l\'événement',
             ))
             ->add('content', CKEditorType::class, array(

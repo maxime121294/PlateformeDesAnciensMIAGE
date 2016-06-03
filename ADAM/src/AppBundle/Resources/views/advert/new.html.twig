@@ -62,12 +62,13 @@
 
         $('#evenDate').datetimepicker({
             locale: 'fr',
-             minDate:moment()
+            minDate:moment()
         });
     });
 
     function EvenCategory() {
         if ($('#advert_category option:selected').text() === 'Événement'){
+             console.log('test');
             $('#form-evenementDate').removeClass("hidden");
         }
         else{
