@@ -35,14 +35,13 @@ class FOSUBUserProvider extends BaseClass
     {
         $data = $response->getResponse();
         $serviceName = $response->getResourceOwner()->getName();
-        
+        $birthday = null;
+
         if ($serviceName === 'google'){
-            $birthday = null;
             $username = $data['id'];
             $firstname = $data['name']['givenName'];
             $lastname = $data['name']['familyName'];
             $email = $data['emails'][0]['value'];
-            $birthday = null;
             if (isset($data['birthday'])) {
                 $birthday = $data['birthday'];
             }
@@ -53,6 +52,9 @@ class FOSUBUserProvider extends BaseClass
             $lastname = $response->getLastName();
             $firstname = $response->getFirstName();
             $email = $response->getEmail();
+            if (isset($data['birthday'])) {
+                $birthday = $data['birthday'];
+            }
         }
 
         if ($serviceName === 'linkedin'){
@@ -60,7 +62,6 @@ class FOSUBUserProvider extends BaseClass
             $firstname = $data['firstName'];
             $lastname = $data['lastName'];
             $email = $data['emailAddress'];
-            $birthday = null;
             if (isset($data['birthday'])) {
                 $birthday = $data['birthday'];
             }
