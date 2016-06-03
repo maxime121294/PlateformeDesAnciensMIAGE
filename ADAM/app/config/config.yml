@@ -136,3 +136,80 @@ hwi_oauth:
             client_secret:       %oauth.linkedin.secret%
             scope:               "r_basicprofile,r_emailaddress"
             infos_url:           "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address,picture-url)?format=json"
+
+# CKEditorBundle Configuration 
+ivory_ck_editor:
+    configs:
+        my_custom_config:
+            language:               %locale%
+            toolbar:                [ [ 'Undo', 'Redo' ],['NumberedList', 'BulletedList', '-', 'Outdent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl'] ,[ 'Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'], ['Link', 'Unlink'],[ 'oembed', 'wordcount', 'Table', 'HorizontalRule', 'SpecialChar', 'Smiley'], "/" , ['Styles', 'Format', 'Font', 'FontSize', 'TextColor', 'BGColor'],['Maximize'],[ "Image" , "Youtube"] ]
+            skin:                   "bootstrapck,skins/bootstrapck/"
+            contentsCss:            "bundles/front/css/libs/bootstrap.min.css"
+            allowedContent:         true
+            extraPlugins:           "youtube,widget,glyphicons,lineutils,about,clipboard,dialog,link,autogrow,wordcount,notification"
+            youtube_width :         "640"
+            youtube_height :        "480"
+            wordcount:
+                showParagraphs:     true
+                showWordCount:      false
+                showCharCount:      true
+                countSpacesAsChars: true
+                countHTML:          false
+                maxWordCount:       -1
+                maxCharCount:       3500
+            filebrowserImageUploadUrl: "upload"
+            filebrowserImageBrowserUrl: "browse"
+    filebrowsers:
+        - ImageUpload
+        - ImageBrowser
+    plugins:
+        youtube:
+            path:                   "bundles/ivoryckeditor/plugins/youtube/"
+            filename:               "plugin.js"
+        widget:
+            path:                   "bundles/ivoryckeditor/plugins/widget/"
+            filename:               "plugin.js"
+        glyphicons:
+            path:                   "bundles/ivoryckeditor/plugins/glyphicons/"
+            filename:               "plugin.js"
+        lineutils:
+            path:                   "bundles/ivoryckeditor/plugins/lineutils/"
+            filename:               "plugin.js"
+        about:
+            path:                   "bundles/ivoryckeditor/plugins/about/"
+            filename:               "plugin.js"
+        clipboard:
+            path:                   "bundles/ivoryckeditor/plugins/clipboard/"
+            filename:               "plugin.js"
+        dialog:
+            path:                   "bundles/ivoryckeditor/plugins/dialog/"
+            filename:               "plugin.js"
+        link:
+            path:                   "bundles/ivoryckeditor/plugins/link/"
+            filename:               "plugin.js"
+        autogrow:
+            path:                   "bundles/ivoryckeditor/plugins/autogrow/"
+            filename:               "plugin.js"
+        wordcount:
+            path:                   "bundles/ivoryckeditor/plugins/wordcount/"
+            filename:               "plugin.js"
+        notification:
+            path:                   "bundles/ivoryckeditor/plugins/notification/"
+            filename:               "plugin.js"
+
+# KNP_Paginator Configuration
+knp_paginator:
+    page_range: 5                      # default page range used in pagination control
+    default_options:
+        page_name: page                # page query parameter name
+        sort_field_name: sort          # sort field query parameter name
+        sort_direction_name: direction # sort direction query parameter name
+        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig     # sliding pagination controls template
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig                         # sort link template
+
+# Slugify Configuration
+cocur_slugify:
+    lowercase:  true
+    regexp:     "/([^A-Za-z0-9]|-)+/"
