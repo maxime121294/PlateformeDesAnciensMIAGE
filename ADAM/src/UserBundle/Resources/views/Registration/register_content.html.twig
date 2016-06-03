@@ -8,7 +8,7 @@
 	    	{{ form_widget(form.firstname, {'attr': {'class': 'form-control'}}) }}
 	    	{{ form_errors(form.firstname) }}
 	    </div>
-	    
+
 	</div>
 
 	<div class="form-group row">
@@ -39,15 +39,15 @@
 	    	{{ form_errors(form.email) }}
 		</div>
 	</div>
-	
+
 	<div class="form-group row">
 		{{ form_label(form.graduate, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
 	    <div class="col-sm-9">
 	    	{{ form_widget(form.graduate, {'attr': {'class': 'form-control'}}) }}
 	    	{{ form_errors(form.graduate) }}
-	    </div>  
+	    </div>
 	</div>
-	
+
 	<div class="form-group row">
 	    {{ form_label(form.graduateYear, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
 	    <div class="col-sm-9 input-group date" id="graduateYear">
@@ -60,7 +60,7 @@
 	    	{{ form_errors(form.graduateYear) }}
 	    </div>
 	</div>
-	
+
 	<div class="form-group row">
 	    {{ form_label(form.plainPassword.first, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
 	    <div class="col-sm-9">
@@ -68,13 +68,23 @@
 	    	{{ form_errors(form.plainPassword.first) }}
 	    </div>
 	</div>
-	
+
 	<div class="form-group row">
 	    {{ form_label(form.plainPassword.second, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
-	    <div class="col-sm-9"> 
+	    <div class="col-sm-9">
 	    	{{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'}}) }}
 	    	{{ form_errors(form.plainPassword.second) }}
 	    </div>
+	</div>
+
+	<div class="form-group row col-sm-12">
+    	{{ form_widget(form.termsAccepted) }}
+    	{{ form_errors(form.termsAccepted) }}
+	    <span>
+	    	J'accepte les
+	        <a href="{{ path('conditions_generales') }}">conditions générales d'utilisation du site</a>
+	        .
+	    </span>
 	</div>
 
 	<span class="row"> * champs obligatoires</span>
