@@ -2,6 +2,8 @@
   --descartes-rouge-color: #BB0F47;
   --descartes-grey-color: #F3F3F3;
   --descartes-brown-color: #554348;
+  --descartes-blue-color: #93B7BE;
+  --descartes-green-color: #8C9A9E;
 }
 
 html,
@@ -23,6 +25,7 @@ body {
 .block-container {
     padding: 54px 0 0 0;
     height: 100%;
+    overflow-x: hidden;
 }
 
 /*
@@ -333,16 +336,101 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 *  Politique de confidentialite
 */
 .confidentialite {
-    padding-left: 10%;
-    padding-right: 10%;
-    text-align: justify;
+    margin: 25px auto 15px auto;
+    width: 90%;
+    border: 3px solid grey;
+    padding: 10px 5% 0 5%;
+    vertical-align: middle;
     background-color: var(--descartes-grey-color);
+    text-align: justify;
+
 }
-.confidentialite h2{
+.confidentialite h2 {
     color:var(--descartes-rouge-color);
+    padding-bottom: 50px;
 }
-.confidentialite h3{
+.confidentialite h3 {
+    text-align: center;
     color:var(--descartes-brown-color);
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.confidentialite h6 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.confidentialite .section-border {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    border-bottom: 1px solid #d6d6d6;
+}
+
+/*
+ * Advert form
+ */
+.form-advert {
+    margin: 25px auto 15px auto;
+    width: 75%;
+    padding: 10px;
+    vertical-align: middle;
+}
+.form-advert .btn.btn-lg {
+    background-color: var(--descartes-blue-color);
+    color: var(--descartes-grey-color);
+}
+.form-advert h1 {
+    color: var(--descartes-brown-color);
+}
+.form-advert #evenDate span {
+    height: 20px;
+}
+.form-advert #evenDate input {
+    z-index: 0;
+    width: 92%;
+}
+/*
+ * Advert List
+ */
+.pageAdvertList{
+    width: 85%;
+    margin: 25px auto 15px auto;
+    padding: 10px;
+    vertical-align: middle;
+}
+.pageAdvertList a.btn.btn-default{
+    background-color: #BB0F47;
+}
+.pageAdvertList .btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+
+/*
+ * edit Advert
+ */
+.editAdvert {
+    width: 85%;
+    margin: 25px auto 15px auto;
+    padding: 10px;
+    vertical-align: middle;
+}
+}
+.editAdvert #edit_form-evenDate span {
+    height: 20px;
+}
+.editAdvert #edit_form-evenDate input {
+    z-index: 0;
+    width: 92%;
 }
 
 /*
@@ -368,4 +456,29 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 .password-form .password-title {
     text-align: center;
     margin-bottom: 35px;
+}
+/*
+* Confirmation d'inscription page
+*/
+.register-confirmation {
+    margin: 10% auto;
+    width: 50%;
+    border: 3px solid grey;
+    padding: 10px;
+    vertical-align: middle;
+    background-color: var(--descartes-grey-color);
+    color: var(--descartes-rouge-color);
+}
+
+/*
+* Confirmation d'envoi d'email pour reinitialiser le mot de passe
+*/
+.confirm-email {
+    margin: 10% auto;
+    width: 50%;
+    border: 3px solid grey;
+    padding: 10px;
+    vertical-align: middle;
+    background-color: var(--descartes-grey-color);
+    color: var(--descartes-rouge-color);
 }
