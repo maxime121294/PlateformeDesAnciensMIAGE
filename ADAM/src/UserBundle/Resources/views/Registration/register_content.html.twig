@@ -84,30 +84,24 @@
 </div>
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/datepicker/bootstrap-datepicker.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/datepicker/bootstrap-datepicker.standalone.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/datepicker/bootstrap-datepicker3.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/datepicker/bootstrap-datepicker3.standalone.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/bootstrap-datetimepicker.min.css') }}">
 {% endblock %}
 
 {% block javascripts %}
-	<script type="text/javascript" src="{{asset('bundles/front/js/libs/datepicker/bootstrap-datepicker.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('bundles/front/js/libs/datepicker/bootstrap-datepicker.fr.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('bundles/front/js/libs/moment-with-locales.js')}}"></script>
+    <script type="text/javascript" src="{{asset('bundles/front/js/libs/bootstrap-datetimepicker.js')}}"></script>
 
 	<script>
 		$(function() {
-			$('#birthday').datepicker({
-			    format: "dd/mm/yyyy",
-			    language: "fr",
-			    startView: 2,
-			    autoclose: true
+			$('#birthday').datetimepicker({
+			    format: "DD/MM/YYYY",
+			    locale: "fr"
 			});
 
-			$('#graduateYear').datepicker({
-			    format: "yyyy",
-			    minViewMode: 2,
-			    language: "fr",
-			    autoclose: true
+			$('#graduateYear').datetimepicker({
+				viewMode: 'years',
+			    format: "YYYY",
+			    locale: "fr"
 			});
 		});
 	</script>
