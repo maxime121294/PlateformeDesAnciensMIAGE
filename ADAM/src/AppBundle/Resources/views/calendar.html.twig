@@ -1,0 +1,81 @@
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% include 'ADesignsCalendarBundle::calendar.html.twig' %}
+
+<div id="fullCalModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span> <span class="sr-only">close</span>
+                </button>
+                <h4 id="modalTitle" class="modal-title"></h4>
+            </div>
+            <div id="modalBody" class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary"><a id="eventUrl" target="_self">Suite</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/adesignscalendar/css/fullcalendar/fullcalendar.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/jquery-ui.theme.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/adesignscalendar/js/fullcalendar/jquery.fullcalendar.min.js') }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    
+    <script type="text/javascript">
+        $(function () {
+            $('#calendar-holder').fullCalendar({
+                header: {
+                    left: 'prev, next, today',
+                    center: 'title',
+                    right: 'month,'
+                },
+                lazyFetching: true,
+                timeFormat: {
+                    // for agendaWeek and agendaDay
+                    agenda: 'h:mmt',    // 5:00 - 6:30
+
+                    // for all other views
+                    '': 'h:mmt'         // 7p
+                },
+                monthNames: ['Janvier', 'Fébrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+                dayNamesShort: ['dim', 'Lun', 'Mar', 'Mer','Jeu', 'Vend', 'Sam'],
+                firstDay: 1,
+                weekends: false,
+                theme: true,
+                eventSources: [
+                    {
+                        url: Routing.generate('fullcalendar_loader'),
+                        type: 'POST',
+                        // A way to add custom filters to your event listeners
+                        data: {
+                        },
+                        error: function() {
+                           //alert('There was an error while fetching Google Calendar!');
+                        }
+                    }
+                ],
+
+                eventClick: function(event, jsEvent, view) {
+                    $('#modalTitle').html(event.title);
+                    $('#modalBody').html('test');
+                    $('#eventUrl').attr('href',event.advertUrl);
+                    $('#fullCalModal').modal();
+                },
+
+                eventMouseover: function(event, jsEvent, view) {
+                    $(jsEvent.target).attr('title', event.title);
+                },
+            });
+        });
+    </script>
+{% endblock %}
