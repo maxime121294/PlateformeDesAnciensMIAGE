@@ -3,8 +3,8 @@
 
 {% include 'ADesignsCalendarBundle::calendar.html.twig' %}
 
-<div id="fullCalModal" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
+<div id="fullCalModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -15,7 +15,7 @@
             <div id="modalBody" class="modal-body"></div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button class="btn btn-primary"><a id="eventUrl" target="_self">Suite</a></button>
+                <button class="btn btn-primary"><a id="eventUrl" target="_self">Suite de l'annonce</a></button>
             </div>
         </div>
     </div>
@@ -32,12 +32,14 @@
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     
     <script type="text/javascript">
+    var Mois = ['Janvier', 'Fébrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'];
+
         $(function () {
             $('#calendar-holder').fullCalendar({
                 header: {
-                    left: 'prev, next, today',
+                    left: 'prev, next,',
                     center: 'title',
-                    right: 'month,'
+                    right: 'today,'
                 },
                 lazyFetching: true,
                 timeFormat: {
@@ -47,7 +49,9 @@
                     // for all other views
                     '': 'h:mmt'         // 7p
                 },
-                monthNames: ['Janvier', 'Fébrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+                buttonText: {prev: '&lt;', next:'&gt;', today: 'aujourd\'hui'},
+                buttonIcons: false,
+                monthNames: Mois,
                 dayNamesShort: ['dim', 'Lun', 'Mar', 'Mer','Jeu', 'Vend', 'Sam'],
                 firstDay: 1,
                 weekends: false,
@@ -66,8 +70,9 @@
                 ],
 
                 eventClick: function(event, jsEvent, view) {
+                    console.log(event);
                     $('#modalTitle').html(event.title);
-                    $('#modalBody').html('test');
+                    $('#modalBody').html(convertDate(event.start));
                     $('#eventUrl').attr('href',event.advertUrl);
                     $('#fullCalModal').modal();
                 },
@@ -76,6 +81,24 @@
                     $(jsEvent.target).attr('title', event.title);
                 },
             });
+            $('.fc-button-today').removeClass('ui-state-disabled');
+            $('.fc-button-today').addClass('ui-state-active');
         });
+
+        function convertDate (dateEvent){
+            var dateStr = new Date(dateEvent);
+            var monthNames = Mois;
+            
+            var DateEven = "Date de l'événement : " + dateStr.getDate() + ' ' + monthNames[dateStr.getMonth()] + ' ' + dateStr.getFullYear();
+            var heureEven = "Heure de l'evenement : " + dateStr.getHours() + 'h' + addZero(dateStr.getMinutes());
+            return  DateEven + '<br>' + heureEven;
+        }
+
+        function addZero(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
     </script>
 {% endblock %}

@@ -486,3 +486,14 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     background-color: var(--descartes-grey-color);
     color: var(--descartes-rouge-color);
 }
+
+/*
+ * Calendar
+ */
+ #fullCalModal a {
+    color: white;
+ }
+
+ #fullCalModal .modal-header {
+    background-color: var(--descartes-grey-color);
+ }
