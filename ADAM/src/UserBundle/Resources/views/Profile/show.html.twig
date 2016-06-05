@@ -1,5 +1,12 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends "base.html.twig" %}
 
-{% block fos_user_content %}
-{% include "FOSUserBundle:Profile:show_content.html.twig" %}
-{% endblock fos_user_content %}
+{% block body %}
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#">Informations générales</a></li>
+  <li><a href="#">Expérience professionnel</a></li>
+</ul>
+
+<a href="{{ path('fos_user_profile_edit') }}" class="btn blue">Modifier</a>
+{% include "UserBundle:Profile:show_content.html.twig" %}
+{% endblock body %}
