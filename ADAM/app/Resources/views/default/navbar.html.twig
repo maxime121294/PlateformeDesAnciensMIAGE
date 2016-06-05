@@ -33,14 +33,12 @@
                     </a>
                 </li> 
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                    {% if is_granted('ROLE_ADMIN') %}
                         <li>
                             <a href="{{ path('registered_list') }}" class="divider">
                                 <i class="fa fa-users"></i>
                                 <b>Liste des inscrits</b>
                             </a>
                         </li>
-                    {% endif %}
                     <li>
                         <a href="{{ path('fos_user_security_logout') }}" class="divider">
                             <i class="fa fa-sign-out"></i>
