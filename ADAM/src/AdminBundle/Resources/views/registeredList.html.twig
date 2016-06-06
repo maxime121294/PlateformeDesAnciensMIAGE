@@ -16,9 +16,12 @@
                 <th>Diplôme</th>
                 <th>Année d'obtention du diplôme</th>
                 <th>Actif</th>
+                <th>Banni</th>
                 {% if is_granted("ROLE_ADMIN") %}
                 <th>Role</th>
-                    <th>Actions</th>
+                {% endif %}
+                {% if is_granted("ROLE_SUPER_ADMIN") %}
+                <th>Actions</th>
                 {% endif %}
             </thead>
             <tbody>
@@ -45,6 +48,13 @@
                             Non
                         {% endif %}
                     </td>
+                    <td>
+                        {% if user.locked %}
+                            Oui
+                        {% else %}
+                            Non
+                        {% endif %}
+                    </td>
                     {% if is_granted("ROLE_ADMIN") %}
                     <td>
                         {% if "ROLE_SUPER_ADMIN" in user.roles %}
@@ -56,10 +66,19 @@
                         {% endif %}
                     </td>
                     {% endif %}
-                    {% if is_granted("ROLE_SUPER_ADMIN") %}
+                    {% if is_granted("ROLE_ADMIN") %}
                         <td>
                             {% if "ROLE_SUPER_ADMIN" not in user.roles %}
                                 {% if "ROLE_ADMIN" not in user.roles %}
+                                    {% if user.locked %}
+                                        <a href="{{ path('user_ban', {'id': user.id}) }}">
+                                           Rétablir l'utilisateur
+                                        </a>
+                                        {% else %}
+                                        <a href="{{ path('user_ban', {'id': user.id}) }}">
+                                           Bannir l'utilisateur
+                                        </a>
+                                        {% endif %}
                                     <a href="{{ path('role_toggle', {'action': 'promote', 'id': user.id}) }}">
                                         <img width="30" height="30" alt="Promouvoir l'utilisateur" title="Promouvoir l'utilisateur" src="{{ asset('bundles/front/images/promote_user.svg') }}">
                                     </a>

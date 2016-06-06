@@ -13,25 +13,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class DefaultController extends Controller
 {
     /**
-     * Affichage de la liste des membres inscrits.
-     *
-     * @Route("/registered-list", name="registered_list")
-     * @Template()
-     */
-    public function registeredListAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $users = $em->getRepository('AppBundle:User')
-            ->findAll();
-
-        return $this->render('AdminBundle::registeredList.html.twig',
-            array(
-                'users' => $users
-            ));
-    }
-
-    /**
      * Promouvoir ou destituer un membre en lui attribuant ou non le ROLE_ADMIN. Seul le SuperAdmin peut le faire.
      *
      * @Route("/{action}/{id}", name="role_toggle")
@@ -75,4 +56,35 @@ class DefaultController extends Controller
         // Redirection vers la page de la liste des membres inscrits
         return $this->redirect($this->generateUrl('registered_list'));
     }
+
+    /**
+     * Bannir un membre. Il faut au moins être Admin pour bannir un utilisateur.
+     * Un Admin ne peut bannir un SuperAdmin, 
+     *
+     * @Route("/ban-{id}", name="user_ban")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function userBanAction($id)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $em->getRepository('AppBundle:User')
+                ->findOneById($id);   
+
+        if (!$user) {
+                throw $this->createNotFoundException('User not found');
+        }
+
+        if (!in_array("ROLE_SUPER_ADMIN", $user->getRoles()) && !in_array("ROLE_ADMIN", $user->getRoles())){
+            if($user->isLocked()) $user->setLocked(false);
+            else $user->setLocked(true);
+            $em->persist($user);
+            $em->flush();
+        }
+
+        return $this->redirect($this->generateUrl('registered_list'));
+
+    }
+
 }
