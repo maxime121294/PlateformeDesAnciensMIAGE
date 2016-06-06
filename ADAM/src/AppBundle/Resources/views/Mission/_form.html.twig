@@ -1,0 +1,66 @@
+<div class="form-register">
+{{ form_start(form, {'method': 'post', 'action': path('mission_create'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+	<div class="form-group row">
+	    {{ form_label(form.name, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+	    <div class="col-sm-9">
+	    	{{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+	    	{{ form_errors(form.name) }}
+	    </div>
+	    
+	</div>
+
+	<div class="form-group row">
+	    {{ form_label(form.businessName, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+	    <div class="col-sm-9">
+	    	{{ form_widget(form.businessName, {'attr': {'class': 'form-control'}}) }}
+	    	{{ form_errors(form.businessName) }}
+	    </div>
+    </div>
+
+	<div class="form-group row">
+	    {{ form_label(form.duration, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+	    <div class="col-sm-9">
+	    	{{ form_widget(form.duration, {'attr': {'class': 'form-control'}}) }}
+	    	{{ form_errors(form.duration) }}
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		{{ form_label(form.content, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+	    <div class="col-sm-9">
+	    	{{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+	    	{{ form_errors(form.content) }}
+	    </div>  
+	</div>
+
+	<div class="form-group row">
+	    {{ form_label(form.beginAt, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+	    <div class="col-sm-9 input-group date" id="beginAt">
+	    	<div class="col-sm-12">
+		    	{{ form_widget(form.beginAt, {'attr': {'class': 'form-control'}}) }}
+		    	<span class="input-group-addon">
+		    		<i class="fa fa-calendar"></i>
+		    	</span>
+		    </div>
+	    	{{ form_errors(form.beginAt) }}
+	    </div>
+	</div>
+
+	<div class="form-group row">
+	    {{ form_label(form.endedAt, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+	    <div class="col-sm-9 input-group date" id="endedAt">
+	    	<div class="col-sm-12">
+		    	{{ form_widget(form.endedAt, {'attr': {'class': 'form-control'}}) }}
+		    	<span class="input-group-addon">
+		    		<i class="fa fa-calendar"></i>
+		    	</span>
+		    </div>
+	    	{{ form_errors(form.endedAt) }}
+	    </div>
+	</div>
+
+	<span class="row"> * champs obligatoires</span>
+
+    <input type="submit" value="Valider" class="btn btn-register" />
+{{ form_end(form) }}
+</div>

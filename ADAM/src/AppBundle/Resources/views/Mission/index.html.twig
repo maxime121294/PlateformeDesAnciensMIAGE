@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<ul class="nav nav-tabs">
+  <li><a href="{{ path('fos_user_profile_show') }}">Informations générales</a></li>
+  <li class="active"><a href="{{ path('mission_index') }}">Expérience professionnel</a></li>
+</ul>
+
+<a href="{{ path('mission_new') }}" class="btn blue">Ajouter une mission</a>
+{% endblock body %}

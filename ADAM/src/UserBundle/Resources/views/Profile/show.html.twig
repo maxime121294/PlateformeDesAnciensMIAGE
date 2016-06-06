@@ -3,8 +3,8 @@
 {% block body %}
 
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#">Informations générales</a></li>
-  <li><a href="#">Expérience professionnel</a></li>
+  <li class="active"><a href="{{ path('fos_user_profile_show') }}">Informations générales</a></li>
+  <li><a href="{{ path('mission_index') }}">Expérience professionnel</a></li>
 </ul>
 
 <a href="{{ path('fos_user_profile_edit') }}" class="btn blue">Modifier</a>
