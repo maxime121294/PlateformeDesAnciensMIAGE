@@ -1,3 +1,7 @@
+app_advert:
+    resource: "@AppBundle/Controller/AdvertController.php"
+    type:     annotation
+
 admin:
     resource: "@AdminBundle/Controller/"
     type:     annotation

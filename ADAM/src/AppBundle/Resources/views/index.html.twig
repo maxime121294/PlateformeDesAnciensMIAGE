@@ -1,45 +1,106 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<div class="homepage-background">
-		{# <img class="descartes-background" src="{{ asset('bundles/front/images/saints_peres.jpeg') }}"> #}
-	</div>
-	<div class="homepage-logo col-sm-12">
-		<div class="col-sm-offset-3  col-sm-6">
-			<img class="logo-ADAM" alt="ADAM" src="{{ asset('bundles/front/images/ADAM_Icon.png') }}">
-		</div>
-	</div>
-
-	<div class="homepage-time col-sm-12">
-	   	<div class="col-sm-offset-3 col-sm-6">
-			<div class="timing">
-				<div id="count-down" data-date="2016-06-31 00:00:00"></div>
-			</div>
-	   </div>
-	</div>
-	
+    <section class="first-section section">
+        <div class="homepage-background"></div>
+        <div class="homepage-logo col-sm-12">
+            <div class="col-sm-offset-3  col-sm-6">
+                <img class="logo-ADAM" alt="ADAM" src="{{ asset('bundles/front/images/ADAM_Icon.png') }}">
+            </div>
+        </div>
+        <div class="homepage-time col-sm-12">
+            <div class="col-sm-offset-3 col-sm-6">
+                <div class="timing">
+                    <div id="count-down" data-date="2016-06-31 00:00:00"></div>
+                </div>
+           </div>
+        </div>
+    </section>
+    <section class="second-section section">
+        <div class="row">
+            <div class="section-title">
+                <h2>ADAM</h2>
+                <p>Association Descartes Anciens Miagistes</p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="welcome_part">
+                <div class="welcome_icon">
+                    <i class="fa fa-users fa-4x"></i>
+                </div>
+                <h2>RÉSEAU</h2>
+                <p>Construisez votre réseau d'anciens miagistes pour être informé des nouvelles opportunités.</p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="welcome_part">
+                <div class="welcome_icon">
+                    <i class="fa fa-calendar-plus-o fa-4x"></i>
+                </div>
+                <h2>ÉVÉNEMENTS</h2>
+                <p>Soyez informé des différents événements de l'association.</p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="welcome_part">
+                <div class="welcome_icon">
+                    <i class="fa fa-briefcase fa-4x"></i>
+                </div>
+                <h2>EMPLOIS</h2>
+                <p>Trouvez et proposez des emplois faits pour les miagistes.</p>
+            </div>
+        </div>
+    </section>
 {% endblock %}
 
 {% block stylesheets %}
-	<link rel="stylesheet" href="{{ asset('bundles/front/css/libs/TimeCircles.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/TimeCircles.css') }}">
 {% endblock %}
 
 {% block javascripts %}
-	<script type="text/javascript" src="{{asset('bundles/front/js/libs/TimeCircles.js')}}"></script>
-	<script type="text/javascript">
-	    $("#count-down").TimeCircles(
-	       {   
-	           circle_bg_color: "#F3F3F3",
-	           use_background: true,
-	           bg_width: 1.0,
-	           fg_width: 0.02,
-	           time: {
-	                Jours: { color: "#BB0F47" },
-	                Heures: { color: "#BB0F47" },
-	                Minutes: { color: "#BB0F47" },
-	                Secondes: { color: "#BB0F47" }
-	            }
-	       }
-	    );
-	</script>
+    <script type="text/javascript" src="{{asset('bundles/front/js/libs/TimeCircles.js')}}"></script>
+    <script type="text/javascript">
+        $("#count-down").TimeCircles(
+           {
+               circle_bg_color: "#F3F3F3",
+               use_background: true,
+               bg_width: 1.0,
+               fg_width: 0.02,
+               time: {
+                    Jours: { color: "#BB0F47" },
+                    Heures: { color: "#BB0F47" },
+                    Minutes: { color: "#BB0F47" },
+                    Secondes: { color: "#BB0F47" }
+                }
+           }
+        );
+
+        var winHeight = $(window).height();
+        var winWidth = $(window).width();
+        console.log('$(window).height()', $(window).height())
+        if (winHeight > 650) {
+            $('.first-section').css({
+                'height': winHeight - 54
+            });
+            } else{
+            $('.first-section').css({
+                'height': '600px'
+            });
+        };
+
+        $(window).resize(function(){
+            var winHeight = $(window).height();
+            var winWidth = $(window).width();
+
+            if (winHeight > 600) {
+                $('.first-section').css({
+                    'height': winHeight - 54
+                });
+                } else{
+                $('.first-section').css({
+                    'height': '600px'
+                });
+            };
+        });
+    </script>
 {% endblock %}
