@@ -7,5 +7,62 @@
   <li class="active"><a href="{{ path('mission_index') }}">Expérience professionnel</a></li>
 </ul>
 
-<a href="{{ path('mission_new') }}" class="btn blue">Ajouter une mission</a>
+<div align="right">
+	<a href="{{ path('mission_new') }}" class="btn btn-default" role="button">
+		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Ajouter une mission
+	</a>
+</div>
+
+{% for mission in pagination %}
+	<br>
+         <div class="container">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-9">
+                    <div id="postlist">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <div class="text-center">
+                                    <div class="row">
+                                        <div class="col-sm-9">
+                                            <h3 class="pull-left">{{ mission.name }}</h3>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <h4 class="pull-right">
+                                            <small>{{ mission.businessName }}</small><br>
+                                            <small>Modifié le <em> {% if mission.updatedAt %}{{ mission.updatedAt|localizeddate('full', 'none') }}{% endif %} </em></small>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+                                {{ mission.content|raw  }}
+                            </div>
+
+                            <div class="panel-footer">
+                                <div class="text-center">
+                                    <div class="row">
+                                        <div class="col-sm-9">
+                                            <span class="label label-default pull-left">{{ mission.beginAt|localizeddate('full', 'none') }}</span>
+                                        </div>
+                                       {#  {% if advert.author == app.user or is_granted("ROLE_ADMIN") %}
+                                            <div class="col-sm-3">
+                                                <h5 class="pull-right">
+                                                    <a type="button" href="{{ path('annonce_edit', { 'id': advert.id }) }}" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                    <a type="button" href="{{ path('annonce_delete', { 'id': advert.id }) }}" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-remove"></i></a>
+                                                </h5>
+                                            </div>
+                                        {% endif %} #}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endfor %}
+
 {% endblock body %}

@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class MissionType extends AbstractType
@@ -36,19 +37,19 @@ class MissionType extends AbstractType
                 'label' => 'Nom de l\'entreprise',
                 'required' => true,
             ))
-            ->add('beginAt', DateTimeType::class, array(
+            ->add('beginAt', DateType::class, array(
                 'label' => 'Début de la mission',
                 'widget' => 'single_text',
                 'required' => true,
-                'format' => 'dd/MM/yyyy HH:mm',
-                'placeholder' => 'Choississez la date et l\'heure de l\'événement',
+                'format' => 'dd/MM/yyyy',
+                'placeholder' => 'Choississez la date de l\'événement',
             ))
-            ->add('endedAt', DateTimeType::class, array(
+            ->add('endedAt', DateType::class, array(
                 'label' => 'Fin de la mission',
                 'widget' => 'single_text',
                 'required' => true,
-                'format' => 'dd/MM/yyyy HH:mm',
-                'placeholder' => 'Choississez la date et l\'heure de l\'événement',
+                'format' => 'dd/MM/yyyy',
+                'placeholder' => 'Choississez la date de l\'événement',
             ))
         ;
     }
