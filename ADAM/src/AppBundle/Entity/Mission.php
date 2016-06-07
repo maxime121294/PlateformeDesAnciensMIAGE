@@ -68,8 +68,7 @@ class Mission
     /**
      * @var date
      *
-     * @ORM\Column(name="createdAt", type="date", length=255)
-     * @Assert\NotBlank()
+     * @ORM\Column(name="createdAt", type="datetime")
      */
     private $createdAt;
     /**

@@ -22,10 +22,10 @@ class MissionController extends Controller
      *
      * @Route("/", name="mission_index")
      * @Method("GET")
+     * @Security("has_role('ROLE_USER')")
      */
     public function indexAction(Request $request)
     {
-        $loginVariables = $this->get('user.security')->loginFormInstance($request);
         $em = $this->getDoctrine()->getManager();
 
         $missions = $em->getRepository('AppBundle:Mission')->findBy(array(), array('updatedAt' => 'desc'));
@@ -38,9 +38,6 @@ class MissionController extends Controller
         return $this->render('AppBundle:mission:index.html.twig', array(
             'pagination' => $pagination,
             'missions' => $missions,
-            'last_username' => $loginVariables['last_username'],
-            'error' => $loginVariables['error'],
-            'csrf_token' => $loginVariables['csrf_token'],
         ));
     }
 
