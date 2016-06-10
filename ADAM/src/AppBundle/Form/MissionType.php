@@ -22,10 +22,6 @@ class MissionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
          $builder 
-            ->add('duration', IntegerType::class, array(
-                'label' => 'Durée de la mission (en mois)',
-                'required' => true,
-            ))
             ->add('content', TextType::class, array(
                 'label' => 'Description',
                 'required' => true,
@@ -37,20 +33,6 @@ class MissionType extends AbstractType
             ->add('name', TextType::class, array(
                 'label' => 'Intitulé de la mission',
                 'required' => true,
-            ))
-            ->add('beginAt', DateType::class, array(
-                'label' => 'Début de la mission',
-                'widget' => 'single_text',
-                'required' => true,
-                'format' => 'dd/MM/yyyy',
-                'placeholder' => 'Choississez la date de l\'événement',
-            ))
-            ->add('endedAt', DateType::class, array(
-                'label' => 'Fin de la mission',
-                'widget' => 'single_text',
-                'required' => true,
-                'format' => 'dd/MM/yyyy',
-                'placeholder' => 'Choississez la date de l\'événement',
             ))
         ;
     }

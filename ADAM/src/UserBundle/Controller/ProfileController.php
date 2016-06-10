@@ -73,4 +73,51 @@ class ProfileController extends Controller
             'form' => $form->createView()
         ));
     }
+
+    /**
+     * Affichage du formulaire de modification de mot de passe
+     *
+     * @Route("edit/password", name="profile_password_edit")
+     * @Method("GET")
+     */
+    public function editPasswordAction()
+    {
+        $user = $this->getUser();
+
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+
+        $form = $this->createForm('UserBundle\Form\PasswordType', $user);
+        return $this->render('UserBundle:Profile:edit_password.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * Validation du formulaire de modification de mot de passe
+     *
+     * @Route("update/password", name="profile_password_update")
+     * @Method("POST")
+     */
+    public function updatePasswordAction(Request $request)
+    {
+        $user = $this->getUser();
+
+        $form = $this->createForm('UserBundle\Form\PasswordType', $user);
+        $form->handleRequest($request);
+
+        if ($form->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('fos_user_profile_show');
+        }
+
+        return $this->render('UserBundle:Profile:edit_password.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
 }

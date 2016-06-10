@@ -88,4 +88,55 @@ class MissionController extends Controller
             'form'    => $form->createView(),
         ));
     }
+
+    /**
+     * Display a form to edit a Mission entity.
+     *
+     * @Route("/{id}/edit", name="mission_edit")
+     * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function editAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $mission = $em->getRepository('AppBundle:Mission')->find($id);
+
+        $form = $this->createForm('AppBundle\Form\MissionType', $mission);
+
+        return $this->render('AppBundle:Mission:edit.html.twig', array(
+            'mission' => $mission,
+            'form'    => $form->createView(),
+        ));
+    }
+
+    /**
+     * Update a Mission entity.
+     *
+     * @Route("/{id}/update", name="mission_update")
+     * @Method("POST")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function updateAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $mission = $em->getRepository('AppBundle:Mission')->find($id);
+        
+        $form = $this->createForm('AppBundle\Form\MissionType', $mission);
+        $form->handleRequest($request);
+
+        if ($form->isValid())
+        {
+            $mission->setUser($user);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($mission);
+            $em->flush();
+
+            return $this->redirectToRoute('mission_index');
+        }
+
+        return $this->render('AppBundle:Mission:edit.html.twig', array(
+            'mission' => $mission,
+            'form'    => $form->createView(),
+        ));
+    }
  }  

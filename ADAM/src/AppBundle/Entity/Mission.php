@@ -20,13 +20,6 @@ class Mission
      */
     private $id;
     /**
-     * @var int
-     *
-     * @ORM\Column(name="duration", type="integer")
-     * @Assert\NotBlank()
-     */
-    private $duration;
-    /**
      * @var text
      *
      * @ORM\Column(name="content", type="text", length=16777215)
@@ -47,20 +40,6 @@ class Mission
      * @Assert\NotBlank()
      */
     private $name;
-    /**
-     * @var date
-     *
-     * @ORM\Column(name="beginAt", type="date")
-     * @Assert\NotBlank()
-     */
-    private $beginAt;
-    /**
-     * @var date
-     *
-     * @ORM\Column(name="endedAt", type="date")
-     * @Assert\NotBlank()
-     */
-    private $endedAt;
     /**
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
@@ -94,27 +73,6 @@ class Mission
     public function getId()
     {
         return $this->id;
-    }
-    /**
-     * Set duration
-     *
-     * @param integer $duration
-     * @return Mission
-     */
-    public function setDuration($duration)
-    {
-        $this->duration = $duration;
-
-        return $this;
-    }
-    /**
-     * Get duration
-     *
-     * @return integer 
-     */
-    public function getDuration()
-    {
-        return $this->duration;
     }
     /**
      * Set content
@@ -175,46 +133,6 @@ class Mission
     public function getName()
     {
         return $this->name;
-    }
-    /**
-     * Set beginAt
-     *
-     * @param date $beginAt
-     * @return Mission
-     */
-    public function setBeginAt($beginAt)
-    {
-        $this->beginAt = $beginAt;
-        return $this;
-    }
-    /**
-     * Get beginAt
-     *
-     * @return date 
-     */
-    public function getBeginAt()
-    {
-        return $this->beginAt;
-    }
-    /**
-     * Set endedAt
-     *
-     * @param date $endedAt
-     * @return Mission
-     */
-    public function setEndedAt($endedAt)
-    {
-        $this->endedAt = $endedAt;
-        return $this;
-    }
-    /**
-     * Get endedAt
-     *
-     * @return date 
-     */
-    public function getEndedAt()
-    {
-        return $this->endedAt;
     }
     /**
      * Set user

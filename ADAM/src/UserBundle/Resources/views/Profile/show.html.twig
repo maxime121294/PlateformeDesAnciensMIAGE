@@ -7,6 +7,14 @@
   <li><a href="{{ path('mission_index') }}">Expérience professionnel</a></li>
 </ul>
 
-<a href="{{ path('fos_user_profile_edit') }}" class="btn blue">Modifier</a>
-{% include "UserBundle:Profile:show_content.html.twig" %}
+<div style="margin: 25px auto 15px auto;width: 75%;vertical-align: middle;">
+	<a href="{{ path('fos_user_profile_edit') }}" class="btn btn-default" role="button">
+		Modifier
+	</a>
+	<a href="{{ path('profile_password_edit') }}" class="btn btn-default" role="button">
+		Changer son mot de passe
+	</a>
+	{% include "UserBundle:Profile:show_content.html.twig" %}
+</div>
+
 {% endblock body %}
