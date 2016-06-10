@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -21,7 +22,7 @@ class MissionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
          $builder 
-            ->add('duration', TextType::class, array(
+            ->add('duration', IntegerType::class, array(
                 'label' => 'Durée de la mission (en mois)',
                 'required' => true,
             ))
@@ -34,7 +35,7 @@ class MissionType extends AbstractType
                 'required' => true,
             ))
             ->add('name', TextType::class, array(
-                'label' => 'Nom de l\'entreprise',
+                'label' => 'Intitulé de la mission',
                 'required' => true,
             ))
             ->add('beginAt', DateType::class, array(

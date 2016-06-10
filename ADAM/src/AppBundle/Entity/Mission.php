@@ -23,6 +23,7 @@ class Mission
      * @var int
      *
      * @ORM\Column(name="duration", type="integer")
+     * @Assert\NotBlank()
      */
     private $duration;
     /**
