@@ -8,14 +8,16 @@
                 <img class="logo-ADAM" alt="ADAM" src="{{ asset('bundles/front/images/ADAM_Icon.png') }}">
             </div>
         </div>
-        <div class="col-lg-offset-3 col-lg-6 search-container">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Rechercher une annonce...">
-                <span class="input-group-btn search-container-btn">
-                    <button class="btn btn-default search-btn" type="submit">Rechercher</button>
-                </span>
+        <form id="myFormSearch" action="{{ path('search') }}" method="post">
+            <div class="col-lg-offset-3 col-lg-6 search-container">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="searchAdvert" name="searchAdvert" pattern=".{3,}" title="3 characters minimum" placeholder="Rechercher une annonce...">
+                    <span class="input-group-btn search-container-btn">
+                        <button class="btn btn-default search-btn" type="submit">Rechercher</button>
+                    </span>
+                </div>
             </div>
-        </div>
+        </form> 
     </section>
     <section class="second-section section">
         <div class="row">

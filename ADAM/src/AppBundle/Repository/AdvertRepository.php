@@ -12,4 +12,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class AdvertRepository extends EntityRepository
 {
+	public function getAdvertForSearch($string){
+		$ad = $this->getEntityManager()
+				->createQuery('SELECT a FROM AppBundle:Advert a  WHERE a.title LIKE :string OR a.content LIKE :string')
+                ->setParameter('string','%'.$string.'%')
+                ->getResult();
+        return $ad;
+	}
 }
