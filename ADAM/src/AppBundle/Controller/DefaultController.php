@@ -56,4 +56,13 @@ class DefaultController extends Controller
         $loginVariables = $this->get('user.security')->loginFormInstance($request);
         return $this->render('AppBundle:Security:confidentialite.html.twig', $loginVariables);
     }
+
+    /**
+     * @Route("/conditions-generales/", name="conditions_generales")
+     */
+    public function conditionAction(Request $request)
+    {
+        $loginVariables = $this->get('user.security')->loginFormInstance($request);
+        return $this->render('AppBundle:Security:condition.html.twig', $loginVariables);
+    }
 }
