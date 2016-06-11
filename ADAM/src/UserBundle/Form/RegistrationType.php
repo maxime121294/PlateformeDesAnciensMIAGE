@@ -56,7 +56,9 @@ class RegistrationType extends AbstractType
             ->add('termsAccepted', CheckboxType::class, array(
                 "label" => "J'accepte les conditions générales d'utilisation du site.",
                 'mapped' => false,
-                'constraints' => new IsTrue(),
+                'constraints' => new IsTrue(
+                    array("message" => "Vous devez accepter les conditions générales d'utilisation")
+                ),
                 "required" => true,
             ));
     }
