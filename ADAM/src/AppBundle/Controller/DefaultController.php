@@ -58,7 +58,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/search/", name="search")
+     * @Route("/search", name="search")
      */
     public function liveSearchAction(Request $request)
     {

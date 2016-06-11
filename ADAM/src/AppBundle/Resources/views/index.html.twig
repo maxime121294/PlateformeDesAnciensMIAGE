@@ -8,14 +8,15 @@
                 <img class="logo-ADAM" alt="ADAM" src="{{ asset('bundles/front/images/ADAM_Icon.png') }}">
             </div>
         </div>
-        <form id="myFormSearch" action="{{ path('search') }}" method="post">
+        <form id="myFormSearch" action="{{ path('search') }}" method="post" onsubmit="return verifMiniCaracteres();">
             <div class="col-lg-offset-3 col-lg-6 search-container">
                 <div class="input-group">
-                    <input type="text" class="form-control" id="searchAdvert" name="searchAdvert" pattern=".{3,}" title="3 characters minimum" placeholder="Rechercher une annonce...">
+                    <input type="text" class="form-control" id="searchAdvert" name="searchAdvert" placeholder="Rechercher une annonce...">
                     <span class="input-group-btn search-container-btn">
                         <button class="btn btn-default search-btn" type="submit">Rechercher</button>
                     </span>
                 </div>
+                 <div class="alert alert-danger hidden" id="searchAdvertAlert" role="alert">Votre recherche doit comporter plus de 3 caractères</div>
             </div>
         </form> 
     </section>
@@ -89,5 +90,16 @@
                 });
             };
         });
+        function verifMiniCaracteres() {
+            var search = document.getElementById('searchAdvert');
+            var searchValue = search.value;
+            if(searchValue.length < 3){
+                $('#searchAdvertAlert').removeClass('hidden');
+                return false;
+            }
+            else{
+                $('#searchAdvertAlert').addClass('hidden');
+            }
+        }
     </script>
 {% endblock %}
