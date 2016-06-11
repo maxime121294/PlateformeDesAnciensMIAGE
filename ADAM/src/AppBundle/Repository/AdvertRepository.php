@@ -19,4 +19,14 @@ class AdvertRepository extends EntityRepository
                 ->getResult();
         return $ad;
 	}
+
+    public function getAdvertByCategory($categoryWording) {
+        $ad = $this->getEntityManager()
+                ->createQuery("SELECT a from AppBundle:Advert a LEFT JOIN a.category c with c.wording = :categoryWording where a.category = c.id")
+                ->setParameter("categoryWording", $categoryWording)
+                ->getResult();
+
+        return $ad;
+    }
+    
 }
