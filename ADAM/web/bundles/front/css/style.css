@@ -202,6 +202,10 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     background-color: var(--descartes-grey-color);
 }
 
+.third-section {
+    position: relative;
+}
+
 .homepage-background {
     position: fixed;
     width: 100%;
@@ -424,7 +428,7 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     padding: 10px;
     vertical-align: middle;
 }
-}
+
 .editAdvert #edit_form-evenDate span {
     height: 20px;
 }
@@ -500,3 +504,14 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     color: var(--descartes-rouge-color);
     padding-bottom: 50px;
 }
+
+/*
+ * Calendar
+ */
+ #fullCalModal a {
+    color: white;
+ }
+
+ #fullCalModal .modal-header {
+    background-color: var(--descartes-grey-color);
+ }

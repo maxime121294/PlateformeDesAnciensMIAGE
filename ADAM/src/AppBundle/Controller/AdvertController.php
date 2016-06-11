@@ -81,13 +81,17 @@ class AdvertController extends Controller
      * @Route("/{id}", name="annonce_show")
      * @Method("GET")
      */
-    public function showAction(Advert $advert)
+    public function showAction(Advert $advert, Request $request)
     {
+        $loginVariables = $this->get('user.security')->loginFormInstance($request);
         $deleteForm = $this->createDeleteForm($advert);
 
         return $this->render('AppBundle:advert:show.html.twig', array(
             'advert' => $advert,
             'delete_form' => $deleteForm->createView(),
+            'last_username' => $loginVariables['last_username'],
+            'error' => $loginVariables['error'],
+            'csrf_token' => $loginVariables['csrf_token'],
         ));
     }
 
