@@ -437,7 +437,7 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     padding: 10px;
     vertical-align: middle;
 }
-}
+
 .editAdvert #edit_form-evenDate span {
     height: 20px;
 }
@@ -494,6 +494,24 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     vertical-align: middle;
     background-color: var(--descartes-grey-color);
     color: var(--descartes-rouge-color);
+}
+
+/*
+*  Conditions générales d'utilisation du sit
+*/
+.conditions {
+    margin: 25px auto 15px auto;
+    width: 90%;
+    border: 3px solid grey;
+    padding: 10px 5% 0 5%;
+    vertical-align: middle;
+    background-color: var(--descartes-grey-color);
+    text-align: justify;
+}
+
+.conditions h2 {
+    color: var(--descartes-rouge-color);
+    padding-bottom: 50px;
 }
 
 /*
