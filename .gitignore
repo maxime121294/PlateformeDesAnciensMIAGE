@@ -52,3 +52,5 @@ ADAM/composer.lock
 
 # ckEditor skins
 !ADAM/web/bundles/ivoryckeditor/skins
+
+ADAM/composer.lock

@@ -86,7 +86,11 @@ class DefaultController extends Controller
         ));
     }
 
+<<<<<<< HEAD
     /*
+=======
+    /**
+>>>>>>> 61dae7373dafb8c58e6bb996f2be9670c4d30483
      * @Route("/conditions-generales/", name="conditions_generales")
      */
     public function conditionAction(Request $request)
@@ -94,5 +98,8 @@ class DefaultController extends Controller
         $loginVariables = $this->get('user.security')->loginFormInstance($request);
         return $this->render('AppBundle:Security:condition.html.twig', $loginVariables);
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 61dae7373dafb8c58e6bb996f2be9670c4d30483
 }
