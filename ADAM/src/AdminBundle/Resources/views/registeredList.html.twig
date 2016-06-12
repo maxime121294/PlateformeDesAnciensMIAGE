@@ -2,6 +2,9 @@
 
 {% block body %}
     <div class="registered-list-container">
+        {% if is_granted("ROLE_ADMIN") %}
+            <a href="{{ path('register') }}">Ajouter un Utilisateur</a>
+        {% endif %}
         <table class="table table-striped table-bordered table-hover" id="registreList">
             <thead>
                 <th>Nom</th>
@@ -20,7 +23,7 @@
                 {% if is_granted("ROLE_ADMIN") %}
                 <th>Role</th>
                 {% endif %}
-                {% if is_granted("ROLE_SUPER_ADMIN") %}
+                {% if is_granted("ROLE_ADMIN") %}
                 <th>Actions</th>
                 {% endif %}
             </thead>
@@ -68,6 +71,11 @@
                     {% endif %}
                     {% if is_granted("ROLE_ADMIN") %}
                         <td>
+                            {% if is_granted("ROLE_SUPER_ADMIN") %}
+                                <a href="{{ path('user_remove', {'id': user.id}) }}">
+                                           Supprimer l'utilisateur
+                                </a>
+                            {% endif %}
                             {% if "ROLE_SUPER_ADMIN" not in user.roles %}
                                 {% if "ROLE_ADMIN" not in user.roles %}
                                     {% if user.locked %}

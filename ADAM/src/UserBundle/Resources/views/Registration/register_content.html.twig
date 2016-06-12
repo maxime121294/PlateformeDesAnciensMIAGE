@@ -1,7 +1,11 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 <div class="form-register">
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+	{% if is_granted('ROLE_ADMIN') %}
+		{{ form_start(form, {'method': 'post', 'action': path('user_add')}) }}
+	{% else %}
+		{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+	{% endif %}
 	<div class="form-group row">
 	    {{ form_label(form.firstname, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
 	    <div class="col-sm-9">

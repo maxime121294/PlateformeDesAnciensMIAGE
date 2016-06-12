@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\User;
 
 class DefaultController extends Controller
 {
@@ -59,7 +61,7 @@ class DefaultController extends Controller
 
     /**
      * Bannir un membre. Il faut au moins être Admin pour bannir un utilisateur.
-     * Un Admin ne peut bannir un SuperAdmin, 
+     * Un Admin ne peut bannir un SuperAdmin, et un SuperAdmin doit Destituer un Admin pour le bannir.
      *
      * @Route("/ban-{id}", name="user_ban")
      * @Security("has_role('ROLE_ADMIN')")
@@ -85,6 +87,74 @@ class DefaultController extends Controller
 
         return $this->redirect($this->generateUrl('registered_list'));
 
+    }
+
+    /**
+     * Bannir un membre. Seul un SuperAdmin peut supprimer un utilisateur.
+     *
+     *
+     * @Route("/remove-{id}", name="user_remove")
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     */
+    public function userRemoveAction($id)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $em->getRepository('AppBundle:User')
+                ->findOneById($id);   
+
+        if (!$user) {
+                throw $this->createNotFoundException('User not found');
+        }
+
+        if (!in_array("ROLE_SUPER_ADMIN", $user->getRoles())){
+            $em->remove($user);
+            $em->flush();
+
+        }
+
+        return $this->redirect($this->generateUrl('registered_list'));
+
+    }
+
+    /**
+     * Ajouter un membre. Il faut être au moins Admin pour ajouter un utilisateur par l'interface d'administration.
+     *
+     *
+     * @Route("/add", name="user_add")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function userAddAction(Request $request)
+    {
+
+        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+        $formFactory = $this->get('fos_user.registration.form.factory');
+        
+        $em = $this->getDoctrine()->getManager();
+
+        $user = new User();
+
+        $user->setEnabled(true);
+        $form = $formFactory->createForm();
+        $form->setData($user);
+
+        $form->handleRequest($request);
+
+       //die(var_dump($form->getErrors()));
+
+        if ($form->isValid()) {
+
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('registered_list'));
+    
+    }else{
+           // return $this->redirect($this->generateUrl('register',array('form' => $form->createView())));
+            return $this->render('UserBundle:Registration:register.html.twig', array('form' => $form->createView()));
+
+    }
     }
 
 }
