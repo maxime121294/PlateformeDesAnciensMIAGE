@@ -13,20 +13,19 @@ use Doctrine\ORM\EntityRepository;
 class AdvertRepository extends EntityRepository
 {
 	public function getAdvertForSearch($string){
-		$ad = $this->getEntityManager()
+		$result = $this->getEntityManager()
 				->createQuery('SELECT a FROM AppBundle:Advert a  WHERE a.title LIKE :string OR a.content LIKE :string')
                 ->setParameter('string','%'.$string.'%')
                 ->getResult();
-        return $ad;
+        return $result;
 	}
 
     public function getAdvertByCategory($categoryWording) {
-        $ad = $this->getEntityManager()
+        $result = $this->getEntityManager()
                 ->createQuery("SELECT a from AppBundle:Advert a LEFT JOIN a.category c with c.wording = :categoryWording where a.category = c.id")
                 ->setParameter("categoryWording", $categoryWording)
                 ->getResult();
 
-        return $ad;
+        return $result;
     }
-    
 }
