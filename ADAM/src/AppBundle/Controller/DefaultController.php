@@ -58,6 +58,35 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/search", name="search")
+     */
+    public function liveSearchAction(Request $request)
+    {
+
+        $loginVariables = $this->get('user.security')->loginFormInstance($request);
+
+        $string = $request->request->get('searchAdvert');
+        $advertsSearch = $this->getDoctrine()
+                 ->getRepository('AppBundle:Advert')
+                 ->getAdvertForSearch($string);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $advertsSearch, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5 /*limit per page*/
+        );
+        return $this->render('AppBundle:advert:search.html.twig', array(
+            'search' => $string,
+            'pagination' => $pagination,
+            'advertsSearch' => $advertsSearch,
+            'last_username' => $loginVariables['last_username'],
+            'error' => $loginVariables['error'],
+            'csrf_token' => $loginVariables['csrf_token'],
+        ));
+    }
+
+    /**
      * @Route("/conditions-generales/", name="conditions_generales")
      */
     public function conditionAction(Request $request)
@@ -65,4 +94,5 @@ class DefaultController extends Controller
         $loginVariables = $this->get('user.security')->loginFormInstance($request);
         return $this->render('AppBundle:Security:condition.html.twig', $loginVariables);
     }
+    
 }
