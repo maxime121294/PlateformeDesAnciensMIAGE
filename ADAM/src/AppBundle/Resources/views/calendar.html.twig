@@ -1,0 +1,100 @@
+{% include 'ADesignsCalendarBundle::calendar.html.twig' %}
+
+<div id="fullCalModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span> <span class="sr-only">close</span>
+                </button>
+                <h4 id="modalTitle" class="modal-title"></h4>
+            </div>
+            <div id="modalBody" class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
+                <button class="btn btn-primary"><a id="eventUrl" target="_self">Voir l'annonce complète</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/adesignscalendar/css/fullcalendar/fullcalendar.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/jquery-ui.theme.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/adesignscalendar/js/fullcalendar/jquery.fullcalendar.min.js') }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    
+    <script type="text/javascript">
+    var Mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'];
+
+        $(function () {
+            $('#calendar-holder').fullCalendar({
+                header: {
+                    left: 'prev, next,',
+                    center: 'title',
+                    right: 'today,'
+                },
+                lazyFetching: true,
+                timeFormat: {
+                    // for agendaWeek and agendaDay
+                    agenda: 'h:mmt',    // 5:00 - 6:30
+
+                    // for all other views
+                    '': 'h:mmt'         // 7p
+                },
+                buttonText: {prev: '&lt;', next:'&gt;', today: 'aujourd\'hui'},
+                buttonIcons: false,
+                monthNames: Mois,
+                dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Vend', 'Sam'],
+                firstDay: 1,
+                weekends: true,
+                theme: true,
+                eventSources: [
+                    {
+                        url: Routing.generate('fullcalendar_loader'),
+                        type: 'POST',
+                        // A way to add custom filters to your event listeners
+                        data: {
+                        },
+                        error: function() {
+                           //alert('There was an error while fetching Google Calendar!');
+                        }
+                    }
+                ],
+
+                eventClick: function(event, jsEvent, view) {
+                    $('#modalTitle').html(event.title);
+                    $('#modalBody').html(convertDate(event.start));
+                    $('#eventUrl').attr('href',event.advertUrl);
+                    $('#fullCalModal').modal();
+                },
+
+                eventMouseover: function(event, jsEvent, view) {
+                    $(jsEvent.target).attr('title', event.title);
+                },
+            });
+            $('.fc-button-today').removeClass('ui-state-disabled');
+            $('.fc-button-today').addClass('ui-state-active');
+        });
+
+        function convertDate (dateEvent){
+            var dateStr = new Date(dateEvent);
+            var monthNames = Mois;
+            
+            var DateEven = "Date de l'événement : " + dateStr.getDate() + ' ' + monthNames[dateStr.getMonth()] + ' ' + dateStr.getFullYear();
+            var heureEven = "Heure de l'événement : " + dateStr.getHours() + 'h' + addZero(dateStr.getMinutes());
+            return  DateEven + '<br>' + heureEven;
+        }
+
+        function addZero(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+    </script>
+{% endblock %}

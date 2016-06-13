@@ -202,6 +202,10 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     background-color: var(--descartes-grey-color);
 }
 
+.third-section {
+    position: relative;
+}
+
 .homepage-background {
     position: fixed;
     width: 100%;
@@ -216,10 +220,6 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 
 .homepage-logo .logo-ADAM {
     height: 300px;
-}
-
-.homepage-logo {
-    padding-top: 5%;
 }
 
 .homepage-logo,
@@ -291,6 +291,19 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     color: var(--descartes-brown-color);
     font-size: 14px;
     text-align: center;
+}
+
+.first-section .search-container {
+    padding-top: 50px;
+    z-index: 0;
+}
+
+.first-section .search-container .search-container-btn .search-btn {
+    background-color: var(--descartes-rouge-color);
+    background-image: var(--descartes-rouge-color);
+    border-color: var(--descartes-rouge-color);
+    text-shadow: none;
+    color: white;
 }
 
 /*
@@ -424,7 +437,7 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     padding: 10px;
     vertical-align: middle;
 }
-}
+
 .editAdvert #edit_form-evenDate span {
     height: 20px;
 }
@@ -482,3 +495,32 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     background-color: var(--descartes-grey-color);
     color: var(--descartes-rouge-color);
 }
+
+/*
+*  Conditions générales d'utilisation du sit
+*/
+.conditions {
+    margin: 25px auto 15px auto;
+    width: 90%;
+    border: 3px solid grey;
+    padding: 10px 5% 0 5%;
+    vertical-align: middle;
+    background-color: var(--descartes-grey-color);
+    text-align: justify;
+}
+
+.conditions h2 {
+    color: var(--descartes-rouge-color);
+    padding-bottom: 50px;
+}
+
+/*
+ * Calendar
+ */
+ #fullCalModal a {
+    color: white;
+ }
+
+ #fullCalModal .modal-header {
+    background-color: var(--descartes-grey-color);
+ }
