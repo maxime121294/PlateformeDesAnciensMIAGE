@@ -3,7 +3,7 @@
 {% if action == 'new' %}
 	{{ form_start(form, {'method': 'post', 'action': path('mission_create'), 'attr': {'class': 'fos_user_registration_register'}}) }}
 {% else %}
-	{{ form_start(form, {'method': 'post', 'action': path('mission_update'), 'attr': {'class': 'fos_user_registration_register' }, 'data': {'id': mission.id} }) }}
+	{{ form_start(form, {'method': 'post', 'action': path('mission_update', {id: mission.id}), 'attr': {'class': 'fos_user_registration_register' }}) }}
 {% endif %}
 
 	<div class="form-group row">

@@ -21,7 +21,6 @@ class MissionController extends Controller
      *
      * @Route("/", name="mission_index")
      * @Method("GET")
-     * @Security("has_role('ROLE_USER')")
      */
     public function indexAction(Request $request)
     {
@@ -64,7 +63,6 @@ class MissionController extends Controller
      *
      * @Route("/create", name="mission_create")
      * @Method("POST")
-     * @Security("has_role('ROLE_USER')")
      */
     public function createAction(Request $request)
     {
@@ -94,7 +92,6 @@ class MissionController extends Controller
      *
      * @Route("/{id}/edit", name="mission_edit")
      * @Method({"GET", "POST"})
-     * @Security("has_role('ROLE_USER')")
      */
     public function editAction($id)
     {
@@ -114,7 +111,6 @@ class MissionController extends Controller
      *
      * @Route("/{id}/update", name="mission_update")
      * @Method("POST")
-     * @Security("has_role('ROLE_USER')")
      */
     public function updateAction(Request $request, $id)
     {
@@ -126,7 +122,6 @@ class MissionController extends Controller
 
         if ($form->isValid())
         {
-            $mission->setUser($user);
             $em = $this->getDoctrine()->getManager();
             $em->persist($mission);
             $em->flush();
@@ -138,5 +133,42 @@ class MissionController extends Controller
             'mission' => $mission,
             'form'    => $form->createView(),
         ));
+    }
+
+    /**
+     * Delete a Mission entity.
+     *
+     * @Route("/{id}/delete", name="mission_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $mission = $em->getRepository('AppBundle:Mission')->find($id);
+
+        $form = $this->createDeleteForm($mission);
+        $form->handleRequest($request);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($mission);
+        $em->flush();
+
+        return $this->redirectToRoute('mission_index');
+    }
+
+    /**
+     * Creates a form to delete a Mission entity.
+     *
+     * @param Mission $mission The Mission entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(Mission $mission)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('mission_delete', array('id' => $mission->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+        ;
     }
  }  

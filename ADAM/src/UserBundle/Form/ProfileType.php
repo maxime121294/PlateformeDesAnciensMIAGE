@@ -5,9 +5,8 @@ namespace UserBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -26,15 +25,12 @@ class ProfileType extends AbstractType
                 "label" => "Prénom",
                 "required" => true,
             ))
-            ->add('graduate', ChoiceType::class, array(
+            ->add('graduate', EntityType::class, array(
                 "label" => "Type de diplôme obtenu",
+                "class" => "AppBundle:Degree",
                 "required" => false,
                 "placeholder" => "Selectionner un type de diplôme",
-                "choices"  => array(
-                    "licence" => "Licence",
-                    "master" => "Master"
-                ),
-            ))
+                ))
             ->add('graduateYear', TextType::class, array(
                 "label" => "Année d'obtention du diplôme",
                 "required" => false,

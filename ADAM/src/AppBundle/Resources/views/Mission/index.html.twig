@@ -45,12 +45,10 @@
                             <div class="panel-footer">
                                 <div class="text-center">
                                     <div class="row">
-                                        <div class="col-sm-9">
-                                            <span class="label label-default pull-left">{# {{ mission.beginAt|localizeddate('full', 'none') }} #}</span>
-                                        </div>
                                         <div class="col-sm-3">
                                             <h5 class="pull-right">
                                                 <a type="button" href="{{ path('mission_edit', { 'id': mission.id }) }}" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                <a type="button" href="{{ path('mission_delete', { 'id': mission.id }) }}" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-remove"></i></a>
                                             </h5>
                                         </div>
                                     </div>
