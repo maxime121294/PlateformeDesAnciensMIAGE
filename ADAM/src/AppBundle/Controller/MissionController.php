@@ -139,36 +139,16 @@ class MissionController extends Controller
      * Delete a Mission entity.
      *
      * @Route("/{id}/delete", name="mission_delete")
-     * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
         $mission = $em->getRepository('AppBundle:Mission')->find($id);
 
-        $form = $this->createDeleteForm($mission);
-        $form->handleRequest($request);
-
         $em = $this->getDoctrine()->getManager();
         $em->remove($mission);
         $em->flush();
 
         return $this->redirectToRoute('mission_index');
-    }
-
-    /**
-     * Creates a form to delete a Mission entity.
-     *
-     * @param Mission $mission The Mission entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Mission $mission)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('mission_delete', array('id' => $mission->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
     }
  }  
