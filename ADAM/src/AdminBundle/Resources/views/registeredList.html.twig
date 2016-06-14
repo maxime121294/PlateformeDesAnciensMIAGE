@@ -2,6 +2,7 @@
 
 {% block body %}
     <div class="registered-list-container">
+        <a href="{{ path('homepage', {'_switch_user': '_exit'}) }}">Exit impersonation</a>
         {% if is_granted("ROLE_ADMIN") %}
             <a href="{{ path('register') }}">Ajouter un Utilisateur</a>
         {% endif %}
@@ -71,13 +72,21 @@
                     {% endif %}
                     {% if is_granted("ROLE_ADMIN") %}
                         <td>
-                            {% if is_granted("ROLE_SUPER_ADMIN") %}
+                            {% if is_granted("ROLE_SUPER_ADMIN") and "ROLE_SUPER_ADMIN" not in user.roles %}
                                 <a href="{{ path('user_remove', {'id': user.id}) }}">
                                            Supprimer l'utilisateur
                                 </a>
-                            {% endif %}
-                            {% if "ROLE_SUPER_ADMIN" not in user.roles %}
                                 {% if "ROLE_ADMIN" not in user.roles %}
+                                <a href="{{ path('role_toggle', {'action': 'promote', 'id': user.id}) }}">
+                                    <img width="30" height="30" alt="Promouvoir l'utilisateur" title="Promouvoir l'utilisateur" src="{{ asset('bundles/front/images/promote_user.svg') }}">
+                                </a>
+                                {% else %}
+                                    <a href="{{ path('role_toggle', {'action': 'demote', 'id': user.id}) }}">
+                                        <img width="30" height="30" alt="Destituer l'utilisateur" title="Destituer l'utilisateur" src="{{ asset('bundles/front/images/demote_user.svg') }}">
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                            {% if "ROLE_SUPER_ADMIN" not in user.roles and "ROLE_ADMIN" not in user.roles %}
                                     {% if user.locked %}
                                         <a href="{{ path('user_ban', {'id': user.id}) }}">
                                            Rétablir l'utilisateur
@@ -86,15 +95,7 @@
                                         <a href="{{ path('user_ban', {'id': user.id}) }}">
                                            Bannir l'utilisateur
                                         </a>
-                                        {% endif %}
-                                    <a href="{{ path('role_toggle', {'action': 'promote', 'id': user.id}) }}">
-                                        <img width="30" height="30" alt="Promouvoir l'utilisateur" title="Promouvoir l'utilisateur" src="{{ asset('bundles/front/images/promote_user.svg') }}">
-                                    </a>
-                                {% else %}
-                                    <a href="{{ path('role_toggle', {'action': 'demote', 'id': user.id}) }}">
-                                        <img width="30" height="30" alt="Destituer l'utilisateur" title="Destituer l'utilisateur" src="{{ asset('bundles/front/images/demote_user.svg') }}">
-                                    </a>
-                                {% endif %}
+                                    {% endif %}
                             {% endif %}
                         </td>
                     {% endif %}

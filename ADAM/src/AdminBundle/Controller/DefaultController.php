@@ -151,7 +151,6 @@ class DefaultController extends Controller
             return $this->redirect($this->generateUrl('registered_list'));
     
     }else{
-           // return $this->redirect($this->generateUrl('register',array('form' => $form->createView())));
             return $this->render('UserBundle:Registration:register.html.twig', array('form' => $form->createView()));
 
     }
