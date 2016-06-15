@@ -10,9 +10,9 @@
             <div class="col-md-12">
                 Se connecter via
                 <div class="social-buttons">
-                    <a href="{{ path('hwi_oauth_service_redirect', {'service':'facebook'}) }}" class="btn btn-fb"><i class="fa fa-facebook"></i></a>
-                    <a href="{{ path('hwi_oauth_service_redirect', {'service':'google'}) }}" class="btn btn-google"><i class="fa fa-google"></i></a>
-                    <a href="{{ path('hwi_oauth_service_redirect', {'service':'linkedin'}) }}" class="btn btn-linkedin"><i class="fa fa-linkedin"></i></a>
+                    <a href="{{ path('hwi_oauth_service_redirect', {'service':'facebook'}) }}" class="social-btn"><img src="{{ asset('bundles/front/images/facebook-icon.png') }}" alt="Facebook" /></a>
+                    <a href="{{ path('hwi_oauth_service_redirect', {'service':'google'}) }}" class="social-btn"><img src="{{ asset('bundles/front/images/google-icon.png') }}" alt="Google" /></a>
+                    <a href="{{ path('hwi_oauth_service_redirect', {'service':'linkedin'}) }}" class="social-btn"><img src="{{ asset('bundles/front/images/linkedin-icon.png') }}" alt="Linkedin" /></i></a>
                 </div>
                  <form action="{{ path("fos_user_security_check") }}" method="post" class="form" role="form" accept-charset="UTF-8" id="login-nav">
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />

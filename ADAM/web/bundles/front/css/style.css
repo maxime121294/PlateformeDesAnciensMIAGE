@@ -65,7 +65,7 @@ nav.navbar > .container-fluid a.navbar-brand {
     cursor: default;
 }
 
-nav.navbar > .container-fluid a:not(.navbar-logo):not(.help-link):not(.user-name):hover {
+nav.navbar > .container-fluid a:not(.navbar-logo):not(.help-link):not(.user-name):not(.social-btn):hover {
     background-color: var(--descartes-rouge-color);
     color: #E8E8E8;
 }
@@ -105,44 +105,24 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 #login-dp .social-buttons{
     margin: 12px 0;
 }
-#login-dp .social-buttons a{
-    width: 32%;
-}
+
 #login-dp .form-group {
     margin-bottom: 10px;
 }
-.btn-fb{
-    color: #fff;
-    background-color:#3b5998;
+
+#login-dp .social-btn img{
+    width: 40px;
+    height: 40px;
 }
-.btn-fb:hover{
-    color: #fff;
-    background-color:#496ebc;
+
+#login-dp .form-group .btn-primary{
+    background-color: var(--descartes-rouge-color);
+    background-image: var(--descartes-rouge-color);
+    border-color: var(--descartes-rouge-color);
+    text-shadow: none;
+    color: white;
 }
-.btn-tw{
-    color: #fff;
-    background-color:#55acee;
-}
-.btn-tw:hover{
-    color: #fff;
-    background-color:#59b5fa;
-}
-.btn-google{
-    color: #fff;
-    background-color:#db3236;
-}
-.btn-google:hover{
-    color: #fff;
-    background-color:#db3236;
-}
-.btn-linkedin{
-    color: #fff;
-    background-color:#004471;
-}
-.btn-linkedin:hover{
-    color: #fff;
-    background-color:#004471;
-}
+
 @media(max-width:768px){
     #login-dp{
         background-color: inherit;
