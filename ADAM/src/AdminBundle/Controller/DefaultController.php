@@ -111,7 +111,6 @@ class DefaultController extends Controller
         if (!in_array("ROLE_SUPER_ADMIN", $user->getRoles())){
             $em->remove($user);
             $em->flush();
-
         }
 
         return $this->redirect($this->generateUrl('registered_list'));
@@ -141,8 +140,6 @@ class DefaultController extends Controller
 
         $form->handleRequest($request);
 
-       //die(var_dump($form->getErrors()));
-
         if ($form->isValid()) {
 
             $em->persist($user);
@@ -150,10 +147,10 @@ class DefaultController extends Controller
 
             return $this->redirect($this->generateUrl('registered_list'));
     
-    }else{
+        }else{
             return $this->render('UserBundle:Registration:register.html.twig', array('form' => $form->createView()));
 
-    }
+        }
     }
 
 }
