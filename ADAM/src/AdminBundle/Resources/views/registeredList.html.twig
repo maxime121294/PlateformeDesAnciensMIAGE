@@ -77,7 +77,7 @@
                                         </a>
                             {% endif %}
                             {% if is_granted("ROLE_SUPER_ADMIN") and "ROLE_SUPER_ADMIN" not in user.roles %}
-                                <a href="{{ path('user_remove', {'id': user.id}) }}">
+                                <a id="{{ user.lastname }}" class="supress" href="#" data-toggle="modal" data-target="#ModalDeleteUser" data-href="{{ path('user_remove', {'id': user.id}) }}">
                                            Supprimer l'utilisateur
                                 </a>
                                 <a href="{{ path('homepage', {'_switch_user': user.email }) }}">
@@ -100,6 +100,7 @@
             </tbody>
         </table>
     </div>
+    {% include 'AdminBundle::popinDeleteUser.html.twig' %}
 {% endblock %}
 {% block javascripts %}
 <script>
@@ -123,6 +124,11 @@
                 }
             }
         });
+
+    $( ".supress" ).click(function() {
+        var actionuser = $(this).attr('data-href');
+        $('#removeuser').attr('action',actionuser);
+    }); 
     });
 </script>
 {% endblock %}
