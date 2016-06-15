@@ -31,8 +31,6 @@
                     {% if is_granted("ROLE_ADMIN") %}
                         <td>{{ user.email }}</td>
                         <td>{{ user.createdAt|localizeddate('long', 'none', app.request.locale ) }}</td>
-                    {% endif %}
-                    {% if is_granted("ROLE_ADMIN") %}
                         <td>
                             {% if user.birthday %}
                                 {{ user.birthday|localizeddate('long', 'none', app.request.locale ) }}</td>
@@ -77,7 +75,7 @@
                                         </a>
                             {% endif %}
                             {% if is_granted("ROLE_SUPER_ADMIN") and "ROLE_SUPER_ADMIN" not in user.roles %}
-                                <a id="{{ user.lastname }}" class="supress" href="#" data-toggle="modal" data-target="#ModalDeleteUser" data-href="{{ path('user_remove', {'id': user.id}) }}">
+                                <a class="supress" href="#" data-toggle="modal" data-target="#ModalDeleteUser" data-href="{{ path('user_remove', {'id': user.id}) }}">
                                            Supprimer l'utilisateur
                                 </a>
                                 <a href="{{ path('homepage', {'_switch_user': user.email }) }}">
