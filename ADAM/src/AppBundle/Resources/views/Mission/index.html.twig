@@ -48,9 +48,12 @@
                                         <div class="col-sm-3">
                                             <h5 class="pull-right">
                                                 <a type="button" href="{{ path('mission_edit', { 'id': mission.id }) }}" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                <a type="button" href="{{ path('mission_delete', { 'id': mission.id }) }}" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-remove"></i></a>
+                                                <a class="supress btn btn-danger btn-circle" type="button" href="#" data-toggle="modal" data-target="#ModalDeleteMission" data-href="{{ path('mission_delete', {'id': mission.id}) }}">
+                                                    <i class="glyphicon glyphicon-remove"></i>
+                                                </a>
                                             </h5>
                                         </div>
+                                        {% include 'AppBundle:Mission:popinDeleteMission.html.twig' %}
                                     </div>
                                 </div>
                             </div>
@@ -62,3 +65,14 @@
 {% endfor %}
 
 {% endblock body %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function() {
+            $( ".supress" ).click(function() {
+                var actionmission = $(this).attr('data-href');
+                $('#removemission').attr('action',actionmission);
+            });
+        }); 
+    </script>
+{% endblock %}
