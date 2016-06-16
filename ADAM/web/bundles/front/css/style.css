@@ -306,6 +306,33 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     color: white;
 }
 
+.third-section .calendar-container {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 10px;
+    border: 2px solid var(--descartes-rouge-color);
+    background-color: white;
+}
+
+.third-section .calendar-container .ui-widget-header {
+    background-color: var(--descartes-rouge-color);
+}
+
+.third-section .calendar-container .fc-button-inner,
+.third-section .calendar-container .fc-header-title {
+    color: var(--descartes-rouge-color);
+}
+
+.third-section .section-title h2,
+.third-section .section-title h2:before,
+.third-section .section-title p {
+    color: white;
+}
+
+.third-section .calendar-container .fc-header .fc-header-right .fc-button {
+    z-index: 0;
+}
+
 /*
  * Registerd list
  */
