@@ -323,6 +323,11 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     color: var(--descartes-rouge-color);
 }
 
+.third-section .section-title h2,
+.third-section .section-title h2:before,
+.third-section .section-title p {
+    color: white;
+}
 
 /*
  * Registerd list
