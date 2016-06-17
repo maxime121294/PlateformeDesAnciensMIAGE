@@ -131,7 +131,7 @@ class AdvertController extends Controller
     public function advertRemoveAction(Advert $advert)
     {
         $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository('AppBundle:Advert');  
+        $advert = $em->getRepository('AppBundle:Advert');  
             $em->remove($advert);
             $em->flush();
         return $this->redirectToRoute('annonce_index');
