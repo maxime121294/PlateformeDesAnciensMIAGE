@@ -34,10 +34,11 @@ class AdvertController extends Controller
         if ($categoryId == null)
         {
             $adverts = $em->getRepository('AppBundle:Advert')->findBy(array(), array('updatedAt' => 'desc'));
+            $category = null;
         }
         else
         {
-            $category = $em->getRepository('AppBundle:Category')->find((int) $categoryId);
+            $category = $em->getRepository('AppBundle:Category')->find($categoryId);
             $adverts = $em->getRepository('AppBundle:Advert')->getAdvertsByCategory($category->getWording(), true);
         }
 
@@ -51,6 +52,7 @@ class AdvertController extends Controller
         return $this->render('AppBundle:advert:index.html.twig', array(
             'pagination' => $pagination,
             'adverts' => $adverts,
+            'category' => $category,
             'last_username' => $loginVariables['last_username'],
             'error' => $loginVariables['error'],
             'csrf_token' => $loginVariables['csrf_token'],

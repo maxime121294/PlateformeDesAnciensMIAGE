@@ -2,7 +2,7 @@
 
 {% block body %}
 <section class="pageAdvertList">
-    <h1>Listes des annonces</h1>
+    <h1>Liste des annonces{% if category %} de type "{{ category }}"{% endif %}</h1>
 
     {% if not app.user  %}
         {% include 'AppBundle:advert:popinIndex.html.twig' %}
