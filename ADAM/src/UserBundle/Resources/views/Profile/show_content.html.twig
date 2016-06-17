@@ -1,6 +1,33 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div class="fos_user_user_show">
-    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
-    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+<div class="form" style="width:100%;margin: 10px auto 15px auto;">
+	<div class="form-group row">
+		<div class="col-sm-3"><b>Prénom :</b></div>
+	    <div class="col-sm-9 profil-value">{{ user.firstname }}</div>
+	</div>
+
+	<div class="form-group row">
+		<div class="col-sm-3"><b>Nom :</b></div>
+	    <div class="col-sm-9 profil-value">{{ user.lastname }}</div>
+    </div>
+
+    <div class="form-group row">
+		<div class="col-sm-3"><b>Date de naissance :</b></div>
+	    <div class="col-sm-9 profil-value">{{ user.birthday|date("m/d/Y") }}</div>
+	</div>
+
+	<div class="form-group row">
+		<div class="col-sm-3"><b>Email :</b></div>
+	    <div class="col-sm-9 profil-value">{{ user.email }}</div>
+	</div>
+
+	<div class="form-group row">
+		<div class="col-sm-3"><b>Type de diplome :</b></div>
+	    <div class="col-sm-9 profil-value">{{ user.graduate }}</div>
+	</div>
+
+	<div class="form-group row">
+		<div class="col-sm-3"><b>Année d'obtention du diplome :</b></div>
+	    <div class="col-sm-9 profil-value">{{ user.graduateYear }}</div>
+	</div>
 </div>
