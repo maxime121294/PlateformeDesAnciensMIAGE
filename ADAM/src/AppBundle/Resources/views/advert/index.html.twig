@@ -55,7 +55,7 @@
                                         <div class="col-sm-3">
                                             <h5 class="pull-right">
                                                 {% if advert.category == "Événement" %}
-                                                    <a type="button" id="{{ advert.id }}" class="buttonParticipate btn btn-success">Je participe</a>
+                                                    <a type="button" id="buttonParticipate{{ advert.id }}" class="btn btn-success">Je participe</a>
                                                 {% endif %}
                                                 {% if advert.author == app.user or is_granted("ROLE_ADMIN") %}
                                                     <a type="button" href="{{ path('annonce_edit', { 'id': advert.id }) }}" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-pencil"></i></a>
@@ -71,6 +71,28 @@
                 </div>
             </div>
         </div>
+
+        <script type="text/javascript">
+            $('#buttonParticipate{{ advert.id }}').click(function() {
+                $.ajax({
+                    url: "{{ path('annonce_participate', { 'id': advert.id }) }}",
+                    dataType: "json",
+                    success: function() {
+                        var button = $('#buttonParticipate{{ advert.id }}');
+                        if (response == 'YES'){
+                            button.removeClass("hidden");
+                            button.html('Je participe');
+                        } else {
+                            button.removeClass("btn-success");
+                            button.addClass("btn-danger");
+                            button.html('Je ne participe pas');
+                        }
+                    },
+                    error: function() {
+                    }
+                });
+            });
+        </script>
     {% endfor %}
      
     <div class="navigation pull-right">
@@ -84,37 +106,6 @@
         $('#myModal').modal({
             backdrop: "static",
             keyboard: false
-        }); 
-
-        $(document).ready(function() {
-            $(".buttonParticipate").each(function(){
-                var idAdvert = this.id;
-                ajax(idAdvert);
-            });
-            
-            $('.buttonParticipate').change(function() {
-                var idAdvert = this.id;
-                ajax(idAdvert);
-            });
         });
-
-        function ajax(idAdvert){
-            var button = document.getElementById('#buttonParticipate');
-
-            $.ajax({
-                url: "{{ path('annonce_participate') }}",
-                data: { 'id': idAdvert },
-                success: function(response) {
-                    if (response == 'YES'){
-                        $('#buttonParticipate').removeClass("hidden");
-                        button.innerHTML = 'Je participe';
-                    } else {
-                        $('#buttonParticipate').removeClass("btn-success");
-                        $('#buttonParticipate').addClass("btn-danger");
-                        button.innerHTML = 'Je ne participe pas';
-                    }
-                }
-            });
-        }
     </script>
 {% endblock %}
