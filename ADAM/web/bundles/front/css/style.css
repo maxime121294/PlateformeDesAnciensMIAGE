@@ -69,7 +69,7 @@ nav.navbar > .container-fluid a.navbar-brand {
     cursor: default;
 }
 
-nav.navbar > .container-fluid a:not(.navbar-logo):not(.help-link):not(.user-name):hover {
+nav.navbar > .container-fluid a:not(.navbar-logo):not(.help-link):hover {
     background-color: var(--descartes-rouge-color);
     color: #E8E8E8;
 }
@@ -164,10 +164,8 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 .form-register {
     margin: 25px auto 15px auto;
     width: 75%;
-    border: 3px solid grey;
     padding: 10px;
     vertical-align: middle;
-    background-color: var(--descartes-grey-color);
     color: var(--descartes-rouge-color);
 }
 
@@ -558,3 +556,70 @@ section.pageAdvertList .participate{
  #fullCalModal .modal-header {
     background-color: var(--descartes-grey-color);
  }
+
+/*
+ * Profil
+ */
+.profil .profil-menu li a{
+    color: black;
+    border-radius: 0px;
+}
+
+.profil .profil-menu li.active a{
+    color: var(--descartes-rouge-color);
+    background-color: white;
+}
+
+.profil .profil-menu li.profil-title a:hover {
+    background-color: var(--descartes-grey-color);
+}
+
+.profil .profil-container {
+    margin-top: 30px;
+}
+
+.profil .profil-container .form {
+    margin: 25px auto 15px auto;
+    width: 75%;
+    padding: 10px;
+    vertical-align: middle;
+    background-color: white;
+    color: var(--descartes-rouge-color);
+}
+
+.profil .profil-value {
+    color: black;
+}
+
+.profil .profil-btn-container {
+    text-align: right;
+}
+
+.profil .profil-container .btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+
+.group-btn {
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+.group-btn .btn-register {
+    margin: initial;
+    display: initial;
+}
+
+.group-btn .btn-cancel {
+    background-image: initial;
+}
+
+.group-btn .btn-cancel:hover {
+    background-color: var(--descartes-grey-color)
+}
