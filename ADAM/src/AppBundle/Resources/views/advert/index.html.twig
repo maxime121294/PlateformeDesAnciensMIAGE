@@ -58,7 +58,7 @@
                                 <div class="text-center">
                                     <div class="row">
                                         <div class="col-sm-9">
-                                            <span class="label label-default pull-left">{{ advert.category }}</span>
+                                            <a href="{{ path('annonce_index', { categoryId: advert.category.id }) }}"><span class="label label-default pull-left">{{ advert.category }}</span></a>
                                         </div>
                                         {% if advert.author == app.user or is_granted("ROLE_ADMIN") %}
                                             <div class="col-sm-3">

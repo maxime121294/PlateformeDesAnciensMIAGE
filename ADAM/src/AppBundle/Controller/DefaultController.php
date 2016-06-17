@@ -68,7 +68,7 @@ class DefaultController extends Controller
         $string = $request->request->get('searchAdvert');
         $advertsSearch = $this->getDoctrine()
                  ->getRepository('AppBundle:Advert')
-                 ->getAdvertForSearch($string);
+                 ->getAdvertsForSearch($string);
 
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
