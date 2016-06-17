@@ -34,24 +34,19 @@ class AdvertController extends Controller
         if ($categoryId == null)
         {
             $adverts = $em->getRepository('AppBundle:Advert')->findBy(array(), array('updatedAt' => 'desc'));
-            $paginator  = $this->get('knp_paginator');
-            $pagination = $paginator->paginate(
-                $adverts, /* query NOT result */
-                $request->query->getInt('page', 1)/*page number*/,
-                5 /*limit per page*/
-            );
         }
         else
         {
             $category = $em->getRepository('AppBundle:Category')->find((int) $categoryId);
             $adverts = $em->getRepository('AppBundle:Advert')->getAdvertsByCategory($category->getWording(), true);
-            $paginator  = $this->get('knp_paginator');
-            $pagination = $paginator->paginate(
-                $adverts, /* query NOT result */
-                $request->query->getInt('page', 1)/*page number*/,
-                5 /*limit per page*/
-            );
         }
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $adverts, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5 /*limit per page*/
+        );
 
         return $this->render('AppBundle:advert:index.html.twig', array(
             'pagination' => $pagination,
