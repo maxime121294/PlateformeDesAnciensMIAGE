@@ -20,7 +20,7 @@
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                     {% if app.user is defined %}
                         <li>
-                            <a class="user-name">
+                            <a class="user-name" href="{{ path('fos_user_profile_show') }}">
                                 <i class="fa fa-user"></i>
                                 <b>{{ app.user.firstname|capitalize }}</b>
                             </a>

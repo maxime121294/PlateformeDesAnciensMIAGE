@@ -16,6 +16,10 @@ body {
     height: auto;
     margin: 0 auto auto;
     padding: 0 0 auto;
+    background-color: var(--descartes-grey-color);
+}
+
+#wrap.homepage {
     background-color: #444444;
 }
 
@@ -192,6 +196,10 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 /*
  * Homepage css
  */
+ #homepage-container {
+    background-color: #444444;
+ }
+
 .section {
     float: left;
     width: 100%;

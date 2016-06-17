@@ -1,0 +1,78 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<ul class="nav nav-tabs">
+  <li><a href="{{ path('fos_user_profile_show') }}">Informations générales</a></li>
+  <li class="active"><a href="{{ path('mission_index') }}">Expérience professionnel</a></li>
+</ul>
+
+{% if pagination|length == 0 %}
+<div align="right">
+	<a href="{{ path('mission_new') }}" class="btn btn-default" role="button">
+		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Ajouter une mission
+	</a>
+</div>
+{% endif %}
+
+{% for mission in pagination %}
+	<br>
+         <div class="container">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-9">
+                    <div id="postlist">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <div class="text-center">
+                                    <div class="row">
+                                        <div class="col-sm-9">
+                                            <h3 class="pull-left">{{ mission.name }} ({{ mission.businessName }})</h3>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <h4 class="pull-right">
+                                            <small>Modifié le <em> {% if mission.updatedAt %}{{ mission.updatedAt|localizeddate('full', 'none') }}{% endif %} </em></small>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+                                {{ mission.content|raw  }}
+                            </div>
+
+                            <div class="panel-footer">
+                                <div class="text-center">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h5 class="pull-right">
+                                                <a type="button" href="{{ path('mission_edit', { 'id': mission.id }) }}" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                <a class="supress btn btn-danger btn-circle" type="button" href="#" data-toggle="modal" data-target="#ModalDeleteMission" data-href="{{ path('mission_delete', {'id': mission.id}) }}">
+                                                    <i class="glyphicon glyphicon-remove"></i>
+                                                </a>
+                                            </h5>
+                                        </div>
+                                        {% include 'AppBundle:Mission:popinDeleteMission.html.twig' %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endfor %}
+
+{% endblock body %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function() {
+            $( ".supress" ).click(function() {
+                var actionmission = $(this).attr('data-href');
+                $('#removemission').attr('action',actionmission);
+            });
+        }); 
+    </script>
+{% endblock %}
