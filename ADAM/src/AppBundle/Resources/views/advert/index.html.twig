@@ -5,14 +5,6 @@
     <h1>Listes des annonces</h1>
 
     {% if not app.user  %}
-        {% block javascripts %}
-            <script type="text/javascript">
-                $('#myModal').modal({
-                    backdrop: "static",
-                    keyboard: false
-                }); 
-            </script>
-        {% endblock %}
         {% include 'AppBundle:advert:popinIndex.html.twig' %}
     {% endif %}
 
@@ -60,14 +52,17 @@
                                         <div class="col-sm-9">
                                             <span class="label label-default pull-left">{{ advert.category }}</span>
                                         </div>
-                                        {% if advert.author == app.user or is_granted("ROLE_ADMIN") %}
-                                            <div class="col-sm-3">
-                                                <h5 class="pull-right">
+                                        <div class="col-sm-3">
+                                            <h5 class="pull-right">
+                                                {% if advert.category == "Événement" %}
+                                                    <a type="button" id="{{ advert.id }}" class="buttonParticipate btn btn-success">Je participe</a>
+                                                {% endif %}
+                                                {% if advert.author == app.user or is_granted("ROLE_ADMIN") %}
                                                     <a type="button" href="{{ path('annonce_edit', { 'id': advert.id }) }}" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-pencil"></i></a>
                                                     <a type="button" href="{{ path('annonce_delete', { 'id': advert.id }) }}" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-remove"></i></a>
-                                                </h5>
-                                            </div>
-                                        {% endif %}
+                                                {% endif %}
+                                            </h5>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -82,4 +77,44 @@
         {{ knp_pagination_render(pagination) }}
     </div>
 </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $('#myModal').modal({
+            backdrop: "static",
+            keyboard: false
+        }); 
+
+        $(document).ready(function() {
+            $(".buttonParticipate").each(function(){
+                var idAdvert = this.id;
+                ajax(idAdvert);
+            });
+            
+            $('.buttonParticipate').change(function() {
+                var idAdvert = this.id;
+                ajax(idAdvert);
+            });
+        });
+
+        function ajax(idAdvert){
+            var button = document.getElementById('#buttonParticipate');
+
+            $.ajax({
+                url: "{{ path('annonce_participate') }}",
+                data: { 'id': idAdvert },
+                success: function(response) {
+                    if (response == 'YES'){
+                        $('#buttonParticipate').removeClass("hidden");
+                        button.innerHTML = 'Je participe';
+                    } else {
+                        $('#buttonParticipate').removeClass("btn-success");
+                        $('#buttonParticipate').addClass("btn-danger");
+                        button.innerHTML = 'Je ne participe pas';
+                    }
+                }
+            });
+        }
+    </script>
 {% endblock %}
