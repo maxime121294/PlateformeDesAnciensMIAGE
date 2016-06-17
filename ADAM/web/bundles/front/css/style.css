@@ -380,10 +380,9 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 .confidentialite {
     margin: 25px auto 15px auto;
     width: 90%;
-    border: 3px solid grey;
     padding: 10px 5% 0 5%;
     vertical-align: middle;
-    background-color: var(--descartes-grey-color);
+    background-color: white;
     text-align: justify;
 
 }
@@ -503,10 +502,8 @@ section.pageAdvertList .participate{
 .password-form {
     margin: 10% auto;
     width: 50%;
-    border: 3px solid grey;
     padding: 10px;
     vertical-align: middle;
-    background-color: var(--descartes-grey-color);
     color: var(--descartes-rouge-color);
 }
 
@@ -527,10 +524,9 @@ section.pageAdvertList .participate{
 .register-confirmation {
     margin: 10% auto;
     width: 50%;
-    border: 3px solid grey;
     padding: 10px;
     vertical-align: middle;
-    background-color: var(--descartes-grey-color);
+    background-color:white;
     color: var(--descartes-rouge-color);
 }
 
@@ -540,7 +536,6 @@ section.pageAdvertList .participate{
 .confirm-email {
     margin: 10% auto;
     width: 50%;
-    border: 3px solid grey;
     padding: 10px;
     vertical-align: middle;
     background-color: var(--descartes-grey-color);
@@ -553,10 +548,9 @@ section.pageAdvertList .participate{
 .conditions {
     margin: 25px auto 15px auto;
     width: 90%;
-    border: 3px solid grey;
     padding: 10px 5% 0 5%;
     vertical-align: middle;
-    background-color: var(--descartes-grey-color);
+    background-color: white;
     text-align: justify;
 }
 

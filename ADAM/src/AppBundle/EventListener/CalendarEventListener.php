@@ -32,7 +32,7 @@ class CalendarEventListener
         // for instance, retrieving events from a repository
         $repository = $this->entityManager->getRepository('AppBundle:Advert');
 
-        $evenements = $repository->getAdvertByCategory('Événement');
+        $evenements = $repository->getAdvertsByCategory('Événement');
         
         foreach($evenements as $evenement) {
             $id = $evenement->getId();
