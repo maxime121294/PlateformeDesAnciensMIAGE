@@ -150,6 +150,40 @@ class AdvertController extends Controller
         return $this->redirectToRoute('annonce_index');
     }
 
+
+    /**
+     * Ajoute ou retire un user à un evenement
+     *
+     * @Route("/participate/{id}", name="annonce_participate")
+     * @Method({"GET"})
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function participateAction(Request $request, $id)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+
+        $advert = $em->getRepository('AppBundle:Advert')
+                ->find($id);
+
+        $participates = $advert->getUsers();    
+
+        if (!$participates->contains($user)) {
+            $advert->addUser($user);
+            $em->persist($advert);
+            $em->flush();
+            $message = "YES";
+        }
+        else {
+            $advert->removeUser($user);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($advert);
+            $em->flush();
+            $message = "NO";
+        }
+        
+        return new JsonResponse($message);
+    }
     /**
      * 
      * @Route("/upload", name="upload")

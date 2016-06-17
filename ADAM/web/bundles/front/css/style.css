@@ -420,9 +420,11 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     padding: 10px;
     vertical-align: middle;
 }
-.form-advert .btn.btn-lg {
-    background-color: var(--descartes-blue-color);
-    color: var(--descartes-grey-color);
+.form-advert .btn.btn-registered {
+    background-image: initial;
+    background-color: var(--descartes-rouge-color);
+    color: white;
+    text-shadow: initial;
 }
 .form-advert h1 {
     color: var(--descartes-brown-color);
@@ -434,6 +436,7 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     z-index: 0;
     width: 92%;
 }
+
 /*
  * Advert List
  */
@@ -443,9 +446,7 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     padding: 10px;
     vertical-align: middle;
 }
-.pageAdvertList a.btn.btn-default{
-    background-color: #BB0F47;
-}
+
 .pageAdvertList .btn-circle {
   width: 30px;
   height: 30px;
@@ -454,6 +455,21 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
   font-size: 12px;
   line-height: 1.428571429;
   border-radius: 15px;
+}
+section.pageAdvertList .participate{
+    display: none;
+}
+
+.btn-add-advert,
+.btn-add-advert:hover {
+    background-image: initial;
+    background-color: var(--descartes-rouge-color);
+    color: white;
+    text-shadow: initial;
+}
+
+.pageAdvertList .panel-footer{
+    background-color: white;
 }
 
 /*
@@ -472,6 +488,12 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 .editAdvert #edit_form-evenDate input {
     z-index: 0;
     width: 92%;
+}
+.editAdvert .group-btn input {
+    background-image: initial;
+    background-color: var(--descartes-rouge-color);
+    color: white;
+    text-shadow: initial;
 }
 
 /*
@@ -609,8 +631,5 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 
 .group-btn .btn-cancel {
     background-image: initial;
-}
-
-.group-btn .btn-cancel:hover {
-    background-color: var(--descartes-grey-color)
+    text-shadow: none;
 }
