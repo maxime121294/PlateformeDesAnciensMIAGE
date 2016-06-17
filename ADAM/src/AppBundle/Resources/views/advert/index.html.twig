@@ -54,11 +54,11 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <h5 class="pull-right">
-                                                {% if advert.category == "Événement" %}
+                                                {% if advert.category == "Événement" and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                                                     {% if app.user in advert.users %}
-                                                        <a type="button" id="buttonParticipate{{ advert.id }}" class="btn btn-danger">Je ne participe pas</a>
+                                                        <button id="buttonParticipate{{ advert.id }}" class="btn btn-danger">Je ne participe pas</button>
                                                     {% else %}
-                                                        <a type="button" id="buttonParticipate{{ advert.id }}" class="btn btn-success">Je participe</a>
+                                                        <button id="buttonParticipate{{ advert.id }}" class="btn btn-success">Je participe</button>
                                                     {% endif %}
                                                 {% endif %}
                                                 {% if advert.author == app.user or is_granted("ROLE_ADMIN") %}
@@ -68,20 +68,13 @@
                                             </h5>
                                         </div>
                                     </div>
-                                    <div id="alert_participate_success{{ advert.id }}" class="alert alert-success alert-dismissible fade in" role="alert">
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                                                <span aria-hidden="true">x</span>
-                                            </button>
-                                            Votre participation a bien été modifiée ! 
-                                        </div>
-
-                                        <div id="alert_participate_danger{{ advert.id }}" class="alert alert-danger alert-dismissible fade in" role="alert">
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                                                <span aria-hidden="true">x</span>
-                                            </button>
-                                            <strong>Désolé ! Une erreur est survenue.</strong>
-                                            Votre participation n'a pas été prise en compte 
-                                        </div>
+                                    <div class="alert alert-success fade" id="alert_participate_success{{ advert.id }}" role="alert">
+                                        Votre participation a bien été prise en compte !
+                                    </div>
+                                     <div class="alert alert-danger fade" id="alert_participate_danger{{ advert.id }}" role="alert">
+                                        <strong>Désolé ! Une erreur est survenue.</strong>
+                                        Votre participation n'a pas été prise en compte 
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -102,21 +95,23 @@
                     dataType: "json",
                     success: function(response) {
                         var button = $('#buttonParticipate{{ advert.id }}');
-                        $('#alert_participate_success{{ advert.id }}').show();
+
                         if (response == 'YES') {
                             button.removeClass("btn-success");
                             button.addClass("btn-danger");
 
                             button.html('Je ne participe pas');
+                            $('#alert_participate_success{{ advert.id }}').show().delay(200).addClass("in").fadeOut(3500);
                         } else {
                             button.removeClass("btn-danger");
                             button.addClass("btn-success");
 
                             button.html('Je participe');
+                            $('#alert_participate_success{{ advert.id }}').show().delay(200).addClass("in").fadeOut(3500);
                         }
                     },
                     error: function() {
-                        $('#alert_participate_danger{{ advert.id }}').show();
+                        $('#alert_participate_danger{{ advert.id }}').show().delay(200).addClass("in").fadeOut(3500);
                     }
                 });
             });
