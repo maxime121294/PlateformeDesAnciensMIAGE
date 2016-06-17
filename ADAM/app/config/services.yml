@@ -16,3 +16,12 @@ services:
         class: "%my_user_provider.class%"
         #this is the place where the properties are passed to the UserProvider - see config.yml
         arguments: ["@fos_user.user_manager",{facebook: facebook_id, google: google_id, linkedin: linkedin_id}]
+    app.form.advert:
+        class: AppBundle\Form\AdvertType
+        tags:
+            - { name: form.type, alias: app_user_advert }
+    acme.demobundle.calendar_listener:
+        class: AppBundle\EventListener\CalendarEventListener
+        tags:
+            - { name: kernel.event_listener, event: calendar.load_events, method: loadEvents }
+        arguments: ['@doctrine.orm.entity_manager']

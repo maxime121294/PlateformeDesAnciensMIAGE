@@ -21,6 +21,11 @@ class AppKernel extends Kernel
             new UserBundle\UserBundle(),
             new AdminBundle\AdminBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Cocur\Slugify\Bridge\Symfony\CocurSlugifyBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new ADesigns\CalendarBundle\ADesignsCalendarBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
@@ -28,6 +33,8 @@ class AppKernel extends Kernel
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
+            $bundles[] = new CoreSphere\ConsoleBundle\CoreSphereConsoleBundle();
+            $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
         }
 
         return $bundles;

@@ -8,9 +8,12 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints\IsTrue;
 
 use FOS\UserBundle\Util\LegacyFormHelper;
 
@@ -26,17 +29,14 @@ class RegistrationType extends AbstractType
                 "label" => "Prénom",
                 "required" => true,
             ))
-            ->add('graduate', ChoiceType::class, array(
+            ->add('graduate', EntityType::class, array(
                 "label" => "Type de diplôme obtenu",
+                "class" => "AppBundle:Degree",
                 "required" => false,
                 "placeholder" => "Selectionner un type de diplôme",
 				"choices_as_values" => true,
-                "choices"  => array(
-                    "licence" => "Licence",
-                    "master" => "Master"
-                ),
             ))
-            ->add('graduateYear', TextType::class, array(
+             ->add('graduateYear', TextType::class, array(
                 "label" => "Année d'obtention du diplôme",
                 "required" => false,
             ))
@@ -53,9 +53,16 @@ class RegistrationType extends AbstractType
                 'first_options' => array('label' => 'form.password'),
                 'second_options' => array('label' => 'form.password_confirmation'),
                 'invalid_message' => 'fos_user.password.mismatch'
+            ))
+            ->add('termsAccepted', CheckboxType::class, array(
+                "label" => "J'accepte les conditions générales d'utilisation du site.",
+                'mapped' => false,
+                'constraints' => new IsTrue(
+                    array("message" => "Vous devez accepter les conditions générales d'utilisation")
+                ),
+                "required" => true,
             ));
     }
-
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
@@ -65,12 +72,10 @@ class RegistrationType extends AbstractType
             'intention'  => 'registration',
         ));
     }
-
     public function getBlockPrefix()
     {
         return 'app_user_registration';
     }
-
     public function getName()
     {
         return $this->getBlockPrefix();

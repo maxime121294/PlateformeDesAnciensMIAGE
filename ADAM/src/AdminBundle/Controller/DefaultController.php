@@ -73,6 +73,6 @@ class DefaultController extends Controller
         }
 
         // Redirection vers la page de la liste des membres inscrits
-        return $this->redirect($this->generateUrl('registered_list'));;
+        return $this->redirect($this->generateUrl('registered_list'));
     }
 }
