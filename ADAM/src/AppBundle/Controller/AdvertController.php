@@ -170,17 +170,15 @@ class AdvertController extends Controller
      */
     public function participateAction(Request $request, $id)
     {
-        $user = $this->getUser()->getId();
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
-        $idAdvert = $request->request->get('id');
-        $participate = $em->getRepository('AppBundle:Advert')
-                ->findOneBy(array('id' => $idAdvert, 'user_id' => $user));
-
         $advert = $em->getRepository('AppBundle:Advert')
-                ->find($idAdvert);
+                ->find($id);
 
-        if (!$participate) {
+        $participates = $advert->getUsers();    
+
+        if (!$participates->contains($user)) {
             $advert->addUser($user);
             $em->persist($advert);
             $em->flush();
