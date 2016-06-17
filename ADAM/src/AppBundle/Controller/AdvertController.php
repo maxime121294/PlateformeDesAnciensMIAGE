@@ -95,11 +95,9 @@ class AdvertController extends Controller
     public function showAction(Advert $advert, Request $request)
     {
         $loginVariables = $this->get('user.security')->loginFormInstance($request);
-        $deleteForm = $this->createDeleteForm($advert);
 
         return $this->render('AppBundle:advert:show.html.twig', array(
             'advert' => $advert,
-            'delete_form' => $deleteForm->createView(),
             'last_username' => $loginVariables['last_username'],
             'error' => $loginVariables['error'],
             'csrf_token' => $loginVariables['csrf_token'],
@@ -115,7 +113,6 @@ class AdvertController extends Controller
      */
     public function editAction(Request $request, Advert $advert)
     {
-        $deleteForm = $this->createDeleteForm($advert);
         $editForm = $this->createForm('AppBundle\Form\AdvertType', $advert);
         $editForm->handleRequest($request);
 
@@ -131,45 +128,24 @@ class AdvertController extends Controller
         return $this->render('AppBundle:advert:edit.html.twig', array(
             'advert' => $advert,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Deletes a Advert entity.
+     * Supprimer un post. 
      *
-     * @Route("/{id}", name="annonce_delete")
-     * @Method("DELETE")
+     *
+     * @Route("/remove-{id}", name="advert_remove")
      * @Security("has_role('ROLE_USER')")
      */
-    public function deleteAction(Request $request, Advert $advert)
+    public function advertRemoveAction($id)
     {
-        $form = $this->createDeleteForm($advert);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($advert);
-            $em->flush();
-        }
-
+        $em = $this->getDoctrine()->getManager();
+        $advert = $em->getRepository('AppBundle:Advert')
+                    ->find($id); 
+        $em->remove($advert);
+        $em->flush();
         return $this->redirectToRoute('annonce_index');
-    }
-
-    /**
-     * Creates a form to delete a Advert entity.
-     *
-     * @param Advert $advert The Advert entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Advert $advert)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('annonce_delete', array('id' => $advert->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
     }
 
     /**
