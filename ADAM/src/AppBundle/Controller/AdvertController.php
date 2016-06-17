@@ -128,12 +128,13 @@ class AdvertController extends Controller
      * @Route("/remove-{id}", name="advert_remove")
      * @Security("has_role('ROLE_USER')")
      */
-    public function advertRemoveAction(Advert $advert)
+    public function advertRemoveAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $advert = $em->getRepository('AppBundle:Advert');  
-            $em->remove($advert);
-            $em->flush();
+        $advert = $em->getRepository('AppBundle:Advert')
+                    ->find($id); 
+        $em->remove($advert);
+        $em->flush();
         return $this->redirectToRoute('annonce_index');
     }
 
