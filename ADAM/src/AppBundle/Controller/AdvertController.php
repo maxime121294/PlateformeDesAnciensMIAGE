@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\Advert;
 use AppBundle\Form\AdvertType;
 
@@ -24,7 +23,6 @@ class AdvertController extends Controller
      * Lists all Advert entities.
      *
      * @Route("/", name="annonce_index")
-     * @Template()
      */
     public function indexAction(Request $request)
     {
