@@ -1,5 +1,23 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends "base.html.twig" %}
 
-{% block fos_user_content %}
-{% include "FOSUserBundle:Profile:show_content.html.twig" %}
-{% endblock fos_user_content %}
+{% block body %}
+<div class="profil col-sm-12">
+    <ul class="profil-menu nav nav-pills nav-stacked col-sm-2">
+        <li class="profil-title"><a><b>Profil</b></a></li>
+        <li class="active"><a href="{{ path('fos_user_profile_show') }}">Informations générales</a></li>
+        <li><a href="{{ path('mission_index') }}">Expérience professionnel</a></li>
+    </ul>
+
+    <div class="profil-container col-sm-10">
+        <div class="profil-btn-container">
+        	<a href="{{ path('fos_user_profile_edit') }}" class="btn btn-default" role="button">
+        		Modifier
+        	</a>
+        	<a href="{{ path('profile_password_edit') }}" class="btn btn-default" role="button">
+        		Changer son mot de passe
+        	</a>
+        </div>
+    	{% include "UserBundle:Profile:show_content.html.twig" %}
+    </div>
+</div>
+{% endblock body %}
