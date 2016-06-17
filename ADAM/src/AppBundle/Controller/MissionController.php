@@ -44,7 +44,6 @@ class MissionController extends Controller
      *
      * @Route("/new", name="mission_new")
      * @Method({"GET", "POST"})
-     * @Security("has_role('ROLE_USER')")
      */
     public function newAction()
     {
