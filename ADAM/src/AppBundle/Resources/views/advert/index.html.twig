@@ -63,7 +63,9 @@
                                                 {% endif %}
                                                 {% if advert.author == app.user or is_granted("ROLE_ADMIN") %}
                                                     <a type="button" href="{{ path('annonce_edit', { 'id': advert.id }) }}" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                    <a type="button" href="{{ path('annonce_delete', { 'id': advert.id }) }}" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-remove"></i></a>
+
+                                                    <a class="btn btn-danger btn-circle supress" href="#" data-toggle="modal" data-target="#ModalDeleteAdvert" data-href="{{ path('advert_remove', {'id': advert.id}) }}"><i class="glyphicon glyphicon-remove"></i></a>
+                                                    {% include 'AppBundle:advert:popinDeleteForm.html.twig' %}
                                                 {% endif %}
                                             </h5>
                                         </div>
@@ -129,6 +131,18 @@
         $('#myModal').modal({
             backdrop: "static",
             keyboard: false
+<<<<<<< HEAD
         });
     </script>
 {% endblock %}
+=======
+        }); 
+
+        $(".supress").click(function(){
+            var actionadvert = $(this).attr('data-href');
+            $('#removeadvert').attr('action', actionadvert);
+        })
+    </script>
+{% endblock %}
+
+>>>>>>> 1eaa484b5ab06cd1d80dd7c2cefbbc28d16853a2
