@@ -458,6 +458,9 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
   line-height: 1.428571429;
   border-radius: 15px;
 }
+section.pageAdvertList .participate{
+    display: none;
+}
 
 /*
  * edit Advert
