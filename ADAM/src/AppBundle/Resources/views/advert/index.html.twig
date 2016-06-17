@@ -2,7 +2,7 @@
 
 {% block body %}
 <section class="pageAdvertList">
-    <h1>Listes des annonces</h1>
+    <h1>Liste des annonces</h1>
 
     {% if not app.user  %}
         {% include 'AppBundle:advert:popinIndex.html.twig' %}
@@ -10,7 +10,7 @@
 
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  %}
         <div align="right">
-            <a href="{{ path('annonce_new') }}" class="btn btn-default" role="button">
+            <a href="{{ path('annonce_new') }}" class="btn btn-default btn-add-advert" role="button">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Créer une annonce
             </a>
         </div>
@@ -75,7 +75,7 @@
                                     </div>
                                      <div class="alert alert-danger participate" id="alert_participate_danger{{ advert.id }}" role="alert">
                                         <strong>Désolé ! Une erreur est survenue.</strong>
-                                        Votre participation n'a pas été prise en compte 
+                                        Votre participation n'a pas été prise en compte
                                     </div>
                                 </div>
                             </div>
@@ -119,7 +119,7 @@
             });
         </script>
     {% endfor %}
-     
+
     <div class="navigation pull-right">
         {{ knp_pagination_render(pagination) }}
     </div>
@@ -131,7 +131,7 @@
         $('#myModal').modal({
             backdrop: "static",
             keyboard: false
-        }); 
+        });
 
         $(".supress").click(function(){
             var actionadvert = $(this).attr('data-href');

@@ -67,12 +67,14 @@
                         </div>
                          <div class="alert alert-danger fade" id="alert_participate_danger{{ advert.id }}" role="alert">
                             <strong>Désolé ! Une erreur est survenue.</strong>
-                            Votre participation n'a pas été prise en compte 
+                            Votre participation n'a pas été prise en compte
                         </div>
                     </div>
                 </div>
             </div>
-            <a href="{{ path('annonce_index') }}" class="btn btn-default" type="button"> Retour aux annonces</a>
+            <div class="group-btn">
+                <a href="{{ path('annonce_index') }}" class="btn btn-default btn-cancel" type="button"> Retour aux annonces</a>
+            </div>
         </div>
         <script type="text/javascript">
             $('#buttonParticipate{{ advert.id }}').click(function() {
@@ -110,8 +112,8 @@
         $('#myModal').modal({
             backdrop: "static",
             keyboard: false
-        }); 
-        
+        });
+
         $(".supress").click(function(){
             var actionadvert = $(this).data('href');
             $('#removeadvert').attr('action', actionadvert);
