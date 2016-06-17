@@ -63,7 +63,9 @@
 
 	<span class="row"> * champs obligatoires</span>
 
-	<a href="{{ path('fos_user_profile_show') }}" type="button" class="btn btn-default">Retour</a>
-    <input type="submit" value="Mettre à jour mon profil" class="btn btn-register" />
+	<div class="group-btn">
+		<a href="{{ path('fos_user_profile_show') }}" type="button" class="btn btn-default btn-cancel">Retour</a>
+	    <input type="submit" value="Mettre à jour mon profil" class="btn btn-register" />
+	</div>
 {{ form_end(form) }}
 </div>

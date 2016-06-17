@@ -601,3 +601,22 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     line-height: 1.428571429;
     border-radius: 15px;
 }
+
+.group-btn {
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+.group-btn .btn-register {
+    margin: initial;
+    display: initial;
+}
+
+.group-btn .btn-cancel {
+    background-image: initial;
+}
+
+.group-btn .btn-cancel:hover {
+    background-color: var(--descartes-grey-color)
+}
