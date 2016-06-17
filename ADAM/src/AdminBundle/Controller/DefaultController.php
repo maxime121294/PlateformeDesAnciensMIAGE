@@ -75,12 +75,16 @@ class DefaultController extends Controller
                 ->findOneById($id);   
 
         if (!$user) {
-                throw $this->createNotFoundException('User not found');
+            throw $this->createNotFoundException('User not found');
         }
 
         if (!in_array("ROLE_SUPER_ADMIN", $user->getRoles()) && !in_array("ROLE_ADMIN", $user->getRoles())){
-            if($user->isLocked()) $user->setLocked(false);
-            else $user->setLocked(true);
+            if($user->isLocked()) {
+                $user->setLocked(false);
+            }
+            else {
+                $user->setLocked(true);
+            }
             $em->persist($user);
             $em->flush();
         }
@@ -91,7 +95,6 @@ class DefaultController extends Controller
 
     /**
      * Bannir un membre. Seul un SuperAdmin peut supprimer un utilisateur.
-     *
      *
      * @Route("/remove-{id}", name="user_remove")
      * @Security("has_role('ROLE_SUPER_ADMIN')")

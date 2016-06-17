@@ -482,3 +482,12 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     background-color: var(--descartes-grey-color);
     color: var(--descartes-rouge-color);
 }
+
+/*
+* Barre de simulation d'un utilisateur
+*/
+.simulation-bar {
+    background-color: #c5c2b4;
+    height : 40px;
+    padding : 5px;
+}
