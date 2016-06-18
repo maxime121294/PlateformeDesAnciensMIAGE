@@ -16,6 +16,10 @@ body {
     height: auto;
     margin: 0 auto auto;
     padding: 0 0 auto;
+    background-color: var(--descartes-grey-color);
+}
+
+#wrap.homepage {
     background-color: #444444;
 }
 
@@ -65,7 +69,7 @@ nav.navbar > .container-fluid a.navbar-brand {
     cursor: default;
 }
 
-nav.navbar > .container-fluid a:not(.navbar-logo):not(.help-link):not(.user-name):hover {
+nav.navbar > .container-fluid a:not(.navbar-logo):not(.help-link):hover {
     background-color: var(--descartes-rouge-color);
     color: #E8E8E8;
 }
@@ -160,10 +164,8 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 .form-register {
     margin: 25px auto 15px auto;
     width: 75%;
-    border: 3px solid grey;
     padding: 10px;
     vertical-align: middle;
-    background-color: var(--descartes-grey-color);
     color: var(--descartes-rouge-color);
 }
 
@@ -202,6 +204,10 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     background-color: var(--descartes-grey-color);
 }
 
+.third-section {
+    position: relative;
+}
+
 .homepage-background {
     position: fixed;
     width: 100%;
@@ -216,10 +222,6 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 
 .homepage-logo .logo-ADAM {
     height: 300px;
-}
-
-.homepage-logo {
-    padding-top: 5%;
 }
 
 .homepage-logo,
@@ -293,6 +295,46 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     text-align: center;
 }
 
+.first-section .search-container {
+    padding-top: 50px;
+    z-index: 0;
+}
+
+.first-section .search-container .search-container-btn .search-btn {
+    background-color: var(--descartes-rouge-color);
+    background-image: var(--descartes-rouge-color);
+    border-color: var(--descartes-rouge-color);
+    text-shadow: none;
+    color: white;
+}
+
+.third-section .calendar-container {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 10px;
+    border: 2px solid var(--descartes-rouge-color);
+    background-color: white;
+}
+
+.third-section .calendar-container .ui-widget-header {
+    background-color: var(--descartes-rouge-color);
+}
+
+.third-section .calendar-container .fc-button-inner,
+.third-section .calendar-container .fc-header-title {
+    color: var(--descartes-rouge-color);
+}
+
+.third-section .section-title h2,
+.third-section .section-title h2:before,
+.third-section .section-title p {
+    color: white;
+}
+
+.third-section .calendar-container .fc-header .fc-header-right .fc-button {
+    z-index: 0;
+}
+
 /*
  * Registerd list
  */
@@ -338,10 +380,9 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 .confidentialite {
     margin: 25px auto 15px auto;
     width: 90%;
-    border: 3px solid grey;
     padding: 10px 5% 0 5%;
     vertical-align: middle;
-    background-color: var(--descartes-grey-color);
+    background-color: white;
     text-align: justify;
 
 }
@@ -379,9 +420,11 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     padding: 10px;
     vertical-align: middle;
 }
-.form-advert .btn.btn-lg {
-    background-color: var(--descartes-blue-color);
-    color: var(--descartes-grey-color);
+.form-advert .btn.btn-registered {
+    background-image: initial;
+    background-color: var(--descartes-rouge-color);
+    color: white;
+    text-shadow: initial;
 }
 .form-advert h1 {
     color: var(--descartes-brown-color);
@@ -393,6 +436,7 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     z-index: 0;
     width: 92%;
 }
+
 /*
  * Advert List
  */
@@ -402,9 +446,7 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     padding: 10px;
     vertical-align: middle;
 }
-.pageAdvertList a.btn.btn-default{
-    background-color: #BB0F47;
-}
+
 .pageAdvertList .btn-circle {
   width: 30px;
   height: 30px;
@@ -413,6 +455,21 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
   font-size: 12px;
   line-height: 1.428571429;
   border-radius: 15px;
+}
+section.pageAdvertList .participate{
+    display: none;
+}
+
+.btn-add-advert,
+.btn-add-advert:hover {
+    background-image: initial;
+    background-color: var(--descartes-rouge-color);
+    color: white;
+    text-shadow: initial;
+}
+
+.pageAdvertList .panel-footer{
+    background-color: white;
 }
 
 /*
@@ -424,13 +481,19 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     padding: 10px;
     vertical-align: middle;
 }
-}
+
 .editAdvert #edit_form-evenDate span {
     height: 20px;
 }
 .editAdvert #edit_form-evenDate input {
     z-index: 0;
     width: 92%;
+}
+.editAdvert .group-btn input {
+    background-image: initial;
+    background-color: var(--descartes-rouge-color);
+    color: white;
+    text-shadow: initial;
 }
 
 /*
@@ -439,10 +502,8 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 .password-form {
     margin: 10% auto;
     width: 50%;
-    border: 3px solid grey;
     padding: 10px;
     vertical-align: middle;
-    background-color: var(--descartes-grey-color);
     color: var(--descartes-rouge-color);
 }
 
@@ -463,10 +524,9 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 .register-confirmation {
     margin: 10% auto;
     width: 50%;
-    border: 3px solid grey;
     padding: 10px;
     vertical-align: middle;
-    background-color: var(--descartes-grey-color);
+    background-color:white;
     color: var(--descartes-rouge-color);
 }
 
@@ -476,9 +536,100 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 .confirm-email {
     margin: 10% auto;
     width: 50%;
-    border: 3px solid grey;
     padding: 10px;
     vertical-align: middle;
     background-color: var(--descartes-grey-color);
     color: var(--descartes-rouge-color);
+}
+
+/*
+*  Conditions générales d'utilisation du sit
+*/
+.conditions {
+    margin: 25px auto 15px auto;
+    width: 90%;
+    padding: 10px 5% 0 5%;
+    vertical-align: middle;
+    background-color: white;
+    text-align: justify;
+}
+
+.conditions h2 {
+    color: var(--descartes-rouge-color);
+    padding-bottom: 50px;
+}
+
+/*
+ * Calendar
+ */
+ #fullCalModal a {
+    color: white;
+ }
+
+ #fullCalModal .modal-header {
+    background-color: var(--descartes-grey-color);
+ }
+
+/*
+ * Profil
+ */
+.profil .profil-menu li a{
+    color: black;
+    border-radius: 0px;
+}
+
+.profil .profil-menu li.active a{
+    color: var(--descartes-rouge-color);
+    background-color: white;
+}
+
+.profil .profil-menu li.profil-title a:hover {
+    background-color: var(--descartes-grey-color);
+}
+
+.profil .profil-container {
+    margin-top: 30px;
+}
+
+.profil .profil-container .form {
+    margin: 25px auto 15px auto;
+    width: 75%;
+    padding: 10px;
+    vertical-align: middle;
+    background-color: white;
+    color: var(--descartes-rouge-color);
+}
+
+.profil .profil-value {
+    color: black;
+}
+
+.profil .profil-btn-container {
+    text-align: right;
+}
+
+.profil .profil-container .btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+
+.group-btn {
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+.group-btn .btn-register {
+    margin: initial;
+    display: initial;
+}
+
+.group-btn .btn-cancel {
+    background-image: initial;
+    text-shadow: none;
 }

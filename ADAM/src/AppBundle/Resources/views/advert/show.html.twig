@@ -4,6 +4,10 @@
     <section class="pageAdvertList">
     <h1>Les annonces d'ADAM</h1>
 
+    {% if not app.user  %}
+        {% include 'AppBundle:advert:popinIndex.html.twig' %}
+    {% endif %}
+
       <div class="container">
             <div class="row">
                 <div class="col-md-1"></div>
@@ -25,32 +29,94 @@
                                         </div>
                                     </div>
                                 </div>
+
+                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  %}
                             <div class="panel-body">
                                 {{ advert.content|raw  }}
                             </div>
+                        {% endif %}
+
                             <div class="panel-footer">
                                 <div class="text-center">
                                     <div class="row">
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-8">
                                             <span class="label label-default pull-left">{{ advert.category }}</span>
                                         </div>
-                                        {% if advert.author == app.user or is_granted("ROLE_ADMIN")%}
-                                            <div class="col-sm-3">
-                                                <h5 class="pull-right">
+                                        <div class="col-sm-4">
+                                            <h5 class="pull-right">
+                                                {% if advert.category == "Événement" and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                                    {% if app.user in advert.users %}
+                                                        <button id="buttonParticipate{{ advert.id }}" class="btn btn-danger">Je ne participe pas</button>
+                                                    {% else %}
+                                                        <button id="buttonParticipate{{ advert.id }}" class="btn btn-success">Je participe</button>
+                                                    {% endif %}
+                                                {% endif %}
+                                                {% if advert.author == app.user or is_granted("ROLE_ADMIN") %}
                                                     <a type="button" href="{{ path('annonce_edit', { 'id': advert.id }) }}" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                    <button type="button" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-remove"></i></button>
-                                                </h5>
-                                            </div>
-                                            {% include 'AppBundle:advert:popinDeleteForm.html.twig' %}
-                                        {% endif %}
+                                                    <a class="btn btn-danger btn-circle supress" href="#" data-toggle="modal" data-target="#ModalDeleteAdvert" data-href="{{ path('advert_remove', {'id': advert.id}) }}"><i class="glyphicon glyphicon-remove"></i></a>
+                                                {% endif %}
+                                            </h5>
+                                        </div>
+                                        {% include 'AppBundle:advert:popinDeleteForm.html.twig' %}
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="alert alert-success fade" id="alert_participate_success{{ advert.id }}" role="alert">
+                            Votre participation a bien été prise en compte !
+                        </div>
+                         <div class="alert alert-danger fade" id="alert_participate_danger{{ advert.id }}" role="alert">
+                            <strong>Désolé ! Une erreur est survenue.</strong>
+                            Votre participation n'a pas été prise en compte
+                        </div>
                     </div>
                 </div>
             </div>
-            <a href="{{ path('annonce_index') }}" class="btn btn-default" type="button"> Retour aux annonces</a>
+            <div class="group-btn">
+                <a href="{{ path('annonce_index') }}" class="btn btn-default btn-cancel" type="button"> Retour aux annonces</a>
+            </div>
         </div>
+        <script type="text/javascript">
+            $('#buttonParticipate{{ advert.id }}').click(function() {
+                $.ajax({
+                    url: "{{ path('annonce_participate', { 'id': advert.id }) }}",
+                    dataType: "json",
+                    success: function(response) {
+                        var button = $('#buttonParticipate{{ advert.id }}');
+
+                        if (response == 'YES') {
+                            button.removeClass("btn-success");
+                            button.addClass("btn-danger");
+
+                            button.html('Je ne participe pas');
+                            $('#alert_participate_success{{ advert.id }}').show().delay(200).addClass("in").fadeOut(3500);
+                        } else {
+                            button.removeClass("btn-danger");
+                            button.addClass("btn-success");
+
+                            button.html('Je participe');
+                            $('#alert_participate_success{{ advert.id }}').show().delay(200).addClass("in").fadeOut(3500);
+                        }
+                    },
+                    error: function() {
+                        $('#alert_participate_danger{{ advert.id }}').show().delay(200).addClass("in").fadeOut(3500);
+                    }
+                });
+            });
+        </script>
 </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $('#myModal').modal({
+            backdrop: "static",
+            keyboard: false
+        });
+
+        $(".supress").click(function(){
+            var actionadvert = $(this).data('href');
+            $('#removeadvert').attr('action', actionadvert);
+        })
+    </script>
 {% endblock %}
