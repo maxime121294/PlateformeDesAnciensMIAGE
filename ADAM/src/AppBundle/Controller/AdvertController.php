@@ -24,7 +24,7 @@ class AdvertController extends Controller
      * Lists all Advert entities.
      *
      * @Route("/index/{categoryId}", name="annonce_index")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
     public function indexAction(Request $request, $categoryId = null)
     {
@@ -39,7 +39,14 @@ class AdvertController extends Controller
         else
         {
             $category = $em->getRepository('AppBundle:Category')->find($categoryId);
-            $adverts = $em->getRepository('AppBundle:Advert')->getAdvertsByCategory($category->getWording(), true);
+            $adverts = $em->getRepository('AppBundle:Advert')->getAdvertsByCategory($category, true);
+        }
+        
+        $filter_form = $this->createForm('AppBundle\Form\CategoryType');
+        $filter_form->handleRequest($request);
+        if ($filter_form->isSubmitted() && $filter_form->isValid()){
+            $categoryCheck = $request->get('category');
+            $adverts = $em->getRepository('AppBundle:Advert')->getAdvertsByCategory($categoryCheck, true);
         }
 
         $paginator  = $this->get('knp_paginator');
@@ -48,11 +55,12 @@ class AdvertController extends Controller
             $request->query->getInt('page', 1)/*page number*/,
             5 /*limit per page*/
         );
-
+        
         return $this->render('AppBundle:advert:index.html.twig', array(
             'pagination' => $pagination,
             'adverts' => $adverts,
             'category' => $category,
+            'filter_form' => $filter_form->createView(),
             'last_username' => $loginVariables['last_username'],
             'error' => $loginVariables['error'],
             'csrf_token' => $loginVariables['csrf_token'],
