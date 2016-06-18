@@ -80,7 +80,6 @@ class DefaultController extends Controller
             throw $this->createNotFoundException('User not found');
         }
 
-        //if (!in_array("ROLE_SUPER_ADMIN", $user->getRoles()) && !in_array("ROLE_ADMIN", $user->getRoles())){
         if (!$rolechecker->isGranted('ROLE_ADMIN', $user)) {    
             if($user->isLocked()) {
                 $user->setLocked(false);
