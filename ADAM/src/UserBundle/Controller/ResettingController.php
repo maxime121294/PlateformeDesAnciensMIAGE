@@ -44,13 +44,17 @@ class ResettingController extends Controller
     public function sendEmailAction(Request $request)
     {
         $username = $request->request->get('username');
-
+        $loginVariables = $this->get('user.security')->loginFormInstance($request);
+        
         /** @var $user UserInterface */
         $user = $this->get('fos_user.user_manager')->findUserByUsernameOrEmail($username);
 
         if (null === $user) {
             return $this->render('FOSUserBundle:Resetting:request.html.twig', array(
-                'invalid_username' => $username
+                'invalid_username' => $username,
+                'last_username' => $loginVariables['last_username'],
+                'error' => $loginVariables['error'],
+                'csrf_token' => $loginVariables['csrf_token']
             ));
         }
 
@@ -98,6 +102,7 @@ class ResettingController extends Controller
      */
     public function resetAction(Request $request, $token)
     {
+        $loginVariables = $this->get('user.security')->loginFormInstance($request);
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->get('fos_user.resetting.form.factory');
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
@@ -142,6 +147,9 @@ class ResettingController extends Controller
         return $this->render('FOSUserBundle:Resetting:reset.html.twig', array(
             'token' => $token,
             'form' => $form->createView(),
+            'last_username' => $loginVariables['last_username'],
+            'error' => $loginVariables['error'],
+            'csrf_token' => $loginVariables['csrf_token']
         ));
     }
 
