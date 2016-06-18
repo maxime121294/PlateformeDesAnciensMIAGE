@@ -270,20 +270,15 @@ class AdvertController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()){
             $categoryCheck = $request->get('category');
+            if(count($categoryCheck['filtre']) == 4){
+                return $this->redirectToRoute('annonce_index');
+            }
             $adverts = $em->getRepository('AppBundle:Advert')->findBy(
                 array('category' => $categoryCheck['filtre'])
             );
         }
 
-        $paginator  = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $adverts, /* query NOT result */
-            $request->query->getInt('page', 1)/*page number*/,
-            5 /*limit per page*/
-        );
-
         return $this->render('AppBundle:advert:search.html.twig', array(
-            'pagination' => $pagination,
             'adverts' => $adverts,
             'filter_form' => $form->createView(),
             'last_username' => $loginVariables['last_username'],
