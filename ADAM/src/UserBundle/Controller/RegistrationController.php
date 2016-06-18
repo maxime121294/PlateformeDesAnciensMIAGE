@@ -82,8 +82,9 @@ class RegistrationController extends Controller
     /**
      * Tell the user to check his email provider
      */
-    public function checkEmailAction()
+    public function checkEmailAction(Request $request)
     {
+        $loginVariables = $this->get('user.security')->loginFormInstance($request);
         $email = $this->get('session')->get('fos_user_send_confirmation_email/email');
         $this->get('session')->remove('fos_user_send_confirmation_email/email');
         $user = $this->get('fos_user.user_manager')->findUserByEmail($email);
@@ -94,6 +95,9 @@ class RegistrationController extends Controller
 
         return $this->render('FOSUserBundle:Registration:checkEmail.html.twig', array(
             'user' => $user,
+            'last_username' => $loginVariables['last_username'],
+            'error' => $loginVariables['error'],
+            'csrf_token' => $loginVariables['csrf_token']
         ));
     }
 
