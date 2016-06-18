@@ -25,75 +25,75 @@
             </thead>
             <tbody>
             {% for user in users %}
-                <tr>
-                    <td>{{ user.lastname }}</td>
-                    <td>{{ user.firstname }}</td>
-                    {% if is_granted("ROLE_ADMIN") %}
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.createdAt|localizeddate('long', 'none', app.request.locale ) }}</td>
-                        <td>
-                            {% if user.birthday %}
-                                {{ user.birthday|localizeddate('long', 'none', app.request.locale ) }}</td>
-                            {% endif %}
-                    {% endif %}
-                    <td>{{ user.graduate }}</td>
-                    <td>{{ user.graduateYear }}</td>
-                    {% if is_granted("ROLE_ADMIN") %}
-                        <td>
-                            {% if user.enabled %}
-                                Oui
-                            {% else %}
-                                Non
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if user.locked %}
-                                Oui
-                            {% else %}
-                                Non
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if "ROLE_SUPER_ADMIN" in user.roles %}
-                                Super Administrateur
-                            {% elseif "ROLE_ADMIN" in user.roles %}
-                                Administateur
-                            {% else %}
-                                Utilisateur
-                            {% endif %}
-                        </td>
-                    {% endif %}
-                    {% if is_granted("ROLE_ADMIN") %}
-                        <td>
-                            {% if "ROLE_SUPER_ADMIN" not in user.roles and "ROLE_ADMIN" not in user.roles %}
-                                        <a href="{{ path('user_ban', {'id': user.id}) }}">
-                                            {% if user.locked %}
-                                                Rétablir l'utilisateur
-                                            {% else %}
-                                                Bannir l'utilisateur
-                                            {% endif %}
-                                        </a>
-                            {% endif %}
-                            {% if is_granted("ROLE_SUPER_ADMIN") and "ROLE_SUPER_ADMIN" not in user.roles %}
-                                <a class="supress" href="#" data-toggle="modal" data-target="#ModalDeleteUser" data-href="{{ path('user_remove', {'id': user.id}) }}">
-                                           Supprimer l'utilisateur
-                                </a>
-                                <a href="{{ path('homepage', {'_switch_user': user.email }) }}">
-                                           Simuler l'utilisateur
-                                </a>
-                                {% if "ROLE_ADMIN" not in user.roles %}
-                                    <a href="{{ path('role_toggle', {'action': 'promote', 'id': user.id}) }}">
-                                        <img width="30" height="30" alt="Promouvoir l'utilisateur" title="Promouvoir l'utilisateur" src="{{ asset('bundles/front/images/promote_user.svg') }}">
-                                    </a>
-                                {% else %}
-                                    <a href="{{ path('role_toggle', {'action': 'demote', 'id': user.id}) }}">
-                                        <img width="30" height="30" alt="Destituer l'utilisateur" title="Destituer l'utilisateur" src="{{ asset('bundles/front/images/demote_user.svg') }}">
-                                    </a>
+                {% if not ("ROLE_SUPER_ADMIN" in user.roles) and not ("ROLE_ADMIN" in user.roles and not is_granted('ROLE_ADMIN')) %}
+                    <tr>
+                        <td>{{ user.lastname }}</td>
+                        <td>{{ user.firstname }}</td>
+                        {% if is_granted("ROLE_ADMIN") %}
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.createdAt|localizeddate('long', 'none', app.request.locale ) }}</td>
+                            <td>
+                                {% if user.birthday %}
+                                    {{ user.birthday|localizeddate('long', 'none', app.request.locale ) }}</td>
                                 {% endif %}
-                            {% endif %}
-                        </td>
-                    {% endif %}
-                </tr>
+                        {% endif %}
+                        <td>{{ user.graduate }}</td>
+                        <td>{{ user.graduateYear }}</td>
+                        {% if is_granted("ROLE_ADMIN") %}
+                            <td>
+                                {% if user.enabled %}
+                                    Oui
+                                {% else %}
+                                    Non
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if user.locked %}
+                                    Oui
+                                {% else %}
+                                    Non
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if "ROLE_ADMIN" in user.roles %}
+                                    Administateur
+                                {% else %}
+                                    Utilisateur
+                                {% endif %}
+                            </td>
+                        {% endif %}
+                        {% if is_granted("ROLE_ADMIN") %}
+                            <td>
+                                {% if "ROLE_SUPER_ADMIN" not in user.roles and "ROLE_ADMIN" not in user.roles %}
+                                            <a href="{{ path('user_ban', {'id': user.id}) }}">
+                                                {% if user.locked %}
+                                                    Rétablir l'utilisateur
+                                                {% else %}
+                                                    Bannir l'utilisateur
+                                                {% endif %}
+                                            </a>
+                                {% endif %}
+                                {% if is_granted("ROLE_SUPER_ADMIN") and "ROLE_SUPER_ADMIN" not in user.roles %}
+                                    <a class="supress" href="#" data-toggle="modal" data-target="#ModalDeleteUser" data-href="{{ path('user_remove', {'id': user.id}) }}">
+                                               Supprimer l'utilisateur
+                                    </a>
+                                    <a href="{{ path('homepage', {'_switch_user': user.email }) }}">
+                                               Simuler l'utilisateur
+                                    </a>
+                                    {% if "ROLE_ADMIN" not in user.roles %}
+                                        <a href="{{ path('role_toggle', {'action': 'promote', 'id': user.id}) }}">
+                                            <img width="30" height="30" alt="Promouvoir l'utilisateur" title="Promouvoir l'utilisateur" src="{{ asset('bundles/front/images/promote_user.svg') }}">
+                                        </a>
+                                    {% else %}
+                                        <a href="{{ path('role_toggle', {'action': 'demote', 'id': user.id}) }}">
+                                            <img width="30" height="30" alt="Destituer l'utilisateur" title="Destituer l'utilisateur" src="{{ asset('bundles/front/images/demote_user.svg') }}">
+                                        </a>
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endif %}
             {% endfor %}
             </tbody>
         </table>
