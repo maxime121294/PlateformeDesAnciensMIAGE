@@ -25,7 +25,7 @@
             </thead>
             <tbody>
             {% for user in users %}
-                {% if not ("ROLE_SUPER_ADMIN" in user.roles) and not ("ROLE_ADMIN" in user.roles and not is_granted('ROLE_ADMIN')) %}
+                {% if not ("ROLE_SUPER_ADMIN" in user.roles) %}
                     <tr>
                         <td>{{ user.lastname }}</td>
                         <td>{{ user.firstname }}</td>
