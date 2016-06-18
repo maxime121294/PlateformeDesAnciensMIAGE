@@ -62,6 +62,8 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
+    auth_mode: "%mailer_auth_mode%"
+    port:      "%mailer_port%"
     host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
@@ -143,11 +145,6 @@ hwi_oauth:
             client_secret:       %oauth.linkedin.secret%
             scope:               "r_basicprofile,r_emailaddress"
             infos_url:           "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address,picture-url)?format=json"
-swiftmailer:
-    transport:  gmail
-    host:       smtp.gmail.com
-    username:  '%mailer_user%'
-    password:  '%mailer_password%'
 
 # CKEditorBundle Configuration 
 ivory_ck_editor:
