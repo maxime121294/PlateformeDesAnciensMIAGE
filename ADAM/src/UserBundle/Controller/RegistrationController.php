@@ -19,7 +19,7 @@ class RegistrationController extends Controller
     /**
     * @param ContainerInterface $container
     */
-    public function __construct(ContainerInterface $container)
+    public function __construct(ContainerInterface $container = null)
     {
         $this->container = $container;
     }
