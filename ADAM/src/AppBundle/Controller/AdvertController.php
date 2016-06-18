@@ -267,11 +267,11 @@ class AdvertController extends Controller
         $form = $this->createForm('AppBundle\Form\CategoryType');
         $form->handleRequest($request);
 
-        $categoryCheck = $request->get('category');
+        $category = $request->get('category');
 
-        if(array_key_exists('filtre', $categoryCheck) && $form->isSubmitted() && $form->isValid()) {
+        if(array_key_exists('filtre', $category) && $form->isSubmitted() && $form->isValid()) {
             $adverts = $em->getRepository('AppBundle:Advert')->findBy(
-                array('category' => $categoryCheck['filtre'])
+                array('category' => $category['filtre'])
             );
             return $this->render('AppBundle:advert:search.html.twig', array(
                 'adverts' => $adverts,
@@ -289,8 +289,8 @@ class AdvertController extends Controller
      */
     public function liveSearchAction(Request $request)
     {
-
         $loginVariables = $this->get('user.security')->loginFormInstance($request);
+        $form = $this->createForm('AppBundle\Form\CategoryType');
 
         $string = $request->request->get('searchAdvert');
         $advertsSearch = $this->getDoctrine()
@@ -306,7 +306,8 @@ class AdvertController extends Controller
         return $this->render('AppBundle:advert:search.html.twig', array(
             'search' => $string,
             'pagination' => $pagination,
-            'advertsSearch' => $advertsSearch,
+            'filter_form' => $form->createView(),
+            'adverts' => $advertsSearch,
             'last_username' => $loginVariables['last_username'],
             'error' => $loginVariables['error'],
             'csrf_token' => $loginVariables['csrf_token'],
