@@ -156,7 +156,7 @@ class RegistrationController extends Controller
         $fromName = $this->container->getParameter('mailer_name');
         
         $message = \Swift_Message::newInstance()
-        ->setSubject('Bienvenu sur ADAM !')
+        ->setSubject('Bienvenue sur ADAM !')
         ->setFrom(array($fromEmail => $fromName))
         ->setTo($user->getEmail())
         ->addPart(
