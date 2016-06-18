@@ -86,8 +86,8 @@ fos_user:
     firewall_name: main
     user_class: AppBundle\Entity\User
     from_email:
-        address:        noreply@adam.parisdescartes.fr
-        sender_name:    ADAM
+        address:        "%mailer_user%"
+        sender_name:    "%mailer_name%"
     service:
         mailer: fos_user.mailer.twig_swift
     registration:

@@ -1,0 +1,26 @@
+{% block subject %}
+{% endblock %}
+
+{% block body_text %}
+{% autoescape false %}
+{{ user.firstname }},
+
+Félicitations !
+
+Vous venez de valider votre compte sur notre site Internet et nous vous souhaitons la bienvenue parmi nous !
+
+Vous pouvez dès à présent vous connecter au site à l'adresse suivante :
+{{ homepage }}.
+
+N’hésitez pas à renseigner votre identité et compléter votre profil pour pouvoir communiquer avec les autres membres.
+
+L'édition de votre profil se trouve à l'adresse suivante :
+{{ profile }}
+
+Au plaisir de (re-)faire votre connaissance ! À très bientôt,
+L’équipe ADAM
+{% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+{% endblock %}

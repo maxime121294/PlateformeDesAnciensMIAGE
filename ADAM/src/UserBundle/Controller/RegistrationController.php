@@ -150,6 +150,29 @@ class RegistrationController extends Controller
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
+        $homepage = $this->container->getParameter('app_base_url') . $this->generateUrl('homepage');
+        $profile = $this->container->getParameter('app_base_url') . $this->generateUrl('fos_user_profile_show');
+        $fromEmail = $this->container->getParameter('mailer_user');
+        $fromName = $this->container->getParameter('mailer_name');
+        
+        $message = \Swift_Message::newInstance()
+        ->setSubject('Bienvenu sur ADAM !')
+        ->setFrom(array($fromEmail => $fromName))
+        ->setTo($user->getEmail())
+        ->addPart(
+            $this->renderView(
+                "UserBundle:Registration:email_confirmed.txt.twig",
+                array(
+                    'user' => $user,
+                    'homepage' => $homepage,
+                    'profile' => $profile
+                )
+            ),
+            'text/plain'
+        );
+
+        $this->get('mailer')->send($message);
+
         return $this->render('FOSUserBundle:Registration:confirmed.html.twig', array(
             'user' => $user,
             'targetUrl' => $this->getTargetUrlFromSession(),
