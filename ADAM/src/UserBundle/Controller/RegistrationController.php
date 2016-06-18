@@ -34,8 +34,9 @@ class RegistrationController extends Controller
         return $this->container->get($service);
     }
 
-    public function registrationForm(Request $request)
+    public function registerAction(Request $request)
     {
+        $loginVariables = $this->get('user.security')->loginFormInstance($request);
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->get('fos_user.registration.form.factory');
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
@@ -74,9 +75,12 @@ class RegistrationController extends Controller
             return $response;
         }
 
-        return array(
+        return $this->render('FOSUserBundle:Registration:register.html.twig', array(
             'form' => $form->createView(),
-        );
+            'last_username' => $loginVariables['last_username'],
+            'error' => $loginVariables['error'],
+            'csrf_token' => $loginVariables['csrf_token'],
+        ));
     }
 
     /**

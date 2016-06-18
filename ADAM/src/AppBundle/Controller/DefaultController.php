@@ -22,33 +22,6 @@ class DefaultController extends Controller
     }
 
     /**
-     * Affichage du formulaire d'inscription
-     * Page de confirmation d'inscription
-     *
-     * @Route("/register/", name="register")
-     */
-    public function registerAction(Request $request)
-    {
-        $loginVariables = $this->get('user.security')->loginFormInstance($request);
-        $registrationForm = $this->get('user.registration')->registrationForm($request);
-
-        // Si on récupère un objet (de type RedirectResponse) depuis le RegistrationController : Le compte a bien été enregistré
-        if (is_object($registrationForm)) {
-            // On renvoit la vue de checkEmailAction() en faisant appel au service
-            return $this->get('user.registration')->checkEmailAction($request);
-        }
-        // Sinon on récupère le formulaire d'inscription (sous forme de tableau) qu'on peut renvoyer avec les autres variables du formulaire de connexion (dans la navbar)
-        else {
-            return $this->render('UserBundle:Registration:register.html.twig', array(
-                'form' => $registrationForm['form'],
-                'last_username' => $loginVariables['last_username'],
-                'error' => $loginVariables['error'],
-                'csrf_token' => $loginVariables['csrf_token'],
-            ));
-        }
-    }
-
-    /**
      * @Route("/security/", name="security")
      */
     public function securityAction(Request $request)
