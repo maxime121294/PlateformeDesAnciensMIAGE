@@ -2,7 +2,7 @@
 
 {% block body %}
 <section class="pageAdvertList">
-    <h1>Résultat de la recherche "{{ search }}"</h1>
+    <h1>Résultat de la recherche {% if search is defined %} "{{ search }}" {% endif %}</h1>
 
     {% if not app.user  %}
         {% block javascripts %}
@@ -56,7 +56,7 @@
                                             <div class="col-sm-3">
                                                 <h5 class="pull-right">
                                                     <a type="button" href="{{ path('annonce_edit', { 'id': advert.id }) }}" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                    <a type="button" href="{{ path('annonce_delete', { 'id': advert.id }) }}" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-remove"></i></a>
+                                                    <a type="button" href="{{ path('advert_remove', {'id': advert.id}) }}" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-remove"></i></a>
                                                 </h5>
                                             </div>
                                         {% endif %}

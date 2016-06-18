@@ -20,29 +20,20 @@ class AdvertRepository extends EntityRepository
         return $result;
 	}
 
-    public function getAdvertsByCategory($categoryId, $isAdvertIndex = false) {
-        if(!is_array($categoryId))
+    public function getAdvertsByCategory($categoryWording, $isAdvertIndex = false) {
+
+        if ($isAdvertIndex == false)
         {
-            if ($isAdvertIndex == false)
-            {
-                $result = $this->getEntityManager()
-                    ->createQuery("SELECT a from AppBundle:Advert a LEFT JOIN a.category c with c.id = :categoryId where a.category = c.id")
-                    ->setParameter("categoryId", $categoryId)
-                    ->getResult();
-            }
-            else
-            {
-                $result = $this->getEntityManager()
-                    ->createQuery("SELECT a from AppBundle:Advert a LEFT JOIN a.category c with c.id = :categoryId where a.category = c.id order by a.updatedAt DESC")
-                    ->setParameter("categoryId", $categoryId)
-                    ->getResult();
-            }
-        }
-        else 
-        {   
             $result = $this->getEntityManager()
-                ->createQuery("SELECT a from AppBundle:Advert a LEFT JOIN a.category c  WHERE a.category = c.id AND a.category IN (:categoryId) order by a.updatedAt DESC")
-                ->setParameter("categoryId", implode(',', $categoryId["filtre"]))
+                ->createQuery("SELECT a from AppBundle:Advert a LEFT JOIN a.category c with c.wording = :categoryWording where a.category = c.id")
+                ->setParameter("categoryWording", $categoryWording)
+                ->getResult();
+        }
+        else
+        {
+            $result = $this->getEntityManager()
+                ->createQuery("SELECT a from AppBundle:Advert a LEFT JOIN a.category c with c.wording = :categoryWording where a.category = c.id order by a.updatedAt DESC")
+                ->setParameter("categoryWording", $categoryWording)
                 ->getResult();
         }
 

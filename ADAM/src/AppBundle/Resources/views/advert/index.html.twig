@@ -17,7 +17,7 @@
     {% endif %}
     <div align="center">
         <div class="row">
-            {{ form_start(filter_form) }}
+            {{ form_start(filter_form, {'action': path('advert_filter')}) }}
                 {{ form_widget(filter_form) }}
                 {{ form_errors(filter_form) }}
                 <input type="submit" value="Filtrer" class="btn btn-default" />

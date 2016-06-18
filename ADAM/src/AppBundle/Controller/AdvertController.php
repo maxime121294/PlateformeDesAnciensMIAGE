@@ -39,14 +39,13 @@ class AdvertController extends Controller
         else
         {
             $category = $em->getRepository('AppBundle:Category')->find($categoryId);
-            $adverts = $em->getRepository('AppBundle:Advert')->getAdvertsByCategory($category, true);
+            $adverts = $em->getRepository('AppBundle:Advert')->getAdvertsByCategory($category->getWording(), true);
         }
-        
-        $filter_form = $this->createForm('AppBundle\Form\CategoryType');
-        $filter_form->handleRequest($request);
-        if ($filter_form->isSubmitted() && $filter_form->isValid()){
-            $categoryCheck = $request->get('category');
-            $adverts = $em->getRepository('AppBundle:Advert')->getAdvertsByCategory($categoryCheck, true);
+
+        $form = $this->createForm('AppBundle\Form\CategoryType');
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            filterAdvert($request);
         }
 
         $paginator  = $this->get('knp_paginator');
@@ -56,11 +55,12 @@ class AdvertController extends Controller
             5 /*limit per page*/
         );
         
+
         return $this->render('AppBundle:advert:index.html.twig', array(
             'pagination' => $pagination,
             'adverts' => $adverts,
             'category' => $category,
-            'filter_form' => $filter_form->createView(),
+            'filter_form' => $form->createView(),
             'last_username' => $loginVariables['last_username'],
             'error' => $loginVariables['error'],
             'csrf_token' => $loginVariables['csrf_token'],
@@ -251,4 +251,45 @@ class AdvertController extends Controller
 
         return $slug .'.'. $extension;
     }
+
+    /**
+     * Supprimer un post. 
+     *
+     *
+     * @Route("/filter", name="advert_filter")
+     * @Security("has_role('ROLE_USER')")
+     * @Method({"GET", "POST"})
+     */
+    public function filterAdvertAction(Request $request)
+    {
+        $loginVariables = $this->get('user.security')->loginFormInstance($request);
+        $em = $this->getDoctrine()->getManager();
+
+        $form = $this->createForm('AppBundle\Form\CategoryType');
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $categoryCheck = $request->get('category');
+            $adverts = $em->getRepository('AppBundle:Advert')->findBy(
+                array('category' => $categoryCheck['filtre'])
+            );
+        }
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $adverts, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5 /*limit per page*/
+        );
+
+        return $this->render('AppBundle:advert:search.html.twig', array(
+            'pagination' => $pagination,
+            'adverts' => $adverts,
+            'filter_form' => $form->createView(),
+            'last_username' => $loginVariables['last_username'],
+            'error' => $loginVariables['error'],
+            'csrf_token' => $loginVariables['csrf_token'],
+        ));
+    }
+
 }
