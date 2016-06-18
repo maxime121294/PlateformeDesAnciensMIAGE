@@ -23,6 +23,7 @@ class DefaultController extends Controller
     public function roleToggleAction($id, $action)
     {
         $em = $this->getDoctrine()->getManager();
+        $rolechecker = $this->container->get('user_rolechecker');
 
         $user = $em->getRepository('AppBundle:User')
                 ->findOneById($id);
@@ -32,9 +33,9 @@ class DefaultController extends Controller
             }
 
         // Ne pas permettre de promouvoir un admin, de destituer un membre et aucun des deux pour un superadmin
-        if (!in_array("ROLE_SUPER_ADMIN", $user->getRoles()) &&
-            ($action === "promote" && !in_array("ROLE_ADMIN", $user->getRoles())) || 
-            ($action === "demote" && in_array("ROLE_ADMIN", $user->getRoles()))) {
+        if (!$rolechecker->isGranted('ROLE_SUPER_ADMIN', $user) &&
+            ($action === "promote" && !$rolechecker->isGranted('ROLE_ADMIN', $user)) || 
+            ($action === "demote" && !$rolechecker->isGranted('ROLE_ADMIN', $user))) {
 
             // Commande de FOSUserBundle dynamique pour promote ou demote un membre
             $command = 'fos:user:'.$action;
@@ -70,6 +71,7 @@ class DefaultController extends Controller
     {
 
         $em = $this->getDoctrine()->getManager();
+        $rolechecker = $this->container->get('user_rolechecker');
 
         $user = $em->getRepository('AppBundle:User')
                 ->findOneById($id);   
@@ -78,7 +80,8 @@ class DefaultController extends Controller
             throw $this->createNotFoundException('User not found');
         }
 
-        if (!in_array("ROLE_SUPER_ADMIN", $user->getRoles()) && !in_array("ROLE_ADMIN", $user->getRoles())){
+        //if (!in_array("ROLE_SUPER_ADMIN", $user->getRoles()) && !in_array("ROLE_ADMIN", $user->getRoles())){
+        if (!$rolechecker->isGranted('ROLE_ADMIN', $user)) {    
             if($user->isLocked()) {
                 $user->setLocked(false);
             }
@@ -103,6 +106,7 @@ class DefaultController extends Controller
     {
 
         $em = $this->getDoctrine()->getManager();
+        $rolechecker = $this->container->get('user_rolechecker');
 
         $user = $em->getRepository('AppBundle:User')
                 ->findOneById($id);   
@@ -111,7 +115,7 @@ class DefaultController extends Controller
                 throw $this->createNotFoundException('User not found');
         }
 
-        if (!in_array("ROLE_SUPER_ADMIN", $user->getRoles())){
+        if (!$rolechecker->isGranted('ROLE_SUPER_ADMIN', $user)){
             $em->remove($user);
             $em->flush();
         }
