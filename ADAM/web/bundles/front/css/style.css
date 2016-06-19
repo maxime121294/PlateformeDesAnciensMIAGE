@@ -106,10 +106,10 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     clear: both;
     padding: 14px;
 }
-#login-dp .social-buttons{
+.social-buttons{
     margin: 12px 0;
 }
-#login-dp .social-buttons a{
+.social-buttons a{
     width: 32%;
 }
 #login-dp .form-group {
@@ -570,6 +570,50 @@ section.pageAdvertList .participate{
     text-align: center;
     margin-bottom: 35px;
 }
+
+/*
+* Modifier le mot de passe
+*/
+.modif-password-form {
+    margin: 10% auto;
+    width: 50%;
+    padding: 10px;
+    vertical-align: middle;
+    color: var(--descartes-rouge-color);
+}
+
+.modif-password-form .btn-submit {
+    color : white;
+    background-color: var(--descartes-rouge-color);
+    margin: auto;
+    display: block;
+    border: 1px solid transparent;
+    border-radius: 4px;
+
+}
+
+.modif-password-form .modif-password-title {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.modif-password-form .submit-container {
+    margin-top: 30px;
+}
+
+/*
+* Page mot passe déjà demandé
+*/
+.already-request-container {
+    margin: 10% auto;
+    width: 50%;
+    padding: 10px;
+    vertical-align: middle;
+    background-color:white;
+    color: var(--descartes-rouge-color);
+}
+
+
 /*
 * Confirmation d'inscription page
 */

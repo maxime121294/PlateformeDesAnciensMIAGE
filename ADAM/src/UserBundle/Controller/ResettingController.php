@@ -45,7 +45,7 @@ class ResettingController extends Controller
     {
         $username = $request->request->get('username');
         $loginVariables = $this->get('user.security')->loginFormInstance($request);
-        
+
         /** @var $user UserInterface */
         $user = $this->get('fos_user.user_manager')->findUserByUsernameOrEmail($username);
 
@@ -59,7 +59,11 @@ class ResettingController extends Controller
         }
 
         if ($user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl'))) {
-            return $this->render('FOSUserBundle:Resetting:passwordAlreadyRequested.html.twig');
+            return $this->render('FOSUserBundle:Resetting:passwordAlreadyRequested.html.twig', array(
+                'last_username' => $loginVariables['last_username'],
+                'error' => $loginVariables['error'],
+                'csrf_token' => $loginVariables['csrf_token']
+            ));
         }
 
         if (null === $user->getConfirmationToken()) {
