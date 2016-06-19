@@ -24,7 +24,7 @@ class AdvertController extends Controller
      * Lists all Advert entities.
      *
      * @Route("/index/{categoryId}", name="annonce_index")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
     public function indexAction(Request $request, $categoryId = null)
     {
@@ -42,6 +42,12 @@ class AdvertController extends Controller
             $adverts = $em->getRepository('AppBundle:Advert')->getAdvertsByCategory($category->getWording(), true);
         }
 
+        $form = $this->createForm('AppBundle\Form\CategoryType');
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            filterAdvert($request);
+        }
+
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $adverts, /* query NOT result */
@@ -53,6 +59,7 @@ class AdvertController extends Controller
             'pagination' => $pagination,
             'adverts' => $adverts,
             'category' => $category,
+            'filter_form' => $form->createView(),
             'last_username' => $loginVariables['last_username'],
             'error' => $loginVariables['error'],
             'csrf_token' => $loginVariables['csrf_token'],
@@ -91,7 +98,7 @@ class AdvertController extends Controller
     /**
      * Finds and displays a Advert entity.
      *
-     * @Route("/{id}", name="annonce_show")
+     * @Route("/show/{id}", name="annonce_show")
      * @Method("GET")
      */
     public function showAction(Advert $advert, Request $request)
@@ -243,4 +250,67 @@ class AdvertController extends Controller
 
         return $slug .'.'. $extension;
     }
+
+    /**
+     * Filtre la recherche par types d'annonce multiples. 
+     *
+     *
+     * @Route("/filter", name="advert_filter")
+     * @Method({"POST"})
+     */
+    public function filterAdvertAction(Request $request)
+    {
+        $loginVariables = $this->get('user.security')->loginFormInstance($request);
+        $em = $this->getDoctrine()->getManager();
+
+        $form = $this->createForm('AppBundle\Form\CategoryType');
+        $form->handleRequest($request);
+
+        $category = $request->get('category');
+
+        if(array_key_exists('filtre', $category) && $form->isSubmitted() && $form->isValid()) {
+            $adverts = $em->getRepository('AppBundle:Advert')->findBy(
+                array('category' => $category['filtre'])
+            );
+            return $this->render('AppBundle:advert:search.html.twig', array(
+                'pagination' => $adverts,
+                'filter_form' => $form->createView(),
+                'last_username' => $loginVariables['last_username'],
+                'error' => $loginVariables['error'],
+                'csrf_token' => $loginVariables['csrf_token'],
+            ));
+        }
+        return $this->redirectToRoute('annonce_index');
+    }
+
+    /**
+     * @Route("/search", name="search")
+     */
+    public function liveSearchAction(Request $request)
+    {
+        $loginVariables = $this->get('user.security')->loginFormInstance($request);
+        $form = $this->createForm('AppBundle\Form\CategoryType');
+
+        $string = $request->request->get('searchAdvert');
+        $advertsSearch = $this->getDoctrine()
+                 ->getRepository('AppBundle:Advert')
+                 ->getAdvertsForSearch($string);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $advertsSearch, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5 /*limit per page*/
+        );
+        return $this->render('AppBundle:advert:search.html.twig', array(
+            'search' => $string,
+            'pagination' => $pagination,
+            'filter_form' => $form->createView(),
+            'adverts' => $advertsSearch,
+            'last_username' => $loginVariables['last_username'],
+            'error' => $loginVariables['error'],
+            'csrf_token' => $loginVariables['csrf_token'],
+        ));
+    }
+
 }
