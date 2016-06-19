@@ -341,11 +341,45 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 .registered-list-container {
     margin: 25px auto 15px auto;
     width: 90%;
-    border: 3px solid grey;
     padding: 10px;
     vertical-align: middle;
-    background-color: var(--descartes-grey-color);
+}
+
+.registered-list-container .add-user {
+    text-decoration:none;
     color: var(--descartes-rouge-color);
+}
+
+.registered-list-container #registreList_wrapper {
+    margin-top: 30px;
+}
+
+.registered-list-container #registreList_wrapper div:nth-child(2) {
+    overflow-x: auto;
+}
+
+.registered-list-container table td.action-container {
+    white-space: nowrap;
+}
+
+.registered-list-container table a.action-btn{
+    color: darken(var(--descartes-grey-color));
+    font-size: 20px;
+    text-decoration:none;
+}
+
+.registered-list-container table a.action-btn:hover{
+    color: var(--descartes-rouge-color);
+}
+
+.registered-list-container .table-hover thead {
+    color: var(--descartes-grey-color);
+    background-color: var(--descartes-rouge-color);
+}
+
+.registered-list-container #registreList.table.table-hover thead th:after{
+    color: var(--descartes-grey-color);
+    opacity: 1;
 }
 
 .registered-list-container .table-hover tbody tr td,
@@ -546,9 +580,14 @@ section.pageAdvertList .participate{
 * Barre de simulation d'un utilisateur
 */
 .simulation-bar {
-    background-color: #c5c2b4;
-    height : 40px;
+    background-color: var(--descartes-rouge-color);
+    height : 30px;
     padding : 5px;
+    color: white;
+}
+
+.simulation-bar a{
+    color: var(--descartes-blue-color);
 }
 
 /*
