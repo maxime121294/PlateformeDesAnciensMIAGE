@@ -10,6 +10,25 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class DefaultController extends Controller
 {
     /**
+     * Affichage de la liste des membres inscrits.
+     *
+     * @Route("/registered-list", name="registered_list")
+     * @Template()
+     */
+    public function registeredListAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $users = $em->getRepository('AppBundle:User')
+            ->findAll();
+
+        return $this->render('AdminBundle::registeredList.html.twig',
+            array(
+                'users' => $users
+            ));
+    }
+
+    /**
      * Affichage de la page d'accueil
      *
      * @Route("/", name="homepage")

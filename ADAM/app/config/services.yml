@@ -20,6 +20,9 @@ services:
         class: AppBundle\Form\AdvertType
         tags:
             - { name: form.type, alias: app_user_advert }
+    user_rolechecker:
+        class: UserBundle\RoleChecker\RoleChecker
+        arguments: [@security.role_hierarchy]
     acme.demobundle.calendar_listener:
         class: AppBundle\EventListener\CalendarEventListener
         tags:
