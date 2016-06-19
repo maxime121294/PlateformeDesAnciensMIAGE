@@ -2,12 +2,12 @@
     <h3 class="password-title"> Retrouvez votre compte </h3>
     <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
         <div class="form-group row">
-            {% if invalid_username is defined %}
-                <p>Adresse e-mail</p>
-            {% endif %}
             <label class="col-sm-3 form-control-label" for="username">Adresse e-mail</label>
             <div class="col-sm-9">
                 <input class="form-control" type="text" id="username" name="username" required="required" />
+                {% if invalid_username is defined %}
+                    <p>Cette adresse email n'existe pas.</p>
+                {% endif %}
             </div>
         </div>
             <input class= "btn btn-submit" type="submit" value="Envoyer" />

@@ -34,14 +34,12 @@
                     </a>
                 </li>
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                    {% if is_granted('ROLE_ADMIN') %}
                         <li>
                             <a href="{{ path('registered_list') }}" class="divider">
                                 <i class="fa fa-users"></i>
                                 <b>Liste des inscrits</b>
                             </a>
                         </li>
-                    {% endif %}
                     <li>
                         <a href="{{ path('fos_user_security_logout') }}" class="divider">
                             <i class="fa fa-sign-out"></i>
@@ -67,4 +65,9 @@
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
+    {% if is_granted('ROLE_PREVIOUS_ADMIN') and app.user is defined %}
+        <div class="simulation-bar">
+            <p> Vous êtes connecté en tant que <b>{{ app.user.firstname|capitalize }}</b>. Pour quitter, cliquez <a href="{{ path('registered_list', {'_switch_user': '_exit'}) }}">ici</a></p>
+        </div>
+    {% endif %}
 </nav>
