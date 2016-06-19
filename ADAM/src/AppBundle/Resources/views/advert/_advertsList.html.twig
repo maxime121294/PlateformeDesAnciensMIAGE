@@ -60,10 +60,10 @@
                         <div class="panel-footer">
                             <div class="text-center">
                                 <div class="row">
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-5">
                                         <a href="{{ path('annonce_index', { categoryId: advert.category.id }) }}"><span class="label label-default pull-left">{{ advert.category }}</span></a>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-7">
                                         <h5 class="pull-right">
                                             {% if advert.category == "Événement" and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                                                 {% if app.user in advert.users %}
@@ -76,7 +76,6 @@
                                                 <a type="button" href="{{ path('annonce_edit', { 'id': advert.id }) }}" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-pencil"></i></a>
 
                                                 <a class="btn btn-danger btn-circle supress" href="#" data-toggle="modal" data-target="#ModalDeleteAdvert" data-href="{{ path('advert_remove', {'id': advert.id}) }}"><i class="glyphicon glyphicon-remove"></i></a>
-                                                {% include 'AppBundle:advert:popinDeleteForm.html.twig' %}
                                             {% endif %}
                                         </h5>
                                     </div>
@@ -130,6 +129,8 @@
         });
     </script>
 {% endfor %}
+
+{% include 'AppBundle:advert:popinDeleteForm.html.twig' %}
 
 {% block javascripts %}
     <script type="text/javascript">
