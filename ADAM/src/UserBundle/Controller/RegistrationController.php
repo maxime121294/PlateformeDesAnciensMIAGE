@@ -19,7 +19,7 @@ class RegistrationController extends Controller
     /**
     * @param ContainerInterface $container
     */
-    public function __construct(ContainerInterface $container)
+    public function __construct(ContainerInterface $container = null)
     {
         $this->container = $container;
     }
@@ -34,8 +34,9 @@ class RegistrationController extends Controller
         return $this->container->get($service);
     }
 
-    public function registrationForm(Request $request)
+    public function registerAction(Request $request)
     {
+        $loginVariables = $this->get('user.security')->loginFormInstance($request);
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->get('fos_user.registration.form.factory');
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
@@ -74,16 +75,20 @@ class RegistrationController extends Controller
             return $response;
         }
 
-        return array(
+        return $this->render('FOSUserBundle:Registration:register.html.twig', array(
             'form' => $form->createView(),
-        );
+            'last_username' => $loginVariables['last_username'],
+            'error' => $loginVariables['error'],
+            'csrf_token' => $loginVariables['csrf_token'],
+        ));
     }
 
     /**
      * Tell the user to check his email provider
      */
-    public function checkEmailAction()
+    public function checkEmailAction(Request $request)
     {
+        $loginVariables = $this->get('user.security')->loginFormInstance($request);
         $email = $this->get('session')->get('fos_user_send_confirmation_email/email');
         $this->get('session')->remove('fos_user_send_confirmation_email/email');
         $user = $this->get('fos_user.user_manager')->findUserByEmail($email);
@@ -94,6 +99,9 @@ class RegistrationController extends Controller
 
         return $this->render('FOSUserBundle:Registration:checkEmail.html.twig', array(
             'user' => $user,
+            'last_username' => $loginVariables['last_username'],
+            'error' => $loginVariables['error'],
+            'csrf_token' => $loginVariables['csrf_token']
         ));
     }
 
@@ -141,6 +149,29 @@ class RegistrationController extends Controller
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
+
+        $homepage = $this->container->getParameter('app_base_url') . $this->generateUrl('homepage');
+        $profile = $this->container->getParameter('app_base_url') . $this->generateUrl('fos_user_profile_show');
+        $fromEmail = $this->container->getParameter('mailer_user');
+        $fromName = $this->container->getParameter('mailer_name');
+        
+        $message = \Swift_Message::newInstance()
+        ->setSubject('Bienvenue sur ADAM !')
+        ->setFrom(array($fromEmail => $fromName))
+        ->setTo($user->getEmail())
+        ->addPart(
+            $this->renderView(
+                "UserBundle:Registration:email_confirmed.txt.twig",
+                array(
+                    'user' => $user,
+                    'homepage' => $homepage,
+                    'profile' => $profile
+                )
+            ),
+            'text/plain'
+        );
+
+        $this->get('mailer')->send($message);
 
         return $this->render('FOSUserBundle:Registration:confirmed.html.twig', array(
             'user' => $user,

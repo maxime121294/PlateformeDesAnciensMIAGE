@@ -39,7 +39,7 @@ security:
                 require_previous_session: false
                 remember_me:            true
             remember_me:
-                key:        %secret%
+                secret:        %secret%
                 lifetime:   31536000  # 365 days in seconds
                 path:       /
                 domain:     ~
