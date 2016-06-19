@@ -54,7 +54,6 @@ class AdvertController extends Controller
             $request->query->getInt('page', 1)/*page number*/,
             5 /*limit per page*/
         );
-        
 
         return $this->render('AppBundle:advert:index.html.twig', array(
             'pagination' => $pagination,
@@ -99,7 +98,7 @@ class AdvertController extends Controller
     /**
      * Finds and displays a Advert entity.
      *
-     * @Route("/{id}", name="annonce_show")
+     * @Route("/show/{id}", name="annonce_show")
      * @Method("GET")
      */
     public function showAction(Advert $advert, Request $request)
@@ -274,7 +273,7 @@ class AdvertController extends Controller
                 array('category' => $category['filtre'])
             );
             return $this->render('AppBundle:advert:search.html.twig', array(
-                'adverts' => $adverts,
+                'pagination' => $adverts,
                 'filter_form' => $form->createView(),
                 'last_username' => $loginVariables['last_username'],
                 'error' => $loginVariables['error'],

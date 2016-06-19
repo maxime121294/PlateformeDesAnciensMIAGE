@@ -27,7 +27,7 @@
      </div>
 </div>
 
-{% for advert in adverts %}
+{% for advert in pagination %}
     <br>
      <div class="container">
         <div class="row">
@@ -130,10 +130,6 @@
         });
     </script>
 {% endfor %}
-
-<div class="navigation pull-right">
-    {% if pagination is defined %} {{ knp_pagination_render(pagination) }} {% endif %}
-</div>
 
 {% block javascripts %}
     <script type="text/javascript">
