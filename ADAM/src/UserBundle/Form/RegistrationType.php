@@ -34,8 +34,9 @@ class RegistrationType extends AbstractType
                 "class" => "AppBundle:Degree",
                 "required" => false,
                 "placeholder" => "Selectionner un type de diplôme",
+				"choices_as_values" => true,
             ))
-            ->add('graduateYear', TextType::class, array(
+             ->add('graduateYear', TextType::class, array(
                 "label" => "Année d'obtention du diplôme",
                 "required" => false,
             ))
@@ -62,7 +63,6 @@ class RegistrationType extends AbstractType
                 "required" => true,
             ));
     }
-
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
@@ -72,12 +72,10 @@ class RegistrationType extends AbstractType
             'intention'  => 'registration',
         ));
     }
-
     public function getBlockPrefix()
     {
         return 'app_user_registration';
     }
-
     public function getName()
     {
         return $this->getBlockPrefix();
