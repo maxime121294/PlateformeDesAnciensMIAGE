@@ -3,7 +3,7 @@
 {% block body %}
     <div class="registered-list-container">
         {% if is_granted("ROLE_ADMIN") %}
-            <a href="{{ path('register') }}" class="add-user">
+            <a href="{{ path('fos_user_registration_register') }}" class="add-user">
                 <i class="fa fa-plus-circle" aria-hidden="true"></i>
                 Ajouter un Utilisateur
             </a>
