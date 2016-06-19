@@ -69,3 +69,22 @@
 	</div>
 {{ form_end(form) }}
 </div>
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/bootstrap-datetimepicker.min.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{asset('bundles/front/js/libs/moment-with-locales.js')}}"></script>
+    <script type="text/javascript" src="{{asset('bundles/front/js/libs/bootstrap-datetimepicker.js')}}"></script>
+
+	<script>
+		$(function() {
+			$('#birthday').datetimepicker({
+			    format: "DD/MM/YYYY",
+			    locale: "fr"
+			});
+		});
+	</script>
+{% endblock %}
+
