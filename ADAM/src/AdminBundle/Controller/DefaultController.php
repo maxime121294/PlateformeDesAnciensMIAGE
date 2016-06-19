@@ -35,8 +35,8 @@ class DefaultController extends Controller
         // Ne pas permettre de promouvoir un admin, de destituer un membre et aucun des deux pour un superadmin
         if (!$rolechecker->isGranted('ROLE_SUPER_ADMIN', $user) &&
             ($action === "promote" && !$rolechecker->isGranted('ROLE_ADMIN', $user)) || 
-            ($action === "demote" && !$rolechecker->isGranted('ROLE_ADMIN', $user))) {
-
+            ($action === "demote" && $rolechecker->isGranted('ROLE_ADMIN', $user))) {
+            
             // Commande de FOSUserBundle dynamique pour promote ou demote un membre
             $command = 'fos:user:'.$action;
 
