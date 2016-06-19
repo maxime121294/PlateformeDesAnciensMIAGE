@@ -17,12 +17,12 @@
         </a>
     </div>
 {% endif %}
-<div align="center">
-    <div class="row">
+<div align="center" class="filter-container">
+    <div class="form-group row">
         {{ form_start(filter_form, {'action': path('advert_filter')}) }}
             {{ form_widget(filter_form) }}
             {{ form_errors(filter_form) }}
-            <input type="submit" value="Filtrer" class="btn btn-default" />
+            <input type="submit" value="Appliquer" class="btn btn-default" />
         {{ form_end(filter_form) }}
      </div>
 </div>
@@ -95,7 +95,7 @@
             </div>
         </div>
     </div>
-    
+
     <script type="text/javascript">
         $('#buttonParticipate{{ advert.id }}').click(function() {
             $.ajax({

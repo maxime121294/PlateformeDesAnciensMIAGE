@@ -472,6 +472,24 @@ section.pageAdvertList .participate{
     background-color: white;
 }
 
+.filter-container {
+    margin-top: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.filter-container label {
+    padding-left: 8px;
+    padding-right: 10px;
+}
+
+.filter-container .btn {
+    background-image: initial;
+    text-shadow: initial;
+}
+
 /*
  * edit Advert
  */
