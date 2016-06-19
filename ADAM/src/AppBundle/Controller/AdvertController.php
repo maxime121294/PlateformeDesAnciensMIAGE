@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\Advert;
+use AppBundle\Entity\Category;
 use AppBundle\Form\AdvertType;
 
 /**
@@ -22,24 +23,43 @@ class AdvertController extends Controller
     /**
      * Lists all Advert entities.
      *
-     * @Route("/", name="annonce_index")
-     * @Method("GET")
+     * @Route("/index/{categoryId}", name="annonce_index")
+     * @Method({"GET", "POST"})
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, $categoryId = null)
     {
         $loginVariables = $this->get('user.security')->loginFormInstance($request);
         $em = $this->getDoctrine()->getManager();
 
-        $adverts = $em->getRepository('AppBundle:Advert')->findBy(array(), array('updatedAt' => 'desc'));
+        if ($categoryId == null)
+        {
+            $adverts = $em->getRepository('AppBundle:Advert')->findBy(array(), array('updatedAt' => 'desc'));
+            $category = null;
+        }
+        else
+        {
+            $category = $em->getRepository('AppBundle:Category')->find($categoryId);
+            $adverts = $em->getRepository('AppBundle:Advert')->getAdvertsByCategory($category->getWording(), true);
+        }
+
+        $form = $this->createForm('AppBundle\Form\CategoryType');
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            filterAdvert($request);
+        }
+
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $adverts, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             5 /*limit per page*/
         );
+
         return $this->render('AppBundle:advert:index.html.twig', array(
             'pagination' => $pagination,
             'adverts' => $adverts,
+            'category' => $category,
+            'filter_form' => $form->createView(),
             'last_username' => $loginVariables['last_username'],
             'error' => $loginVariables['error'],
             'csrf_token' => $loginVariables['csrf_token'],
@@ -78,17 +98,15 @@ class AdvertController extends Controller
     /**
      * Finds and displays a Advert entity.
      *
-     * @Route("/{id}", name="annonce_show")
+     * @Route("/show/{id}", name="annonce_show")
      * @Method("GET")
      */
     public function showAction(Advert $advert, Request $request)
     {
         $loginVariables = $this->get('user.security')->loginFormInstance($request);
-        $deleteForm = $this->createDeleteForm($advert);
 
         return $this->render('AppBundle:advert:show.html.twig', array(
             'advert' => $advert,
-            'delete_form' => $deleteForm->createView(),
             'last_username' => $loginVariables['last_username'],
             'error' => $loginVariables['error'],
             'csrf_token' => $loginVariables['csrf_token'],
@@ -104,7 +122,6 @@ class AdvertController extends Controller
      */
     public function editAction(Request $request, Advert $advert)
     {
-        $deleteForm = $this->createDeleteForm($advert);
         $editForm = $this->createForm('AppBundle\Form\AdvertType', $advert);
         $editForm->handleRequest($request);
 
@@ -120,47 +137,60 @@ class AdvertController extends Controller
         return $this->render('AppBundle:advert:edit.html.twig', array(
             'advert' => $advert,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Deletes a Advert entity.
+     * Supprimer un post. 
      *
-     * @Route("/{id}", name="annonce_delete")
-     * @Method("DELETE")
+     *
+     * @Route("/remove-{id}", name="advert_remove")
      * @Security("has_role('ROLE_USER')")
      */
-    public function deleteAction(Request $request, Advert $advert)
+    public function advertRemoveAction($id)
     {
-        $form = $this->createDeleteForm($advert);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($advert);
-            $em->flush();
-        }
-
+        $em = $this->getDoctrine()->getManager();
+        $advert = $em->getRepository('AppBundle:Advert')
+                    ->find($id); 
+        $em->remove($advert);
+        $em->flush();
         return $this->redirectToRoute('annonce_index');
     }
 
-    /**
-     * Creates a form to delete a Advert entity.
-     *
-     * @param Advert $advert The Advert entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Advert $advert)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('annonce_delete', array('id' => $advert->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
 
+    /**
+     * Ajoute ou retire un user à un evenement
+     *
+     * @Route("/participate/{id}", name="annonce_participate")
+     * @Method({"GET"})
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function participateAction(Request $request, $id)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+
+        $advert = $em->getRepository('AppBundle:Advert')
+                ->find($id);
+
+        $participates = $advert->getUsers();    
+
+        if (!$participates->contains($user)) {
+            $advert->addUser($user);
+            $em->persist($advert);
+            $em->flush();
+            $message = "YES";
+        }
+        else {
+            $advert->removeUser($user);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($advert);
+            $em->flush();
+            $message = "NO";
+        }
+        
+        return new JsonResponse($message);
+    }
     /**
      * 
      * @Route("/upload", name="upload")
@@ -220,4 +250,67 @@ class AdvertController extends Controller
 
         return $slug .'.'. $extension;
     }
+
+    /**
+     * Filtre la recherche par types d'annonce multiples. 
+     *
+     *
+     * @Route("/filter", name="advert_filter")
+     * @Method({"POST"})
+     */
+    public function filterAdvertAction(Request $request)
+    {
+        $loginVariables = $this->get('user.security')->loginFormInstance($request);
+        $em = $this->getDoctrine()->getManager();
+
+        $form = $this->createForm('AppBundle\Form\CategoryType');
+        $form->handleRequest($request);
+
+        $category = $request->get('category');
+
+        if(array_key_exists('filtre', $category) && $form->isSubmitted() && $form->isValid()) {
+            $adverts = $em->getRepository('AppBundle:Advert')->findBy(
+                array('category' => $category['filtre'])
+            );
+            return $this->render('AppBundle:advert:search.html.twig', array(
+                'pagination' => $adverts,
+                'filter_form' => $form->createView(),
+                'last_username' => $loginVariables['last_username'],
+                'error' => $loginVariables['error'],
+                'csrf_token' => $loginVariables['csrf_token'],
+            ));
+        }
+        return $this->redirectToRoute('annonce_index');
+    }
+
+    /**
+     * @Route("/search", name="search")
+     */
+    public function liveSearchAction(Request $request)
+    {
+        $loginVariables = $this->get('user.security')->loginFormInstance($request);
+        $form = $this->createForm('AppBundle\Form\CategoryType');
+
+        $string = $request->request->get('searchAdvert');
+        $advertsSearch = $this->getDoctrine()
+                 ->getRepository('AppBundle:Advert')
+                 ->getAdvertsForSearch($string);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $advertsSearch, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5 /*limit per page*/
+        );
+        return $this->render('AppBundle:advert:search.html.twig', array(
+            'search' => $string,
+            'pagination' => $pagination,
+            'filter_form' => $form->createView(),
+            'adverts' => $advertsSearch,
+            'last_username' => $loginVariables['last_username'],
+            'error' => $loginVariables['error'],
+            'csrf_token' => $loginVariables['csrf_token'],
+        ));
+    }
+
 }

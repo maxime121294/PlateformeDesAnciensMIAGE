@@ -8,19 +8,19 @@
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-left"> 
+            <ul class="nav navbar-nav navbar-left">
                 <li>
                     <a href="{{ path('homepage') }}" class="divider">
                         <b>Accueil</b>
                     </a>
-                </li>   
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                   
+
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                     {% if app.user is defined %}
                         <li>
-                            <a class="user-name">
+                            <a class="user-name" href="{{ path('fos_user_profile_show') }}" class="divider">
                                 <i class="fa fa-user"></i>
                                 <b>{{ app.user.firstname|capitalize }}</b>
                             </a>
@@ -29,18 +29,17 @@
                 {% endif %}
                 <li>
                     <a href="{{ path('annonce_index') }}" class="divider">
-                        <b>Listes des annonces</b>
+                        <i class="fa fa-list-ul"></i>
+                        <b>Liste des annonces</b>
                     </a>
-                </li> 
+                </li>
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                    {% if is_granted('ROLE_ADMIN') %}
                         <li>
                             <a href="{{ path('registered_list') }}" class="divider">
                                 <i class="fa fa-users"></i>
                                 <b>Liste des inscrits</b>
                             </a>
                         </li>
-                    {% endif %}
                     <li>
                         <a href="{{ path('fos_user_security_logout') }}" class="divider">
                             <i class="fa fa-sign-out"></i>
@@ -57,7 +56,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-sign-in"></i>
-                            <b>Connexion</b> 
+                            <b>Connexion</b>
                             <span class="caret"></span>
                         </a>
                         {% include ':default:login.html.twig' %}
@@ -66,4 +65,9 @@
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
+    {% if is_granted('ROLE_PREVIOUS_ADMIN') and app.user is defined %}
+        <div class="simulation-bar">
+            <p> Vous êtes connecté en tant que <b>{{ app.user.firstname|capitalize }}</b>. Pour quitter, cliquez <a href="{{ path('registered_list', {'_switch_user': '_exit'}) }}">ici</a></p>
+        </div>
+    {% endif %}
 </nav>

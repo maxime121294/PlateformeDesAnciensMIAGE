@@ -1,12 +1,26 @@
-{% trans_default_domain 'FOSUserBundle' %}
 {% block subject %}
 {% autoescape false %}
-{{ 'registration.email.subject'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
+Activation de votre compte ADAM
 {% endautoescape %}
 {% endblock %}
+
 {% block body_text %}
 {% autoescape false %}
-{{ 'registration.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
+{{ user.firstname }},
+
+Merci de vous être inscrit sur le site de l’ADAM.
+
+Votre identifiant de connexion est : {{ user.email }}
+
+Afin d'activer votre compte, veuillez confirmer votre adresse de messagerie électronique en cliquant sur le lien suivant :
+
+{{ confirmationUrl }}
+
+Si ce lien ne fonctionne pas, copiez et collez l'adresse Internet dans une nouvelle fenêtre de navigateur.
+
+Attention, ce lien ne sera valide que 24h, au-delà vous devrez vous réinscrire.
 {% endautoescape %}
 {% endblock %}
-{% block body_html %}{% endblock %}
+
+{% block body_html %}
+{% endblock %}
