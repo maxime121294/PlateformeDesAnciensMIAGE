@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="pageAdvertList">
+        <h1>Liste des annonces{% if category %} de type "{{ category }}"{% endif %}</h1>
+        {% include 'AppBundle:advert:_advertsList.html.twig' %}
+        <div class="navigation pull-right">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </section>
+{% endblock %}

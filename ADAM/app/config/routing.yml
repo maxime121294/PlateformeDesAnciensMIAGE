@@ -1,3 +1,7 @@
+app_advert:
+    resource: "@AppBundle/Controller/AdvertController.php"
+    type:     annotation
+
 admin:
     resource: "@AdminBundle/Controller/"
     type:     annotation
@@ -40,3 +44,9 @@ google_login:
 
 linkedin_login:
     path: /login/check-linkedin
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+adesigns_calendar:
+  resource: "@ADesignsCalendarBundle/Resources/config/routing.xml" 

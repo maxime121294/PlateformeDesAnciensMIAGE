@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="form-advert">
+    <h1>Poster une annonce</h1>
+
+    {{ form_start(form, {'attr': {'id': 'form_advert_new'}}) }}
+            <div class="form-group row">
+                {{ form_label(form.title, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+                <div class="col-sm-9">
+                    {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.title) }}
+                </div>
+
+            </div>
+            <div class="form-group row">
+                {{ form_label(form.category, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+                <div class="col-sm-9">
+                    {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.category) }}
+                </div>
+            </div>
+             <div class="form-group row hidden" id="form-evenementDate">
+                {{ form_label(form.evenementDate, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
+                <div class="col-sm-9 input-group date" id="evenDate">
+                    <div class="col-sm-12">
+                        {{ form_widget(form.evenementDate, {'attr': {'class': 'form-control'}}) }}
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                    {{ form_errors(form.evenementDate) }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-12 input-group date" id="contentsAdvert">
+                    <div class="col-sm-12">
+                        {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    {{ form_errors(form.content) }}
+                </div>
+            </div>
+        <div class="group-btn advert-group-btn">
+            <a href="{{ path('annonce_index') }}" class="btn btn-default btn-cancel" role="button">Retour</a>
+            <input type="submit" value="Poster l'annonce" class="btn btn-default btn-registered" />
+        </div>
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/bootstrap-datetimepicker.min.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{asset('bundles/front/js/libs/moment-with-locales.js')}}"></script>
+    <script type="text/javascript" src="{{asset('bundles/front/js/libs/bootstrap-datetimepicker.js')}}"></script>
+
+    <script>
+    $(document).ready( function() {
+        EvenCategory();
+        $('#advert_category').change(function() {
+            EvenCategory();
+        });
+
+        $('#evenDate').datetimepicker({
+            locale: 'fr',
+            minDate:moment()
+        });
+    });
+
+    function EvenCategory() {
+        if ($('#advert_category option:selected').text() === 'Événement'){
+            $('#form-evenementDate').removeClass("hidden");
+        }
+        else{
+            $('#form-evenementDate').addClass("hidden");
+        }
+    }
+    </script>
+{% endblock %}

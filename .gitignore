@@ -26,6 +26,7 @@
 ADAM/web/bundles/*
 !ADAM/web/bundles/front/
 ADAM/web/uploads/
+ADAM/web/bundles/front/images/uploads/*
 
 # Assets managed by Bower
 /web/assets/vendor/
@@ -41,4 +42,15 @@ ADAM/web/uploads/
 ADAM/composer.phar
 
 # Composer LOCK
+ADAM/composer.lock
+
+#DS_Store
+*.DS_Store
+
+# ckEditor plugins
+!ADAM/web/bundles/ivoryckeditor/plugins
+
+# ckEditor skins
+!ADAM/web/bundles/ivoryckeditor/skins
+
 ADAM/composer.lock

@@ -2,6 +2,8 @@
   --descartes-rouge-color: #BB0F47;
   --descartes-grey-color: #F3F3F3;
   --descartes-brown-color: #554348;
+  --descartes-blue-color: #93B7BE;
+  --descartes-green-color: #8C9A9E;
 }
 
 html,
@@ -14,6 +16,10 @@ body {
     height: auto;
     margin: 0 auto auto;
     padding: 0 0 auto;
+    background-color: var(--descartes-grey-color);
+}
+
+#wrap.homepage {
     background-color: #444444;
 }
 
@@ -23,6 +29,7 @@ body {
 .block-container {
     padding: 54px 0 0 0;
     height: 100%;
+    overflow-x: hidden;
 }
 
 /*
@@ -35,7 +42,7 @@ nav.navbar {
     margin-bottom: 0;
     border: 0;
     top: 0;
-    height: 54px;   
+    height: 54px;
 }
 
 nav.navbar > .container-fluid {
@@ -62,7 +69,7 @@ nav.navbar > .container-fluid a.navbar-brand {
     cursor: default;
 }
 
-nav.navbar > .container-fluid a:not(.navbar-logo):not(.help-link):not(.user-name):hover {
+nav.navbar > .container-fluid a:not(.navbar-logo):not(.help-link):hover {
     background-color: var(--descartes-rouge-color);
     color: #E8E8E8;
 }
@@ -99,10 +106,10 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     clear: both;
     padding: 14px;
 }
-#login-dp .social-buttons{
+.social-buttons{
     margin: 12px 0;
 }
-#login-dp .social-buttons a{
+.social-buttons a{
     width: 32%;
 }
 #login-dp .form-group {
@@ -157,10 +164,8 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 .form-register {
     margin: 25px auto 15px auto;
     width: 75%;
-    border: 3px solid grey;
     padding: 10px;
     vertical-align: middle;
-    background-color: var(--descartes-grey-color);
     color: var(--descartes-rouge-color);
 }
 
@@ -199,6 +204,10 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     background-color: var(--descartes-grey-color);
 }
 
+.third-section {
+    position: relative;
+}
+
 .homepage-background {
     position: fixed;
     width: 100%;
@@ -213,10 +222,6 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 
 .homepage-logo .logo-ADAM {
     height: 300px;
-}
-
-.homepage-logo {
-    padding-top: 5%;
 }
 
 .homepage-logo,
@@ -290,17 +295,91 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     text-align: center;
 }
 
+.first-section .search-container {
+    padding-top: 50px;
+    z-index: 0;
+}
+
+.first-section .search-container .search-container-btn .search-btn {
+    background-color: var(--descartes-rouge-color);
+    background-image: var(--descartes-rouge-color);
+    border-color: var(--descartes-rouge-color);
+    text-shadow: none;
+    color: white;
+}
+
+.third-section .calendar-container {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 10px;
+    border: 2px solid var(--descartes-rouge-color);
+    background-color: white;
+}
+
+.third-section .calendar-container .ui-widget-header {
+    background-color: var(--descartes-rouge-color);
+}
+
+.third-section .calendar-container .fc-button-inner,
+.third-section .calendar-container .fc-header-title {
+    color: var(--descartes-rouge-color);
+}
+
+.third-section .section-title h2,
+.third-section .section-title h2:before,
+.third-section .section-title p {
+    color: white;
+}
+
+.third-section .calendar-container .fc-header .fc-header-right .fc-button {
+    z-index: 0;
+}
+
 /*
  * Registerd list
  */
 .registered-list-container {
     margin: 25px auto 15px auto;
     width: 90%;
-    border: 3px solid grey;
     padding: 10px;
     vertical-align: middle;
-    background-color: var(--descartes-grey-color);
+}
+
+.registered-list-container .add-user {
+    text-decoration:none;
     color: var(--descartes-rouge-color);
+}
+
+.registered-list-container #registreList_wrapper {
+    margin-top: 30px;
+}
+
+.registered-list-container #registreList_wrapper div:nth-child(2) {
+    overflow-x: auto;
+}
+
+.registered-list-container table td.action-container {
+    white-space: nowrap;
+}
+
+.registered-list-container table a.action-btn{
+    color: darken(var(--descartes-grey-color));
+    font-size: 20px;
+    text-decoration:none;
+}
+
+.registered-list-container table a.action-btn:hover{
+    color: var(--descartes-rouge-color);
+}
+
+.registered-list-container .table-hover thead {
+    color: var(--descartes-grey-color);
+    background-color: var(--descartes-rouge-color);
+}
+
+.registered-list-container #registreList.table.table-hover thead th:after{
+    color: var(--descartes-grey-color);
+    opacity: 1;
 }
 
 .registered-list-container .table-hover tbody tr td,
@@ -333,14 +412,334 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
 *  Politique de confidentialite
 */
 .confidentialite {
-    padding-left: 10%;
-    padding-right: 10%;
+    margin: 25px auto 15px auto;
+    width: 90%;
+    padding: 10px 5% 0 5%;
+    vertical-align: middle;
+    background-color: white;
     text-align: justify;
+
+}
+.confidentialite h2 {
+    color:var(--descartes-rouge-color);
+    padding-bottom: 50px;
+}
+.confidentialite h3 {
+    text-align: center;
+    color:var(--descartes-brown-color);
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.confidentialite h6 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.confidentialite .section-border {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    border-bottom: 1px solid #d6d6d6;
+}
+
+/*
+ * Advert form
+ */
+.form-advert {
+    margin: 25px auto 15px auto;
+    width: 75%;
+    padding: 10px;
+    vertical-align: middle;
+}
+.form-advert .btn.btn-registered {
+    background-image: initial;
+    background-color: var(--descartes-rouge-color);
+    color: white;
+    text-shadow: initial;
+}
+.form-advert h1 {
+    color: var(--descartes-brown-color);
+}
+.form-advert #evenDate span {
+    height: 20px;
+}
+.form-advert #evenDate input {
+    z-index: 0;
+    width: 92%;
+}
+
+/*
+ * Advert List
+ */
+.pageAdvertList{
+    width: 85%;
+    margin: 25px auto 15px auto;
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.pageAdvertList .btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+section.pageAdvertList .participate{
+    display: none;
+}
+
+.btn-add-advert,
+.btn-add-advert:hover {
+    background-image: initial;
+    background-color: var(--descartes-rouge-color);
+    color: white;
+    text-shadow: initial;
+}
+
+.pageAdvertList .panel-footer{
+    background-color: white;
+}
+
+.filter-container {
+    margin-top: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.filter-container label {
+    padding-left: 8px;
+    padding-right: 10px;
+}
+
+.filter-container .btn {
+    background-image: initial;
+    text-shadow: initial;
+}
+
+/*
+ * edit Advert
+ */
+.editAdvert {
+    width: 85%;
+    margin: 25px auto 15px auto;
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.editAdvert #edit_form-evenDate span {
+    height: 20px;
+}
+.editAdvert #edit_form-evenDate input {
+    z-index: 0;
+    width: 92%;
+}
+.editAdvert .group-btn input {
+    background-image: initial;
+    background-color: var(--descartes-rouge-color);
+    color: white;
+    text-shadow: initial;
+}
+
+/*
+* Mot de passe oublié
+*/
+.password-form {
+    margin: 10% auto;
+    width: 50%;
+    padding: 10px;
+    vertical-align: middle;
+    color: var(--descartes-rouge-color);
+}
+
+.password-form .btn-submit {
+    color : white;
+    background-color: var(--descartes-rouge-color);
+    margin: auto;
+    display: block;
+}
+
+.password-form .password-title {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+/*
+* Modifier le mot de passe
+*/
+.modif-password-form {
+    margin: 10% auto;
+    width: 50%;
+    padding: 10px;
+    vertical-align: middle;
+    color: var(--descartes-rouge-color);
+}
+
+.modif-password-form .btn-submit {
+    color : white;
+    background-color: var(--descartes-rouge-color);
+    margin: auto;
+    display: block;
+    border: 1px solid transparent;
+    border-radius: 4px;
+
+}
+
+.modif-password-form .modif-password-title {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.modif-password-form .submit-container {
+    margin-top: 30px;
+}
+
+/*
+* Page mot passe déjà demandé
+*/
+.already-request-container {
+    margin: 10% auto;
+    width: 50%;
+    padding: 10px;
+    vertical-align: middle;
+    background-color:white;
+    color: var(--descartes-rouge-color);
+}
+
+
+/*
+* Confirmation d'inscription page
+*/
+.register-confirmation {
+    margin: 10% auto;
+    width: 50%;
+    padding: 10px;
+    vertical-align: middle;
+    background-color:white;
+    color: var(--descartes-rouge-color);
+}
+
+/*
+* Confirmation d'envoi d'email pour reinitialiser le mot de passe
+*/
+.confirm-email {
+    margin: 10% auto;
+    width: 50%;
+    padding: 10px;
+    vertical-align: middle;
+    background-color: var(--descartes-grey-color);
+    color: var(--descartes-rouge-color);
+}
+
+/*
+* Barre de simulation d'un utilisateur
+*/
+.simulation-bar {
+    background-color: var(--descartes-rouge-color);
+    height : 30px;
+    padding : 5px;
+    color: white;
+}
+
+.simulation-bar a{
+    color: var(--descartes-blue-color);
+}
+
+/*
+*  Conditions générales d'utilisation du site
+*/
+.conditions {
+    margin: 25px auto 15px auto;
+    width: 90%;
+    padding: 10px 5% 0 5%;
+    vertical-align: middle;
+    background-color: white;
+    text-align: justify;
+}
+
+.conditions h2 {
+    color: var(--descartes-rouge-color);
+    padding-bottom: 50px;
+}
+
+/*
+ * Calendar
+ */
+ #fullCalModal a {
+    color: white;
+ }
+
+ #fullCalModal .modal-header {
+    background-color: var(--descartes-grey-color);
+ }
+
+/*
+ * Profil
+ */
+.profil .profil-menu li a{
+    color: black;
+    border-radius: 0px;
+}
+
+.profil .profil-menu li.active a{
+    color: var(--descartes-rouge-color);
+    background-color: white;
+}
+
+.profil .profil-menu li.profil-title a:hover {
     background-color: var(--descartes-grey-color);
 }
-.confidentialite h2{
-    color:var(--descartes-rouge-color);
+
+.profil .profil-container {
+    margin-top: 30px;
 }
-.confidentialite h3{
-    color:var(--descartes-brown-color);
+
+.profil .profil-container .form {
+    margin: 25px auto 15px auto;
+    width: 75%;
+    padding: 10px;
+    vertical-align: middle;
+    background-color: white;
+    color: var(--descartes-rouge-color);
+}
+
+.profil .profil-value {
+    color: black;
+}
+
+.profil .profil-btn-container {
+    text-align: right;
+}
+
+.profil .profil-container .btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+
+.group-btn {
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+.group-btn .btn-register {
+    margin: initial;
+    display: initial;
+}
+
+.group-btn .btn-cancel {
+    background-image: initial;
+    text-shadow: none;
 }
