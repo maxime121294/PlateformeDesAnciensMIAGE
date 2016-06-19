@@ -33,7 +33,7 @@ class MissionController extends Controller
             $request->query->getInt('page', 1)/*page number*/,
             5 /*limit per page*/
         );
-        return $this->render('AppBundle:mission:index.html.twig', array(
+        return $this->render('AppBundle:Mission:index.html.twig', array(
             'pagination' => $pagination,
             'missions' => $missions,
         ));
