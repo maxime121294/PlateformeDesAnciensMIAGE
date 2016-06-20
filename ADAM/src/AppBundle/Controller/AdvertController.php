@@ -194,9 +194,10 @@ class AdvertController extends Controller
     /**
      * 
      * @Route("/upload", name="upload")
+     * @Route("/{id}/upload", name="upload")
      * @Method({"GET", "POST"})
      */
-    public function uploadAction()
+    public function uploadAction($id=null)
     {
         if (empty($_FILES['upload'])) {
             return new JsonResponse(['error'=>'No files found for upload.']);
@@ -269,7 +270,9 @@ class AdvertController extends Controller
         $category = $request->get('category');
 
         if(array_key_exists('filtre', $category) && $form->isSubmitted() && $form->isValid()) {
-            $adverts = $em->getRepository('AppBundle:Advert')->findByCategory($category['filtre']);
+            $adverts = $em->getRepository('AppBundle:Advert')->findBy(
+                array('category' => $category['filtre'])
+            );
             return $this->render('AppBundle:advert:search.html.twig', array(
                 'pagination' => $adverts,
                 'filter_form' => $form->createView(),
