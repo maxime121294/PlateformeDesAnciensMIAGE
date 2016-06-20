@@ -27,8 +27,7 @@ class MissionController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
-        $mission = $em->getRepository('AppBundle:Mission')->findBy(array('user' => $user->getId()));
-
+        $mission = $em->getRepository('AppBundle:Mission')->findOneByUser($user->getId());
 
         return $this->render('AppBundle:Mission:index.html.twig', array(
             'mission' => $mission,
