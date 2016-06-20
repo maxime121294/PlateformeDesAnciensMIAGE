@@ -193,7 +193,6 @@ class AdvertController extends Controller
     }
     /**
      * 
-     * @Route("/upload", name="upload")
      * @Route("/upload/{id}", name="upload")
      * @Method({"GET", "POST"})
      */
