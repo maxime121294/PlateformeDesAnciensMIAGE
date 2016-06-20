@@ -141,8 +141,7 @@ class AdvertController extends Controller
     }
 
     /**
-     * Supprimer un post. 
-     *
+     * Supprimer un post
      *
      * @Route("/remove-{id}", name="advert_remove")
      * @Security("has_role('ROLE_USER')")
@@ -159,7 +158,7 @@ class AdvertController extends Controller
 
 
     /**
-     * Ajoute ou retire un user à un evenement
+     * Ajoute ou retire un user à un événement
      *
      * @Route("/participate/{id}", name="annonce_participate")
      * @Method({"GET"})
@@ -192,6 +191,7 @@ class AdvertController extends Controller
         return new JsonResponse($message);
     }
     /**
+     * Upload un fichier vers le serveur
      * 
      * @Route("/upload/{id}", name="upload")
      * @Method({"GET", "POST"})
@@ -254,7 +254,6 @@ class AdvertController extends Controller
     /**
      * Filtre la recherche par types d'annonce multiples. 
      *
-     *
      * @Route("/filter", name="advert_filter")
      * @Method({"POST"})
      */
@@ -282,6 +281,8 @@ class AdvertController extends Controller
     }
 
     /**
+     * Filtre les annonces en fonction de la recherche effectuée sur les titres et contenus.
+     *
      * @Route("/search", name="search")
      */
     public function liveSearchAction(Request $request)

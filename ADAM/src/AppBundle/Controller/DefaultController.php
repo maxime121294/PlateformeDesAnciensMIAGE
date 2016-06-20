@@ -11,7 +11,7 @@ class DefaultController extends Controller
 {
 
     /**
-     * reourne l'url de la page précedente.
+     * Retourne l'url de la page précedente.
      */
     private function getRefererRoute()
     {
@@ -61,6 +61,8 @@ class DefaultController extends Controller
     }
 
     /**
+     * Affichage de la page des mentions légales
+     *
      * @Route("/security/", name="security")
      */
     public function securityAction(Request $request)
@@ -77,6 +79,8 @@ class DefaultController extends Controller
     }
 
     /**
+     * Affichage de la page des conditions générales d'utilisation
+     *
      * @Route("/conditions-generales/", name="conditions_generales")
      */
     public function conditionAction(Request $request)
