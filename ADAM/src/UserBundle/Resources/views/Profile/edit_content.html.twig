@@ -82,7 +82,9 @@
 		$(function() {
 			$('#birthday').datetimepicker({
 			    format: "DD/MM/YYYY",
-			    locale: "fr"
+			    locale: "fr",
+			    maxDate: moment(moment().format('MM/D/YY')),
+			    useCurrent: false
 			});
 			$('#graduateYear').datetimepicker({
 				viewMode: 'years',
