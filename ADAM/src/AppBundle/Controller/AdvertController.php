@@ -269,9 +269,7 @@ class AdvertController extends Controller
         $category = $request->get('category');
 
         if(array_key_exists('filtre', $category) && $form->isSubmitted() && $form->isValid()) {
-            $adverts = $em->getRepository('AppBundle:Advert')->findBy(
-                array('category' => $category['filtre'])
-            );
+            $adverts = $em->getRepository('AppBundle:Advert')->findByCategory($category['filtre']);
             return $this->render('AppBundle:advert:search.html.twig', array(
                 'pagination' => $adverts,
                 'filter_form' => $form->createView(),
