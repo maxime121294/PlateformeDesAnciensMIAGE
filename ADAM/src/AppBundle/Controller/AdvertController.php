@@ -98,7 +98,7 @@ class AdvertController extends Controller
     /**
      * Finds and displays a Advert entity.
      *
-     * @Route("/{id}", name="annonce_show")
+     * @Route("/{id}", name="annonce_show", requirements={"id": "\d+"})
      * @Method("GET")
      */
     public function showAction(Advert $advert, Request $request)
@@ -194,7 +194,7 @@ class AdvertController extends Controller
     /**
      * 
      * @Route("/upload", name="upload")
-     * @Route("/{id}/upload", name="upload")
+     * @Route("/upload/{id}", name="upload")
      * @Method({"GET", "POST"})
      */
     public function uploadAction($id=null)
