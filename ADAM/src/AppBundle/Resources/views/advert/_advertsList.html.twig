@@ -64,20 +64,35 @@
                                         <a href="{{ path('annonce_index', { categoryId: advert.category.id }) }}"><span class="label label-default pull-left">{{ advert.category }}</span></a>
                                     </div>
                                     <div class="col-sm-7">
+                                        <div class="row">
                                         <h5 class="pull-right">
                                             {% if advert.category == "Événement" and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                                                {% if app.user in advert.users %}
-                                                    <button id="buttonParticipate{{ advert.id }}" class="btn btn-danger">Je ne participe pas</button>
-                                                {% else %}
-                                                    <button id="buttonParticipate{{ advert.id }}" class="btn btn-success">Je participe</button>
-                                                {% endif %}
+                                                
+                                                    {% if app.user in advert.users %}
+                                                        <button id="buttonParticipate{{ advert.id }}" class="btn btn-danger">Je ne participe pas</button>
+                                                    {% else %}
+                                                        <button id="buttonParticipate{{ advert.id }}" class="btn btn-success">Je participe</button>
+                                                    {% endif %}
+
+                                                
                                             {% endif %}
                                             {% if advert.author == app.user or is_granted("ROLE_ADMIN") %}
                                                 <a type="button" href="{{ path('annonce_edit', { 'id': advert.id }) }}" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-pencil"></i></a>
 
                                                 <a class="btn btn-danger btn-circle supress" href="#" data-toggle="modal" data-target="#ModalDeleteAdvert" data-href="{{ path('advert_remove', {'id': advert.id}) }}"><i class="glyphicon glyphicon-remove"></i></a>
                                             {% endif %}
+
                                         </h5>
+                                        </div>
+                                        {% if advert.category == "Événement" and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                            {% if advert.users|length > 0 %}
+                                                <div id="classNbParticipate" class="pull-right">
+                                                    <p id="nbParticipate{{ advert.id }}" class="dropdown-toggle" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+                                                      {{ advert.users|length }} participants
+                                                    </p>
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="alert alert-success participate" id="alert_participate_success{{ advert.id }}" role="alert">
@@ -128,6 +143,21 @@
                     alertError.fadeToggle(200, function(){
                         alertError.fadeOut(3500);
                     });
+                }
+            });
+
+            $.ajax({
+                url: "{{ path('annonce_nbparticipate', { 'id': advert.id }) }}",
+                dataType: "json",
+                success: function(data) {
+                    var label = $('#nbParticipate{{ advert.id }}');
+                    if (data != 0) {
+                        label.removeClass("hidden");
+                        label.html(data + ' participants');
+                    }
+                    else{
+                        label.addClass("hidden");
+                    }
                 }
             });
         });

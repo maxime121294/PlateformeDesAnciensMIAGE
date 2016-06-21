@@ -190,6 +190,27 @@ class AdvertController extends Controller
         
         return new JsonResponse($message);
     }
+
+    /**
+     * Determine le nombre de participants à un evnement
+     *
+     * @Route("/nbParticipate/{id}", name="annonce_nbparticipate")
+     * @Method({"GET"})
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function numberParticipateAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $advert = $em->getRepository('AppBundle:Advert')
+                ->find($id);
+
+        $participates = $advert->getUsers(); 
+        $nbParticipates = count($participates);   
+        
+        return new JsonResponse($nbParticipates);
+    }
+
     /**
      * Upload un fichier vers le serveur
      * 
