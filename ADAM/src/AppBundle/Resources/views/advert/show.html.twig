@@ -77,6 +77,7 @@
         </div>
         <script type="text/javascript">
             $('#buttonParticipate{{ advert.id }}').click(function() {
+                $('#buttonParticipate{{ advert.id }}').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin"></i> Chargement...');
                 $.ajax({
                     url: "{{ path('annonce_participate', { 'id': advert.id }) }}",
                     dataType: "json",
@@ -94,11 +95,14 @@
                             button.html('Je participe');
                         }
 
+                        button.prop('disabled', false);
+
                         alertSucess.fadeToggle(200, function(){
                             alertSucess.fadeOut(3500);
                         });
                     },
                     error: function() {
+                        $('#buttonParticipate{{ advert.id }}').prop('disabled', false);
                         var alertError = $('#alert_participate_danger{{ advert.id }}');
 
                         alertError.fadeToggle(200, function(){
