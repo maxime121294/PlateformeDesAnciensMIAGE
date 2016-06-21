@@ -159,6 +159,7 @@ class AdvertController extends Controller
 
     /**
      * Ajoute ou retire un user à un événement
+     * Retourne le nombre de participants à un événement
      *
      * @Route("/participate/{id}", name="annonce_participate")
      * @Method({"GET"})
@@ -187,28 +188,12 @@ class AdvertController extends Controller
             $em->flush();
             $message = "NO";
         }
-        
-        return new JsonResponse($message);
-    }
+        $nbParticipates = count($participates);
 
-    /**
-     * Determine le nombre de participants à un evnement
-     *
-     * @Route("/nbParticipate/{id}", name="annonce_nbparticipate")
-     * @Method({"GET"})
-     * @Security("has_role('ROLE_USER')")
-     */
-    public function numberParticipateAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
+        $data['message'] = $message;
+        $data['nbParticipates'] = $nbParticipates;
 
-        $advert = $em->getRepository('AppBundle:Advert')
-                ->find($id);
-
-        $participates = $advert->getUsers(); 
-        $nbParticipates = count($participates);   
-        
-        return new JsonResponse($nbParticipates);
+        return new JsonResponse($data);
     }
 
     /**
@@ -216,8 +201,9 @@ class AdvertController extends Controller
      * 
      * @Route("/upload/{id}", name="upload")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
      */
-    public function uploadAction($id=null)
+    public function uploadAction($id = null)
     {
         if (empty($_FILES['upload'])) {
             return new JsonResponse(['error'=>'No files found for upload.']);

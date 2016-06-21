@@ -85,13 +85,11 @@
                                         </h5>
                                         </div>
                                         {% if advert.category == "Événement" and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                                            {% if advert.users|length > 0 %}
-                                                <div id="classNbParticipate" class="pull-right">
-                                                    <p id="nbParticipate{{ advert.id }}" class="dropdown-toggle" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
-                                                      {{ advert.users|length }} participants
-                                                    </p>
-                                                </div>
-                                            {% endif %}
+                                            <div class="pull-right">
+                                                <p id="nbParticipate{{ advert.id }}" class="dropdown-toggle" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+                                                    <span id="countParticipates">{{ advert.users|length }}</span> participant(s)
+                                                </p>
+                                            </div>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -116,11 +114,12 @@
             $.ajax({
                 url: "{{ path('annonce_participate', { 'id': advert.id }) }}",
                 dataType: "json",
-                success: function(response) {
+                success: function(data) {
                     var button = $('#buttonParticipate{{ advert.id }}');
+                    var counter = $('#nbParticipate{{ advert.id }} #countParticipates');
                     var alertSucess = $('#alert_participate_success{{ advert.id }}');
 
-                    if (response == 'YES') {
+                    if (data['message'] === 'YES') {
                         button.removeClass("btn-success");
                         button.addClass("btn-danger");
                         button.html('Je ne participe pas');
@@ -129,6 +128,8 @@
                         button.addClass("btn-success");
                         button.html('Je participe');
                     }
+
+                    counter.html(data['nbParticipates']);
 
                     button.prop('disabled', false);
 
@@ -143,21 +144,6 @@
                     alertError.fadeToggle(200, function(){
                         alertError.fadeOut(3500);
                     });
-                }
-            });
-
-            $.ajax({
-                url: "{{ path('annonce_nbparticipate', { 'id': advert.id }) }}",
-                dataType: "json",
-                success: function(data) {
-                    var label = $('#nbParticipate{{ advert.id }}');
-                    if (data != 0) {
-                        label.removeClass("hidden");
-                        label.html(data + ' participants');
-                    }
-                    else{
-                        label.addClass("hidden");
-                    }
                 }
             });
         });
