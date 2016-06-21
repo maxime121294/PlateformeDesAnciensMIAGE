@@ -25,17 +25,12 @@ class MissionController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
 
-        $missions = $em->getRepository('AppBundle:Mission')->findBy(array(), array('updatedAt' => 'desc'));
-        $paginator  = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $missions, /* query NOT result */
-            $request->query->getInt('page', 1)/*page number*/,
-            5 /*limit per page*/
-        );
-        return $this->render('AppBundle:mission:index.html.twig', array(
-            'pagination' => $pagination,
-            'missions' => $missions,
+        $mission = $em->getRepository('AppBundle:Mission')->findOneByUser($user->getId());
+
+        return $this->render('AppBundle:Mission:index.html.twig', array(
+            'mission' => $mission,
         ));
     }
 

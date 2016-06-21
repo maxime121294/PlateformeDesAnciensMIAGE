@@ -98,7 +98,7 @@ class AdvertController extends Controller
     /**
      * Finds and displays a Advert entity.
      *
-     * @Route("/show/{id}", name="annonce_show")
+     * @Route("/{id}", name="annonce_show", requirements={"id": "\d+"})
      * @Method("GET")
      */
     public function showAction(Advert $advert, Request $request)
@@ -141,8 +141,7 @@ class AdvertController extends Controller
     }
 
     /**
-     * Supprimer un post. 
-     *
+     * Supprimer un post
      *
      * @Route("/remove-{id}", name="advert_remove")
      * @Security("has_role('ROLE_USER')")
@@ -159,7 +158,7 @@ class AdvertController extends Controller
 
 
     /**
-     * Ajoute ou retire un user à un evenement
+     * Ajoute ou retire un user à un événement
      *
      * @Route("/participate/{id}", name="annonce_participate")
      * @Method({"GET"})
@@ -192,11 +191,12 @@ class AdvertController extends Controller
         return new JsonResponse($message);
     }
     /**
+     * Upload un fichier vers le serveur
      * 
-     * @Route("/upload", name="upload")
+     * @Route("/upload/{id}", name="upload")
      * @Method({"GET", "POST"})
      */
-    public function uploadAction()
+    public function uploadAction($id=null)
     {
         if (empty($_FILES['upload'])) {
             return new JsonResponse(['error'=>'No files found for upload.']);
@@ -254,7 +254,6 @@ class AdvertController extends Controller
     /**
      * Filtre la recherche par types d'annonce multiples. 
      *
-     *
      * @Route("/filter", name="advert_filter")
      * @Method({"POST"})
      */
@@ -269,9 +268,7 @@ class AdvertController extends Controller
         $category = $request->get('category');
 
         if(array_key_exists('filtre', $category) && $form->isSubmitted() && $form->isValid()) {
-            $adverts = $em->getRepository('AppBundle:Advert')->findBy(
-                array('category' => $category['filtre'])
-            );
+            $adverts = $em->getRepository('AppBundle:Advert')->findByCategory($category['filtre']);
             return $this->render('AppBundle:advert:search.html.twig', array(
                 'pagination' => $adverts,
                 'filter_form' => $form->createView(),
@@ -284,6 +281,8 @@ class AdvertController extends Controller
     }
 
     /**
+     * Filtre les annonces en fonction de la recherche effectuée sur les titres et contenus.
+     *
      * @Route("/search", name="search")
      */
     public function liveSearchAction(Request $request)
