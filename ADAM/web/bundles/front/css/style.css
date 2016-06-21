@@ -728,6 +728,10 @@ section.pageAdvertList .participate{
     border-radius: 15px;
 }
 
+.profil.form-register {
+    min-height: 510px;
+}
+
 .group-btn {
     display: block;
     margin: auto;

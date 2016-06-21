@@ -1,6 +1,6 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div class="form-register">
+<div class="form-register profil">
 {{ form_start(form, {'method': 'post', 'action': path('profile_update'), 'attr': {'class': 'fos_user_registration_register'}}) }}
 	<div class="form-group row">
 	    {{ form_label(form.firstname, null, { 'label_attr': {'class': 'col-sm-3 form-control-label'}}) }}
@@ -69,3 +69,31 @@
 	</div>
 {{ form_end(form) }}
 </div>
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/front/css/libs/bootstrap-datetimepicker.min.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{asset('bundles/front/js/libs/moment-with-locales.js')}}"></script>
+    <script type="text/javascript" src="{{asset('bundles/front/js/libs/bootstrap-datetimepicker.js')}}"></script>
+
+	<script>
+		$(function() {
+			$('#birthday').datetimepicker({
+			    format: "DD/MM/YYYY",
+			    locale: "fr",
+			    maxDate: moment(moment().format('MM/D/YY')),
+			    useCurrent: false
+			});
+			$('#graduateYear').datetimepicker({
+				viewMode: 'years',
+			    format: "YYYY",
+			    locale: "fr",
+			    minDate: "2000",
+                useCurrent: false
+			});
+		});
+	</script>
+{% endblock %}
+

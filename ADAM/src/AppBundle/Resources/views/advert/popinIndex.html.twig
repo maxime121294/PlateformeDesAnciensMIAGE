@@ -18,14 +18,15 @@
                               <a href="{{ path('hwi_oauth_service_redirect', {'service':'linkedin'}) }}" class="btn btn-linkedin"><i class="fa fa-linkedin"></i></a>
                           </div>
                           <form id="loginForm" method="POST" action="{{ path("fos_user_security_check") }}" novalidate="novalidate">
+                              <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
                               <div class="form-group">
                                   <label for="username" class="control-label">{{ 'profile.show.email'|trans }}</label>
-                                  <input type="text" class="form-control" id="username" name="username" value="" required="" title="Votre adresse mail" placeholder="example@gmail.com">
+                                  <input type="text" class="form-control" id="username" name="_username" value="" required="" title="Votre adresse mail" placeholder="example@gmail.com">
                                   <span class="help-block"></span>
                               </div>
                               <div class="form-group">
                                   <label for="password" class="control-label">{{ 'security.login.password'|trans }}</label>
-                                  <input type="password" class="form-control" id="password" name="password" value="" required="" title="Votre mot de passe">
+                                  <input type="password" class="form-control" id="password" name="_password" value="" required="" title="Votre mot de passe">
                                   <span class="help-block"></span>
                               </div>
                               <div id="loginErrorMsg" class="alert alert-error hide">L'adresse mail ou le mot de passe sont invalides</div>

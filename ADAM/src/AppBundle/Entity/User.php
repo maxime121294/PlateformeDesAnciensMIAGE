@@ -94,9 +94,7 @@ class User extends BaseUser
      * @ORM\Column(name="graduateYear", type="integer", nullable=true)
      * @Assert\Range(
      *      min = 2000,
-     *      max = 2016,
-     *      minMessage = "Année minimum : {{ limit }}",
-     *      maxMessage = "Année maximum : {{ limit }}"
+     *      minMessage = "Année minimum : {{ limit }}"
      * )
      */
     private $graduateYear;
