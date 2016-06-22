@@ -36,9 +36,9 @@
                                     <h5 class="pull-right">
                                         {% if advert.category == "Événement" and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                                             {% if app.user in advert.users %}
-                                                <button id="buttonParticipate{{ advert.id }}" class="btn btn-danger">Je ne participe pas</button>
+                                                <button id="buttonParticipate{{ advert.id }}" data-value="" class="btn btn-danger">Je ne participe pas</button>
                                             {% else %}
-                                                <button id="buttonParticipate{{ advert.id }}" class="btn btn-success">Je participe</button>
+                                                <button id="buttonParticipate{{ advert.id }}" data-value="" class="btn btn-success">Je participe</button>
                                             {% endif %}
                                         {% endif %}
                                         {% if advert.author == app.user or is_granted("ROLE_ADMIN") %}
@@ -74,7 +74,9 @@
 
 <script type="text/javascript">
     $('#buttonParticipate{{ advert.id }}').click(function() {
-        $('#buttonParticipate{{ advert.id }}').prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin"></i> Chargement...');
+        var button = $('#buttonParticipate{{ advert.id }}');
+        button.data("value", button.html());
+        button.prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin"></i> Chargement...');
         $.ajax({
             url: "{{ path('annonce_participate', { 'id': advert.id }) }}",
             dataType: "json",
@@ -102,14 +104,18 @@
                 });
             },
             error: function() {
-                $('#buttonParticipate{{ advert.id }}').prop('disabled', false);
                 var alertError = $('#alert_participate_danger{{ advert.id }}');
+                var button = $('#buttonParticipate{{ advert.id }}');
+                
+                button.prop('disabled', false);
+                button.html(button.data("value"));
 
                 alertError.fadeToggle(200, function(){
                     alertError.fadeOut(3500);
                 });
             }
         });
+
     });
 </script>
 
