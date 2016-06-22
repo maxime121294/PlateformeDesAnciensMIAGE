@@ -33,16 +33,18 @@ class RegistrationType extends AbstractType
                 "label" => "Type de diplôme obtenu",
                 "class" => "AppBundle:Degree",
                 "required" => false,
-                "placeholder" => "Selectionner un type de diplôme",
+                "placeholder" => "Sélectionner un type de diplôme",
 				"choices_as_values" => true,
             ))
              ->add('graduateYear', TextType::class, array(
                 "label" => "Année d'obtention du diplôme",
+                'attr' => array("placeholder" => "AAAA"),
                 "required" => false,
             ))
             ->add('birthday', DateType::class, array(
                 "label" => "Date de naissance",
                 'widget' => 'single_text',
+                'attr' => array("placeholder" => "JJ/MM/AAAA"),
                 'format' => 'dd/MM/yyyy',
                 "required" => false,
             ))
