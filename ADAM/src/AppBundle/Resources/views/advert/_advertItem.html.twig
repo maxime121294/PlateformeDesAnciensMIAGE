@@ -1,0 +1,131 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10">
+            <div id="postlist">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="text-center">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <h3 class="pull-left">{{ advert.title }}</h3>
+                                </div>
+                                <div class="col-sm-3">
+                                    <h4 class="pull-right">
+                                    <small>{{ advert.author.firstname }} {{ advert.author.lastname }}</small><br>
+                                    <small>Modifié le <em> {% if advert.updatedAt %}{{ advert.updatedAt|localizeddate('full', 'none') }}{% endif %} </em></small>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  %}
+                    <div class="panel-body">
+                        {{ advert.content|raw  }}
+                    </div>
+                {% endif %}
+
+                    <div class="panel-footer">
+                        <div class="text-center">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <a href="{{ path('annonce_index', { categoryId: advert.category.id }) }}"><span class="label label-default pull-left">{{ advert.category }}</span></a>
+                                </div>
+                                <div class="col-sm-7">
+                                    <h5 class="pull-right">
+                                        {% if advert.category == "Événement" and is_granted('IS_AUTHENTICATED_REMEMBERED') and date(advert.evenementDate) > date() and not is_granted('ROLE_SUPER_ADMIN') %}
+                                            {% if app.user in advert.users %}
+                                                <button id="buttonParticipate{{ advert.id }}" data-value="" class="btn btn-danger">Je ne participe pas</button>
+                                            {% else %}
+                                                <button id="buttonParticipate{{ advert.id }}" data-value="" class="btn btn-success">Je participe</button>
+                                            {% endif %}
+                                        {% endif %}
+                                        {% if advert.author == app.user or is_granted("ROLE_ADMIN") %}
+                                            <a type="button" href="{{ path('annonce_edit', { 'id': advert.id }) }}" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-pencil"></i></a>
+
+                                            <a class="btn btn-danger btn-circle supress" href="#" data-toggle="modal" data-target="#ModalDeleteAdvert" data-href="{{ path('advert_remove', {'id': advert.id}) }}"><i class="glyphicon glyphicon-remove"></i></a>
+                                        {% endif %}
+                                    </h5>
+                                </div>
+                                {% if advert.category == "Événement" and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                    <div class="col-sm-12">
+                                        <div class="pull-right">
+                                            <p id="nbParticipate{{ advert.id }}">
+                                                {% if advert.author == app.user or is_granted('ROLE_SUPER_ADMIN') %}
+                                                    <a href="{{ path('annonce_show', { id: advert.id }) }}"><span id="countParticipates">{{ advert.users|length }}</span> participant(s)</a>
+                                                {% else %}
+                                                    <span id="countParticipates">{{ advert.users|length }}</span> participant(s)
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="alert alert-success participate" id="alert_participate_success{{ advert.id }}" role="alert">
+                                Votre choix a bien été pris en compte !
+                            </div>
+                             <div class="alert alert-danger participate" id="alert_participate_danger{{ advert.id }}" role="alert">
+                                <strong>Désolé ! Une erreur est survenue.</strong>
+                                Votre choix n'a pas été pris en compte
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#buttonParticipate{{ advert.id }}').click(function() {
+        var button = $('#buttonParticipate{{ advert.id }}');
+        button.data("value", button.html());
+        button.prop('disabled', true).html('<i class="fa fa-circle-o-notch fa-spin"></i> Chargement...');
+        $.ajax({
+            url: "{{ path('annonce_participate', { 'id': advert.id }) }}",
+            dataType: "json",
+            success: function(data) {
+                var button = $('#buttonParticipate{{ advert.id }}');
+                var counter = $('#nbParticipate{{ advert.id }} #countParticipates');
+                var alertSucess = $('#alert_participate_success{{ advert.id }}');
+
+                if (data['message'] === 'YES') {
+                    button.removeClass("btn-success");
+                    button.addClass("btn-danger");
+                    button.html('Je ne participe pas');
+                } else {
+                    button.removeClass("btn-danger");
+                    button.addClass("btn-success");
+                    button.html('Je participe');
+                }
+
+                counter.html(data['nbParticipates']);
+
+                button.prop('disabled', false);
+
+                alertSucess.fadeToggle(200, function(){
+                    alertSucess.fadeOut(3500);
+                });
+            },
+            error: function() {
+                var alertError = $('#alert_participate_danger{{ advert.id }}');
+                var button = $('#buttonParticipate{{ advert.id }}');
+
+                button.prop('disabled', false);
+                button.html(button.data("value"));
+
+                alertError.fadeToggle(200, function(){
+                    alertError.fadeOut(3500);
+                });
+            }
+        });
+
+    });
+</script>
+
+<script type="text/javascript">
+    $(".supress").click(function(){
+        var actionadvert = $(this).data('href');
+        $('#removeadvert').attr('action', actionadvert);
+    })
+</script>

@@ -4,48 +4,48 @@
     <div id="login-overlay" class="modal-dialog">
         <div class="modal-content">
         	<div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Vous devez être connecté pour voir le contenu des annonces </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Vous devez être connecté pour voir le contenu des annonces </h4>
           	</div>
-              <div class="modal-body">
-                 <div class="row">
-                  <div class="col-xs-6">
-                      <div class="well">
-                          Se connecter via
-                          <div class="social-buttons col-sm-12">
-                              <a href="{{ path('hwi_oauth_service_redirect', {'service':'facebook'}) }}" class="btn btn-fb"><i class="fa fa-facebook"></i></a>
-                              <a href="{{ path('hwi_oauth_service_redirect', {'service':'google'}) }}" class="btn btn-google"><i class="fa fa-google"></i></a>
-                              <a href="{{ path('hwi_oauth_service_redirect', {'service':'linkedin'}) }}" class="btn btn-linkedin"><i class="fa fa-linkedin"></i></a>
-                          </div>
-                          <form id="loginForm" method="POST" action="{{ path("fos_user_security_check") }}" novalidate="novalidate">
-                              <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-                              <div class="form-group">
-                                  <label for="username" class="control-label">{{ 'profile.show.email'|trans }}</label>
-                                  <input type="text" class="form-control" id="username" name="_username" value="" required="" title="Votre adresse mail" placeholder="example@gmail.com">
-                                  <span class="help-block"></span>
-                              </div>
-                              <div class="form-group">
-                                  <label for="password" class="control-label">{{ 'security.login.password'|trans }}</label>
-                                  <input type="password" class="form-control" id="password" name="_password" value="" required="" title="Votre mot de passe">
-                                  <span class="help-block"></span>
-                              </div>
-                              <div id="loginErrorMsg" class="alert alert-error hide">L'adresse mail ou le mot de passe sont invalides</div>
-                              <div class="help-block text-right"><a href="{{ path('fos_user_resetting_request') }}" class="help-link">Mot de passe oublié ?</a></div>
-                              <button type="submit" class="btn btn-success btn-block">Connexion</button>
-                          </form>
-                      </div>
-                  </div>
-                  <div class="col-xs-6">
-                      <p class="lead">L'inscription est <span class="text-success">GRATUITE</span></p>
-                      <ul class="list-unstyled" style="line-height: 2">
-                          <li><span class="fa fa-check text-success"></span> Retrouvez vos anciens de votre promo</li>
-                          <li><span class="fa fa-check text-success"></span> Trouvez des annonces d'emploi</li>
-                          <li><span class="fa fa-check text-success"></span> Participez à des événements MIAGE</li>
-                      </ul>
-                      <p><a href="{{ path('fos_user_registration_register') }}" class="btn btn-info btn-block">Inscrivez-vous !</a></p>
-                  </div>
-              </div>
-             </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="well">
+                            Se connecter via
+                            <div class="social-buttons col-sm-12">
+                                <a href="{{ path('hwi_oauth_service_redirect', {'service':'facebook'}) }}" class="btn btn-fb"><i class="fa fa-facebook"></i></a>
+                                <a href="{{ path('hwi_oauth_service_redirect', {'service':'google'}) }}" class="btn btn-google"><i class="fa fa-google"></i></a>
+                                <a href="{{ path('hwi_oauth_service_redirect', {'service':'linkedin'}) }}" class="btn btn-linkedin"><i class="fa fa-linkedin"></i></a>
+                            </div>
+                            <form id="loginForm" method="POST" action="{{ path("fos_user_security_check") }}" novalidate="novalidate">
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                                <div class="form-group">
+                                    <label for="username" class="control-label">{{ 'profile.show.email'|trans }}</label>
+                                    <input type="text" class="form-control" id="username" name="_username" value="" required="" title="Votre adresse mail" placeholder="example@gmail.com">
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="control-label">{{ 'security.login.password'|trans }}</label>
+                                    <input type="password" class="form-control" id="password" name="_password" value="" required="" title="Votre mot de passe">
+                                    <span class="help-block"></span>
+                                </div>
+                                <div id="loginErrorMsg" class="alert alert-error hide">L'adresse mail ou le mot de passe sont invalides</div>
+                                <div class="help-block text-right"><a href="{{ path('fos_user_resetting_request') }}" class="help-link">Mot de passe oublié ?</a></div>
+                                <button type="submit" class="btn btn-success btn-block">Connexion</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <p class="lead">L'inscription est <span class="text-success">GRATUITE</span></p>
+                        <ul class="list-unstyled" style="line-height: 2">
+                            <li><span class="fa fa-check text-success"></span> Retrouvez vos anciens de votre promo</li>
+                            <li><span class="fa fa-check text-success"></span> Trouvez des annonces d'emploi</li>
+                            <li><span class="fa fa-check text-success"></span> Participez à des événements MIAGE</li>
+                        </ul>
+                        <p><a href="{{ path('fos_user_registration_register') }}" class="btn btn-info btn-block">Inscrivez-vous !</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

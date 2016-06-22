@@ -83,7 +83,7 @@
 
     <span class="form-group row">
         {{ form_widget(form.termsAccepted) }}
-        J'accepte les <a href="{{ path('conditions_generales') }}">conditions générales d'utilisation du site</a>.
+        <label for="fos_user_registration_form_termsAccepted">J'accepte les <a href="{{ path('conditions_generales') }}" target="_new">conditions générales d'utilisation du site</a>.</label>
         {{ form_errors(form.termsAccepted) }}
     </span>
 
