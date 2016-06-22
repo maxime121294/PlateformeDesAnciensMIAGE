@@ -104,9 +104,11 @@ class AdvertController extends Controller
     public function showAction(Advert $advert, Request $request)
     {
         $loginVariables = $this->get('user.security')->loginFormInstance($request);
+        $users = $advert->getUsers();
 
         return $this->render('AppBundle:advert:show.html.twig', array(
             'advert' => $advert,
+            'users' => $users,
             'last_username' => $loginVariables['last_username'],
             'error' => $loginVariables['error'],
             'csrf_token' => $loginVariables['csrf_token'],
