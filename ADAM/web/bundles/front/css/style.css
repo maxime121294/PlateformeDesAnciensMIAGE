@@ -445,6 +445,10 @@ nav.navbar > .container-fluid .navbar-nav.navbar-right > li.open a.dropdown-togg
     border-bottom: 1px solid #d6d6d6;
 }
 
+.confidentialite .btn-cancel {
+    margin-bottom: 10px;
+}
+
 /*
  * Advert form
  */
@@ -512,6 +516,7 @@ section.pageAdvertList .participate{
     border: 1px solid #ddd;
     padding-top: 10px;
     padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .filter-container label {
@@ -669,6 +674,9 @@ section.pageAdvertList .participate{
     padding-bottom: 50px;
 }
 
+.conditions .btn-cancel {
+    margin-bottom: 10px;
+}
 /*
  * Calendar
  */
@@ -726,6 +734,22 @@ section.pageAdvertList .participate{
     font-size: 12px;
     line-height: 1.428571429;
     border-radius: 15px;
+}
+
+.profil .profil-container h3 {
+    text-align: center;
+}
+
+.profil .profil-container .btn-add-mission {
+    background-color: var(--descartes-rouge-color);
+    color: white;
+    background-image: initial;
+    text-shadow: none;
+}
+
+
+.profil.form-register {
+    min-height: 510px;
 }
 
 .group-btn {

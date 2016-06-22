@@ -98,15 +98,17 @@ class AdvertController extends Controller
     /**
      * Finds and displays a Advert entity.
      *
-     * @Route("/show/{id}", name="annonce_show")
+     * @Route("/{id}", name="annonce_show", requirements={"id": "\d+"})
      * @Method("GET")
      */
     public function showAction(Advert $advert, Request $request)
     {
         $loginVariables = $this->get('user.security')->loginFormInstance($request);
+        $users = $advert->getUsers();
 
         return $this->render('AppBundle:advert:show.html.twig', array(
             'advert' => $advert,
+            'users' => $users,
             'last_username' => $loginVariables['last_username'],
             'error' => $loginVariables['error'],
             'csrf_token' => $loginVariables['csrf_token'],
@@ -141,8 +143,7 @@ class AdvertController extends Controller
     }
 
     /**
-     * Supprimer un post. 
-     *
+     * Supprimer un post
      *
      * @Route("/remove-{id}", name="advert_remove")
      * @Security("has_role('ROLE_USER')")
@@ -159,7 +160,8 @@ class AdvertController extends Controller
 
 
     /**
-     * Ajoute ou retire un user à un evenement
+     * Ajoute ou retire un user à un événement
+     * Retourne le nombre de participants à un événement
      *
      * @Route("/participate/{id}", name="annonce_participate")
      * @Method({"GET"})
@@ -173,30 +175,65 @@ class AdvertController extends Controller
         $advert = $em->getRepository('AppBundle:Advert')
                 ->find($id);
 
+        $author = $advert->getAuthor();
         $participates = $advert->getUsers();    
 
         if (!$participates->contains($user)) {
             $advert->addUser($user);
             $em->persist($advert);
             $em->flush();
-            $message = "YES";
+            $response = "YES";
+
+            // Si ce n'est pas l'auteur de l'événement qui a cliqué sur "je participe", on envoie un mail de notification
+            if ($user != $author) {
+                $app_base_url = $this->container->getParameter('app_base_url');
+                $fromEmail = $this->container->getParameter('mailer_user');
+                $fromName = $this->container->getParameter('mailer_name');
+                $showAdvertUrl = $app_base_url . $this->generateUrl('annonce_show', array('id' => $advert->getId()));
+
+                $message = \Swift_Message::newInstance()
+                ->setSubject('Notification de participation à votre événement !')
+                ->setFrom(array($fromEmail => $fromName))
+                ->setTo($author->getEmail())
+                ->addPart(
+                    $this->renderView(
+                        "AppBundle:advert:email_participate.txt.twig",
+                        array(
+                            'author' => $author,
+                            'user' => $user,
+                            'advert' => $advert,
+                            'showAdvertUrl' => $showAdvertUrl
+                        )
+                    ),
+                    'text/plain'
+                );
+
+                $this->get('mailer')->send($message);
+            }
         }
         else {
             $advert->removeUser($user);
             $em = $this->getDoctrine()->getManager();
             $em->persist($advert);
             $em->flush();
-            $message = "NO";
+            $response = "NO";
         }
-        
-        return new JsonResponse($message);
+        $nbParticipates = count($participates);
+
+        $data['message'] = $response;
+        $data['nbParticipates'] = $nbParticipates;
+
+        return new JsonResponse($data);
     }
+
     /**
+     * Upload un fichier vers le serveur
      * 
-     * @Route("/upload", name="upload")
+     * @Route("/upload/{id}", name="upload")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
      */
-    public function uploadAction()
+    public function uploadAction($id = null)
     {
         if (empty($_FILES['upload'])) {
             return new JsonResponse(['error'=>'No files found for upload.']);
@@ -254,7 +291,6 @@ class AdvertController extends Controller
     /**
      * Filtre la recherche par types d'annonce multiples. 
      *
-     *
      * @Route("/filter", name="advert_filter")
      * @Method({"POST"})
      */
@@ -269,9 +305,7 @@ class AdvertController extends Controller
         $category = $request->get('category');
 
         if(array_key_exists('filtre', $category) && $form->isSubmitted() && $form->isValid()) {
-            $adverts = $em->getRepository('AppBundle:Advert')->findBy(
-                array('category' => $category['filtre'])
-            );
+            $adverts = $em->getRepository('AppBundle:Advert')->findByCategory($category['filtre']);
             return $this->render('AppBundle:advert:search.html.twig', array(
                 'pagination' => $adverts,
                 'filter_form' => $form->createView(),
@@ -284,6 +318,8 @@ class AdvertController extends Controller
     }
 
     /**
+     * Filtre les annonces en fonction de la recherche effectuée sur les titres et contenus.
+     *
      * @Route("/search", name="search")
      */
     public function liveSearchAction(Request $request)

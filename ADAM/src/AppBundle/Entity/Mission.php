@@ -41,7 +41,7 @@ class Mission
      */
     private $name;
     /**
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\OneToOne(targetEntity="User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
