@@ -193,6 +193,35 @@ class AdvertController extends Controller
         $data['message'] = $message;
         $data['nbParticipates'] = $nbParticipates;
 
+        $app_base_url = $this->container->getParameter('app_base_url');
+        $homepage = $app_base_url . $this->generateUrl('homepage');
+        $fromEmail = $this->container->getParameter('mailer_user');
+        $fromName = $this->container->getParameter('mailer_name');
+        $author = $advert->getAuthor();
+        $showAdvertUrl = $app_base_url . $this->generateUrl('annonce_show', array('id' => $advert->getId()));
+        
+        // Si ce n'est pas l'auteur de l'événement qui a cliqué sur "je participe", on envoie un mail de notification
+        if ($user != $author) {
+            $message = \Swift_Message::newInstance()
+            ->setSubject('Notification de participation à votre événement !')
+            ->setFrom(array($fromEmail => $fromName))
+            ->setTo($author->getEmail())
+            ->addPart(
+                $this->renderView(
+                    "AppBundle:advert:email_participate.txt.twig",
+                    array(
+                        'author' => $author,
+                        'user' => $user,
+                        'advert' => $advert,
+                        'showAdvertUrl' => $showAdvertUrl
+                    )
+                ),
+                'text/plain'
+            );
+
+            $this->get('mailer')->send($message);
+        }
+
         return new JsonResponse($data);
     }
 

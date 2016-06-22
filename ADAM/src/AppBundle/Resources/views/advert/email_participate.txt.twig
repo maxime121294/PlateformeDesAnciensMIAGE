@@ -1,0 +1,21 @@
+{% block subject %}
+{% endblock %}
+
+{% block body_text %}
+{% autoescape false %}
+Bonjour {{ author.firstname }},
+
+{{ user.firstname|capitalize }} {{ user.lastname|capitalize }} vient d'annoncer sa participation à votre événement "{{ advert.title }}".
+
+Pour rappel, cet événement aura lieu le {{ advert.evenementDate|localizeddate('full', 'none') }}.
+
+N'hésitez pas à vous rendre sur le lien suivant afin de vérifier le nombre de participants :
+{{ showAdvertUrl }}
+
+Cordialement,
+L'équipe ADAM.
+{% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+{% endblock %}
