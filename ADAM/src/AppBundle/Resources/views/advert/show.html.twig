@@ -11,100 +11,8 @@
 
     {% if (advert.author == app.user) and advert.category == "Événement" %}
         <div class="registered-list-container">
-            <table class="table table-striped table-bordered table-hover" id="registreList">
-                <thead>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    {% if is_granted("ROLE_ADMIN") %}
-                        <th>Email</th>
-                        <th>Date d'inscription</th>
-                        <th>Date de naissance</th>
-                    {% endif %}
-                    <th>Diplôme</th>
-                    <th>Année d'obtention du diplôme</th>
-                    {% if is_granted("ROLE_ADMIN") %}
-                        <th>Actif</th>
-                        <th>Banni</th>
-                        <th>Role</th>
-                        <th>Actions</th>
-                    {% endif %}
-                </thead>
-                <tbody>
-                    {% for user in users %}
-                        {% if not ("ROLE_SUPER_ADMIN" in user.roles) %}
-                            <tr>
-                                <td>{{ user.lastname }}</td>
-                                <td>{{ user.firstname }}</td>
-                                {% if is_granted("ROLE_ADMIN") %}
-                                    <td>{{ user.email }}</td>
-                                    <td>{{ user.createdAt|localizeddate('long', 'none', app.request.locale ) }}</td>
-                                    <td>
-                                        {% if user.birthday %}
-                                            {{ user.birthday|localizeddate('long', 'none', app.request.locale ) }}</td>
-                                        {% endif %}
-                                {% endif %}
-                                <td>{{ user.graduate }}</td>
-                                <td>{{ user.graduateYear }}</td>
-                                {% if is_granted("ROLE_ADMIN") %}
-                                    <td>
-                                        {% if user.enabled %}
-                                            Oui
-                                        {% else %}
-                                            Non
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        {% if user.locked %}
-                                            Oui
-                                        {% else %}
-                                            Non
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        {% if "ROLE_ADMIN" in user.roles %}
-                                            Administateur
-                                        {% else %}
-                                            Utilisateur
-                                        {% endif %}
-                                    </td>
-                                {% endif %}
-                                {% if is_granted("ROLE_ADMIN") %}
-                                    <td class="action-container">
-                                        {% if "ROLE_SUPER_ADMIN" not in user.roles and "ROLE_ADMIN" not in user.roles %}
-                                            <a href="{{ path('user_ban', {'id': user.id}) }}" class="action-btn">
-                                                {% if user.locked %}
-                                                    <i class="fa fa-user" title="Rétablir l'utilisateur"></i>
-                                                {% else %}
-                                                    <i class="fa fa-minus-circle" title="Bannir l'utilisateur"></i>
-                                                {% endif %}
-                                            </a>
-                                        {% endif %}
-                                        {% if is_granted("ROLE_SUPER_ADMIN") and "ROLE_SUPER_ADMIN" not in user.roles %}
-                                            <a class="supress action-btn" href="#" data-toggle="modal" data-target="#ModalDeleteUser" data-href="{{ path('user_remove', {'id': user.id}) }}">
-                                                <i class="fa fa-trash-o" title="Supprimer l'utilisateur"></i>
-                                            </a>
-                                            <a href="{{ path('homepage', {'_switch_user': user.email }) }}" class="action-btn">
-                                                <i class="fa fa-user-secret" title="Simuler l'utilisateur"></i>
-                                            </a>
-                                            {% if "ROLE_ADMIN" not in user.roles %}
-                                                <a href="{{ path('role_toggle', {'action': 'promote', 'id': user.id}) }}" class="action-btn">
-                                                    <i class="fa fa-user-plus" title="Promouvoir l'utilisateur"></i>
-                                                </a>
-                                            {% else %}
-                                                <a href="{{ path('role_toggle', {'action': 'demote', 'id': user.id}) }}" class="action-btn">
-                                                    <i class="fa fa-user-times" title="Destituer l'utilisateur"></i>
-                                                </a>
-                                            {% endif %}
-                                        {% endif %}
-                                    </td>
-                                {% endif %}
-                            </tr>
-                        {% endif %}
-                    {% endfor %}
-                </tbody>
-            </table>
+            {% include 'AppBundle::_usersTable.html.twig' %}
         </div>
-        {% include 'AdminBundle::popinDeleteUser.html.twig' %}
     {% endif %}
 {% endblock %}
 
@@ -113,30 +21,6 @@
         $('#myModal').modal({
             backdrop: "static",
             keyboard: false
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#registreList').dataTable({
-                "oLanguage": {
-                    "sProcessing":      "Traitement en cours...",
-                    "sLengthMenu":      "Afficher _MENU_ éléments",
-                    "sZeroRecords":     "Aucun élément à afficher",
-                    "sInfo":            "Affichage de l'élement _START_ à _END_ sur _TOTAL_ éléments",
-                    "sInfoEmpty":       "Affichage de l'élement 0 à 0 sur 0 éléments",
-                    "sInfoFiltered":    "(filtré de _MAX_ éléments au total)",
-                    "sInfoPostFix":     "",
-                    "sSearch":          "Rechercher:",
-                    "sUrl":             "",
-                    "oPaginate": {
-                         "sFirst":      "Premier",
-                         "sPrevious":   "Précédent",
-                         "sNext":       "Suivant",
-                         "sLast":       "Dernier"
-                    }
-                }
-            });
         });
     </script>
 {% endblock %}

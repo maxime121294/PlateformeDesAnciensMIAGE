@@ -34,7 +34,7 @@
 {% block javascripts %}
     <script type="text/javascript">
         $(".supress").click(function(){
-            var actionadvert = $(this).attr('data-href');
+            var actionadvert = $(this).data('href');
             $('#removeadvert').attr('action', actionadvert);
         })
     </script>
