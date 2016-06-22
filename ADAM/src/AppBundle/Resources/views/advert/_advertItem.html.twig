@@ -48,13 +48,17 @@
                                     </h5>
                                 </div>
                                 {% if advert.category == "Événement" and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                                <div class="col-sm-12">
-                                    <div class="pull-right">
-                                        <p id="nbParticipate{{ advert.id }}" class="dropdown-toggle" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
-                                            <span id="countParticipates">{{ advert.users|length }}</span> participant(s)
-                                        </p>
+                                    <div class="col-sm-12">
+                                        <div class="pull-right">
+                                            <p id="nbParticipate{{ advert.id }}">
+                                                {% if advert.author == app.user %}
+                                                    <a href="{{ path('annonce_show', { id: advert.id }) }}"><span id="countParticipates">{{ advert.users|length }}</span> participant(s)</a>
+                                                {% else %}
+                                                    <span id="countParticipates">{{ advert.users|length }}</span> participant(s)
+                                                {% endif %}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
                                 {% endif %}
                             </div>
                             <div class="alert alert-success participate" id="alert_participate_success{{ advert.id }}" role="alert">
