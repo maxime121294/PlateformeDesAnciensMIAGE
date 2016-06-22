@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="col-sm-7">
                                     <h5 class="pull-right">
-                                        {% if advert.category == "Événement" and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                        {% if advert.category == "Événement" and is_granted('IS_AUTHENTICATED_REMEMBERED') and date(advert.evenementDate) > date() %}
                                             {% if app.user in advert.users %}
                                                 <button id="buttonParticipate{{ advert.id }}" data-value="" class="btn btn-danger">Je ne participe pas</button>
                                             {% else %}
