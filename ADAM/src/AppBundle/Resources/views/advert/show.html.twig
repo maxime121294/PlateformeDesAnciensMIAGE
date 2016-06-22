@@ -9,7 +9,7 @@
         {% endif %}
     </section>
 
-    {% if (advert.author == app.user) and advert.category == "Événement" %}
+    {% if advert.author == app.user and advert.category == "Événement" or is_granted('ROLE_SUPER_ADMIN') %}
         <div class="registered-list-container">
             {% include 'AppBundle::_usersTable.html.twig' %}
         </div>

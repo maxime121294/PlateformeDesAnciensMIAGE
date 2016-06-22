@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="col-sm-7">
                                     <h5 class="pull-right">
-                                        {% if advert.category == "Événement" and is_granted('IS_AUTHENTICATED_REMEMBERED') and date(advert.evenementDate) > date() %}
+                                        {% if advert.category == "Événement" and is_granted('IS_AUTHENTICATED_REMEMBERED') and date(advert.evenementDate) > date() and not is_granted('ROLE_SUPER_ADMIN') %}
                                             {% if app.user in advert.users %}
                                                 <button id="buttonParticipate{{ advert.id }}" data-value="" class="btn btn-danger">Je ne participe pas</button>
                                             {% else %}
@@ -51,7 +51,7 @@
                                     <div class="col-sm-12">
                                         <div class="pull-right">
                                             <p id="nbParticipate{{ advert.id }}">
-                                                {% if advert.author == app.user %}
+                                                {% if advert.author == app.user or is_granted('ROLE_SUPER_ADMIN') %}
                                                     <a href="{{ path('annonce_show', { id: advert.id }) }}"><span id="countParticipates">{{ advert.users|length }}</span> participant(s)</a>
                                                 {% else %}
                                                     <span id="countParticipates">{{ advert.users|length }}</span> participant(s)
